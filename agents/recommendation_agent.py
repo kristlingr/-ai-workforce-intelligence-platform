@@ -1,5 +1,5 @@
 """
-RecommendationAgent implementation for generating workforce optimization recommendations.
+RecommendationAgent implementation for generating executive-level workforce recommendations.
 """
 
 import json
@@ -7,29 +7,30 @@ import logging
 import pathlib
 import yaml
 import re
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 
 from .base_agent import BaseAgent
 from .llm_client import LLMClient
+from tools.recommendation_tool import RecommendationTool
 
 logger = logging.getLogger("agent.recommendationagent")
 
 
 class RecommendationAgent(BaseAgent):
     """
-    AI Agent that synthesizes employee workloads and capacity forecasts into optimization strategies.
+    AI Agent that interprets workforce optimization metrics and deterministic recommendations 
+    to generate executive-level reports.
     """
 
-    def __init__(self, name: str = "RecommendationAgent", role: str = "Optimization Strategist", config: Dict[str, Any] = None):
+    def __init__(self, name: str = "RecommendationAgent", role: str = "Workforce Strategist", config: Dict[str, Any] = None):
         super().__init__(name, role, config)
         self.model_name = self.config.get("model", "gemini-1.5-flash")
         self.client = LLMClient(model_name=self.model_name)
-
-        # Load prompt template from prompts/recommendation_agent_prompt.yaml
+        self.recommendation_tool = RecommendationTool()
         self.system_instruction = self._load_prompt_template()
 
     def _load_prompt_template(self) -> str:
-        """Loads prompt template safely from prompts/recommendation_agent_prompt.yaml."""
+        """Loads prompt template from prompts/recommendation_agent_prompt.yaml."""
         prompt_path = pathlib.Path(__file__).parent.parent / "prompts" / "recommendation_agent_prompt.yaml"
         if prompt_path.exists():
             try:
@@ -38,51 +39,104 @@ class RecommendationAgent(BaseAgent):
                     return data.get("system_instruction", "")
             except Exception as e:
                 logger.error(f"Failed to parse recommendation_agent_prompt.yaml: {e}")
-        
-        # Fallback system instruction if file load fails
-        return (
-            "You are the resource optimization and balancing brain of the Workforce Intelligence System. "
-            "Respond ONLY with a JSON object matching schema: "
-            "{overall_strategy, recommendations: [{category, target, actionable_steps: [], expected_impact}]}."
-        )
+        return "You are the strategic advisor brain of the Workforce Intelligence System. Respond with the requested JSON schema."
 
     def run(self, task_description: str, context: Dict[str, Any] = None) -> Dict[str, Any]:
         """
-        Synthesizes recommendations from workloads and capacity gaps.
+        Runs the recommendation agent.
         
         Args:
-            task_description (str): Query target description.
-            context (Dict[str, Any], optional): Prior execution context containing utilization and forecast data.
+            task_description (str): Query context (e.g., 'How should we improve utilization?').
+            context (Dict[str, Any], optional): Context dict containing utilization_data, forecast_data, project_data.
             
         Returns:
-            Dict[str, Any]: Structured optimization suggestions.
+            Dict[str, Any]: Structured executive recommendations report.
         """
-        self.log_step(f"Running workforce recommendations synthesis for target: '{task_description}'")
+        self.log_step(f"Running recommendation analysis for: '{task_description}'")
 
-        # 1. Resolve prior agent contexts from state dictionary
-        utilization_data = None
-        forecast_data = None
+        # Negative Test: Empty input
+        if not context:
+            self.log_step("Empty input/context provided.")
+            return {
+                "executive_summary": "Error: Empty input provided.",
+                "business_impact": "No analysis could be performed due to missing context.",
+                "priority_actions": [],
+                "recommendations": [],
+                "management_summary": "Error: No context data.",
+                "confidence": 0.0,
+                "tools_used": ["RecommendationTool"],
+                "status": "error"
+            }
 
-        if context and isinstance(context, dict):
-            utilization_data = context.get("utilization")
-            forecast_data = context.get("forecast")
+        # Extract data from context
+        utilization_data = context.get("utilization_data")
+        forecast_data = context.get("forecast_data")
+        project_data = context.get("project_data")
 
-        if not utilization_data:
-            self.log_step("No utilization data found in context. Using fallback baseline.")
-            utilization_data = {"status": "info", "message": "Utilization context absent."}
-        if not forecast_data:
-            self.log_step("No forecast data found in context. Using fallback baseline.")
-            forecast_data = {"status": "info", "message": "Forecast context absent."}
+        # Negative Test: Invalid utilization data
+        if utilization_data is not None and not isinstance(utilization_data, (dict, list)):
+            self.log_step("Invalid utilization data type provided.")
+            return {
+                "executive_summary": "Error: Invalid utilization data provided.",
+                "business_impact": "Could not parse utilization metrics.",
+                "priority_actions": [],
+                "recommendations": [],
+                "management_summary": "Error: Invalid input data format.",
+                "confidence": 0.0,
+                "tools_used": ["RecommendationTool"],
+                "status": "error"
+            }
 
-        # 2. Query LLM to synthesize recommendation outcomes
-        prompt = (
-            f"Task Description: {task_description}\n\n"
-            f"Context Employee Utilization Profiles:\n{json.dumps(utilization_data, indent=2)}\n\n"
-            f"Context Capacity & Demand Forecast:\n{json.dumps(forecast_data, indent=2)}\n\n"
-            f"Generate strategic workforce balancing recommendations and output the expected JSON report format."
+        # 1. Invoke RecommendationTool
+        self.log_step("Invoking RecommendationTool for deterministic recommendations...")
+        tool_res = self.recommendation_tool.run(
+            utilization_data=utilization_data,
+            forecast_data=forecast_data,
+            project_data=project_data
         )
 
-        self.log_step("Querying LLM to compile actionable strategies...")
+        # Negative Test: Tool failure
+        if tool_res.get("status") != "success":
+            self.log_step("RecommendationTool failed.")
+            return {
+                "executive_summary": f"Error: RecommendationTool failure. {tool_res.get('message', '')}",
+                "business_impact": "Analysis aborted due to tool failure.",
+                "priority_actions": [],
+                "recommendations": [],
+                "management_summary": "Error: Dependent tool failed.",
+                "confidence": 0.0,
+                "tools_used": ["RecommendationTool"],
+                "status": "error"
+            }
+
+        tool_recommendations = tool_res.get("recommendations", [])
+
+        # Negative Test: Missing recommendations
+        if not tool_recommendations:
+            self.log_step("No recommendations generated by RecommendationTool.")
+            return {
+                "executive_summary": "No strategic actions required at this time.",
+                "business_impact": "Workforce utilization and capacities are currently optimal with no identified gaps.",
+                "priority_actions": [],
+                "recommendations": [],
+                "management_summary": "No critical concerns requiring management intervention.",
+                "confidence": 0.95,
+                "tools_used": ["RecommendationTool"],
+                "status": "success"
+            }
+
+        # 2. Invoke LLM for executive report synthesis
+        prompt = (
+            f"User Query: {task_description}\n\n"
+            f"Deterministic Recommendations:\n{json.dumps(tool_recommendations, indent=2)}\n\n"
+            f"Context Data:\n"
+            f"Utilization: {json.dumps(utilization_data, indent=2)}\n"
+            f"Forecast: {json.dumps(forecast_data, indent=2)}\n"
+            f"Project: {json.dumps(project_data, indent=2)}\n\n"
+            f"Please synthesize these into the requested JSON report format."
+        )
+
+        self.log_step("Querying LLM client for executive synthesis...")
         llm_response = self.client.execute_prompt(prompt, system_instruction=self.system_instruction)
         json_clean = re.sub(r"```json\s*|\s*```", "", llm_response).strip()
 
@@ -90,21 +144,20 @@ class RecommendationAgent(BaseAgent):
             analysis = json.loads(json_clean)
         except Exception:
             self.log_step("LLM output did not parse as JSON. Running fallback formatter...")
-            # Fallback deterministic recommendations structure
+            priority_actions = [r["description"] for r in tool_recommendations if r.get("priority") == "High"]
+            if not priority_actions and tool_recommendations:
+                priority_actions = [tool_recommendations[0]["description"]]
+
             analysis = {
-                "overall_strategy": "Maintain workforce operations, optimize bench alignment, and monitor role overloads.",
-                "recommendations": [
-                    {
-                        "category": "Redistribution",
-                        "target": "Overall Department",
-                        "actionable_steps": [
-                            "Redistribute project allocation FTE from overloaded individuals to bench peers.",
-                            "Review upcoming assignment end dates."
-                        ],
-                        "expected_impact": "Balances workload and mitigates employee burnout risks."
-                    }
-                ]
+                "executive_summary": f"Strategic recommendation report based on {len(tool_recommendations)} action items.",
+                "business_impact": "Operational efficiency and resource distribution challenges identified.",
+                "priority_actions": priority_actions,
+                "recommendations": tool_recommendations,
+                "management_summary": "Actionable steps proposed to mitigate staffing or utilization risks.",
+                "confidence": 0.9,
+                "tools_used": ["RecommendationTool"],
+                "status": "success"
             }
 
-        self.log_step("Workforce recommendation compilation completed successfully.")
+        self.log_step("Recommendation report completed successfully.")
         return analysis
