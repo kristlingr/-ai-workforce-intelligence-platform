@@ -15,6 +15,7 @@ from .worklog_reader import (
 from .employee_lookup import EmployeeLookupTool
 from .project_analysis import ProjectAnalysisTool
 from .mcp_integration import McpIntegrationTool
+from .forecast_tool import ForecastTool
 
 __all__ = [
     "BaseTool",
@@ -28,4 +29,5 @@ __all__ = [
     "EmployeeLookupTool",
     "ProjectAnalysisTool",
     "McpIntegrationTool",
+    "ForecastTool",
 ]
