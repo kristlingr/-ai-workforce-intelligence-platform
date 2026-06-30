@@ -16,6 +16,7 @@ from .employee_lookup import EmployeeLookupTool
 from .project_analysis import ProjectAnalysisTool
 from .mcp_integration import McpIntegrationTool
 from .forecast_tool import ForecastTool
+from .recommendation_tool import RecommendationTool
 
 __all__ = [
     "BaseTool",
@@ -30,4 +31,5 @@ __all__ = [
     "ProjectAnalysisTool",
     "McpIntegrationTool",
     "ForecastTool",
+    "RecommendationTool",
 ]
