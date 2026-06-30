@@ -1,8 +1,8 @@
 ---
 status: complete
-phase: 07-forecast-tool
+phase: 07-forecast-tool-and-agent
 started: 2026-07-01T01:40:00Z
-updated: 2026-07-01T01:42:00Z
+updated: 2026-07-01T01:52:00Z
 ---
 
 ## Current Test
@@ -16,15 +16,15 @@ expected: |
   ForecastTool calculates monthly standard capacity hours and total active project FTE allocations by department and custom months, flagging surpluses or shortages.
 result: pass
 
-### 2. Future Resource Availability
+### 2. Forecast Agent Shortage Analysis
 expected: |
-  ForecastTool retrieves project allocation end dates for active resources to map future bench dates and release FTEs.
+  ForecastAgent calls ForecastTool, parses target parameters, and uses the Gemini LLM client to summarize capacity/shortage outcomes under a structured JSON layout.
 result: pass
 
 ## Summary
 
-total: 5
-passed: 5
+total: 7
+passed: 7
 issues: 0
 pending: 0
 skipped: 0

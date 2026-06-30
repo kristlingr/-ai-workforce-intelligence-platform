@@ -1,13 +1,10 @@
-# Phase 8 Context: Forecast & Recommendation Agents
+# Phase 8 Context: Recommendation Agent
 
 ## Purpose
-Implement two agents:
-1. `ForecastAgent`: Uses `ForecastTool` to analyze capacity trends, project allocation demand, and detect future deficits/shortages.
-2. `RecommendationAgent`: Synthesizes utilization analyses and forecast gaps to output strategic, actionable workforce optimization recommendations.
+Implement the `RecommendationAgent` which synthesizes utilization analyses and forecast gaps to output strategic, actionable workforce optimization recommendations.
 
 ## Requirements
-- **AGENT-04**: ForecastAgent capacity and staffing demand prediction.
 - **AGENT-06**: RecommendationAgent workforce optimization and resource balancing suggestions.
 
 ## Context
-These agents represent the final analytics decision layers before manager orchestration. They consume local datasets and tools and generate structured summaries and strategic advice.
+This agent represents the final analytics decision layer before manager orchestration. It consumes prior utilization and forecasting reports and constructs strategic balancing suggestions.

@@ -8,7 +8,7 @@
 |----------|---------:|------:|
 | Data | 1 | 1 |
 | Tools | 5 | 5 |
-| Agents | 3 | 5 |
+| Agents | 5 | 6 |
 | Prompts | 1 | 1 |
 | Evaluation | 0 | 3 |
 | UI | 0 | 4 |
@@ -81,9 +81,9 @@ This section is informational only and should not affect traceability.
 | AGENT-01       | Phase 4      | Complete / Verified | 3 Unit Tests Passed |
 | AGENT-02       | Phase 5      | Complete / Verified | 15 Unit Tests Passed |
 | AGENT-03       | Phase 6      | Complete / Verified | 5 Unit Tests Passed |
-| AGENT-04       | Phase 7      | Pending | TBD |
+| AGENT-04       | Phase 7      | Complete / Verified | 2 Unit Tests Passed |
 | AGENT-05       | Phase 9      | Pending | TBD |
-| AGENT-06       | Phase 8      | Pending | TBD |
+| AGENT-06       | Phase 8      | Complete / Verified | 1 Unit Test Passed |
 | TOOL-05        | Phase 5      | Complete / Verified | 15 Unit Tests Passed |
 | PROMPT-01      | Phase 4      | Complete / Verified | system_prompts.yaml validation |
 | EVAL-01        | Phase 10     | Pending | TBD |

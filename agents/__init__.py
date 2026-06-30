@@ -7,6 +7,8 @@ from .research_agent import ResearchAgent
 from .analyst_agent import AnalystAgent
 from .workforce_query_agent import WorkforceQueryAgent
 from .utilization_agent import UtilizationAgent
+from .forecast_agent import ForecastAgent
+from .recommendation_agent import RecommendationAgent
 
 __all__ = [
     "BaseAgent",
@@ -14,4 +16,6 @@ __all__ = [
     "AnalystAgent",
     "WorkforceQueryAgent",
     "UtilizationAgent",
+    "ForecastAgent",
+    "RecommendationAgent",
 ]

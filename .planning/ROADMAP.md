@@ -12,8 +12,8 @@ This roadmap breaks down the development of the AI Workforce Intelligence Agent 
 | 4 | Agent Core & LLM API | Setup BaseAgent and initialize live LLM calls | mvp | `AGENT-01`, `TOOL-01`, `PROMPT-01` | Live API hello-world returns response |
 | 5 | Workforce Query Agent & Tools Integration | Build WorkforceQueryAgent utilizing local data tools | mvp | `AGENT-02`, `TOOL-05` | Agent queries employee and allocation datasets |
 | 6 | Utilization Agent | Build UtilizationAgent to analyze employee productivity and workloads | mvp | `AGENT-03` | Agent computes productivity and workload metrics |
-| 7 | Forecast Tool | Build modular ForecastTool to predict capacity and staffing demand | mvp | `TOOL-04` | Tool forecasts monthly staffing benches and gaps |
-| 8 | Forecast & Recommendation Agents | Build ForecastAgent and RecommendationAgent for workload balancing | mvp | `AGENT-04`, `AGENT-06` | Agents output capacity forecasts and optimization reports |
+| 7 | Forecast Tool & Forecast Agent | Build ForecastTool and ForecastAgent to predict capacity and shortages | mvp | `TOOL-04`, `AGENT-04` | Tool forecasts benches/gaps and Agent reports shortage analyses |
+| 8 | Recommendation Agent | Build RecommendationAgent for resource optimization strategies | mvp | `AGENT-06` | Agent outputs strategic workload balancing and balancing reports |
 | 9 | Manager Agent | Build ManagerAgent orchestrating execution flow and session memory | mvp | `AGENT-05` | Orchestrator chains all specialized agents with shared state |
 | 10 | Agent Quality & Eval | Implement validation assertions, testing, and control panel | mvp | `EVAL-01`, `EVAL-02`, `EVAL-03`, `UI-03` | Eval suite outputs agent scoring metrics |
 | 11 | Streamlit Dashboard | Wire interactive reports, KPIs, and live logs in UI | mvp | `UI-01`, `UI-02` | UI displays live execution status and KPI cards |
@@ -93,25 +93,25 @@ This roadmap breaks down the development of the AI Workforce Intelligence Agent 
 
 **UI Hint:** No
 
-### Phase 7: Forecast Tool
+### Phase 7: Forecast Tool & Forecast Agent
 
-**Goal:** Build modular `ForecastTool` to predict capacity, staffing demand, and future resource shortages.
+**Goal:** Build modular `ForecastTool` and `ForecastAgent` to predict capacity, staffing demand, and future resource shortages.
 **Mode:** mvp
 **Success Criteria:**
 
 1. Tool performs workforce capacity forecasting and staffing demand prediction.
 2. Tool identifies future resource shortage analysis and bench capacity.
+3. ForecastAgent predicts capacity constraints and staffing gaps using ForecastTool and Gemini LLM.
 
 **UI Hint:** No
 
-### Phase 8: Forecast & Recommendation Agents
+### Phase 8: Recommendation Agent
 
-**Goal:** Build `ForecastAgent` and `RecommendationAgent` to generate strategic balancing recommendations.
+**Goal:** Build `RecommendationAgent` to generate strategic balancing recommendations.
 **Mode:** mvp
 **Success Criteria:**
 
-1. ForecastAgent predicts capacity constraints and staffing gaps using ForecastTool.
-2. RecommendationAgent generates workforce optimization, staffing recommendations, and resource balancing suggestions.
+1. RecommendationAgent generates workforce optimization, staffing recommendations, and resource balancing suggestions using Gemini LLM.
 
 **UI Hint:** Yes
 
