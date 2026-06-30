@@ -49,27 +49,27 @@
 
 | Requirement ID | Phase Mapped | Status |
 |----------------|--------------|--------|
-| **AGENT-01**   | Phase 4      | Pending |
-| **AGENT-02**   | Phase 5      | Pending |
-| **AGENT-03**   | Phase 6      | Pending |
-| **AGENT-04**   | Phase 7      | Pending |
-| **AGENT-05**   | Phase 7      | Pending |
-| **TOOL-01**    | Phase 4      | Pending |
-| **TOOL-02**    | Phase 3      | Pending |
-| **TOOL-03**    | Phase 3      | Pending |
-| **TOOL-04**    | Phase 8      | Pending |
-| **TOOL-05**    | Phase 5      | Pending |
-| **EVAL-01**    | Phase 9      | Pending |
-| **EVAL-02**    | Phase 9      | Pending |
-| **EVAL-03**    | Phase 10     | Pending |
-| **UI-01**      | Phase 11     | Pending |
-| **UI-02**      | Phase 11     | Pending |
-| **UI-03**      | Phase 10     | Pending |
-| **UI-04**      | Phase 12     | Pending |
-| **REL-01**     | Phase 12     | Pending |
-| **REL-02**     | Phase 12     | Pending |
-| **REL-03**     | Phase 12     | Pending |
-| **REL-04**     | Phase 12     | Pending |
+| AGENT-01       | Phase 4      | Pending |
+| AGENT-02       | Phase 5      | Pending |
+| AGENT-03       | Phase 6      | Pending |
+| AGENT-04       | Phase 7      | Pending |
+| AGENT-05       | Phase 7      | Pending |
+| TOOL-01        | Phase 4      | Pending |
+| TOOL-02        | Phase 3      | Pending |
+| TOOL-03        | Phase 3      | Pending |
+| TOOL-04        | Phase 8      | Pending |
+| TOOL-05        | Phase 5      | Pending |
+| EVAL-01        | Phase 9      | Pending |
+| EVAL-02        | Phase 9      | Pending |
+| EVAL-03        | Phase 10     | Pending |
+| UI-01          | Phase 11     | Pending |
+| UI-02          | Phase 11     | Pending |
+| UI-03          | Phase 10     | Pending |
+| UI-04          | Phase 12     | Pending |
+| REL-01         | Phase 12     | Pending |
+| REL-02         | Phase 12     | Pending |
+| REL-03         | Phase 12     | Pending |
+| REL-04         | Phase 12     | Pending |
 
 ---
 *Last updated: 2026-06-30*
