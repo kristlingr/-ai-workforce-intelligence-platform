@@ -66,7 +66,7 @@ class TestForecastTool(unittest.TestCase):
         self.assertEqual(res["status"], "success")
         self.assertEqual(res["forecast"]["total_months_evaluated"], 2)
         
-        months_evaluated = [m["month"] for m in res["forecast"]["monthly_metrics"]]
+        months_evaluated = [m["month_key"] for m in res["forecast"]["monthly_metrics"]]
         self.assertEqual(months_evaluated, custom_months)
 
     def test_forecast_invalid_month_format(self):
