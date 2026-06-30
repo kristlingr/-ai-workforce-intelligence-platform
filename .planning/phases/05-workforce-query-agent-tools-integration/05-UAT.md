@@ -23,8 +23,8 @@ result: pass
 
 ## Summary
 
-total: 2
-passed: 2
+total: 15
+passed: 15
 issues: 0
 pending: 0
 skipped: 0
