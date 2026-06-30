@@ -16,7 +16,7 @@
 - [ ] **TOOL-02**: Implement `EmployeeLookupTool` to search and retrieve employee profiles from local datasets.
 - [ ] **TOOL-03**: Implement `ProjectAnalysisTool` to query and summarize project parameters and tasks.
 - [ ] **TOOL-04**: Implement `ForecastTool` utilizing pandas to predict capacity limits and future staffing shortages.
-- [ ] **TOOL-05**: Implement live search scraping/queries in `WebSearchTool` replacing mock responses.
+- [ ] **TOOL-05**: Build MCP Integration Layer supporting Filesystem (local data files), Google Drive, or Notion integrations.
 
 ### 3. Agent Quality & Evaluation (EVAL)
 - [ ] **EVAL-01**: Implement format verification assertions to grade LLM response structures.
@@ -24,7 +24,7 @@
 - [ ] **EVAL-03**: Implement comprehensive unit and integration tests (`tests/`) covering data, tools, agents, and pipelines.
 
 ### 4. Streamlit UI Dashboard (UI)
-- [ ] **UI-01**: Stream live agent execution logs (thought processes) directly to the Streamlit UI logs box.
+- [ ] **UI-01**: Stream live agent execution status and tool activity details directly to the Streamlit UI logs box.
 - [ ] **UI-02**: Render generated markdown reports and source citations dynamically inside glassmorphic dashboard cards.
 - [ ] **UI-03**: Add a dashboard utility control panel to trigger the data generation/cleaning/validation pipeline and display reports.
 - [ ] **UI-04**: Incorporate a professional system architecture diagram and report cover page assets.
@@ -34,6 +34,9 @@
 - [ ] **REL-02**: Deploy the Streamlit application to a cloud hosting platform (e.g. Streamlit Community Cloud).
 - [ ] **REL-03**: Record a high-quality product walkthrough demo video.
 - [ ] **REL-04**: Write the Kaggle capstone project writeup submission.
+
+### 6. Ingestion & Validation Pipeline (DATA)
+- [ ] **DATA-01**: Implement raw dataset generator, automated data cleaning, schema validation, data dictionary mapping, and logical business validation rules.
 
 ## v2 Requirements (Deferred)
 - **AGENT-06**: Interactive agent chat (allowing users to converse with agents to refine sections of the report).
@@ -70,6 +73,7 @@
 | REL-02         | Phase 12     | Pending |
 | REL-03         | Phase 12     | Pending |
 | REL-04         | Phase 12     | Pending |
+| DATA-01        | Phase 2      | Complete |
 
 ---
 *Last updated: 2026-06-30*

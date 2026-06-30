@@ -7,7 +7,7 @@ This roadmap breaks down the development of the AI Workforce Intelligence Agent 
 | # | Phase | Goal | Mode | Requirements | Success Criteria |
 |---|---|---|---|---|---|
 | 1 | Planning & Architecture | Define requirements, codebase map, planning docs | mvp | — | Config and planning files committed |
-| 2 | Dataset Preparation | Clean, standardize, and validate CSV tables | mvp | — | Cleaner pipeline passes checks |
+| 2 | Dataset Preparation | Clean, standardize, and validate CSV tables | mvp | `DATA-01` | Cleaner pipeline passes checks |
 | 3 | Core Data Tools | Build Employee Lookup and Project Analysis tools | mvp | `TOOL-02`, `TOOL-03` | Tools return valid dataset queries |
 | 4 | Agent Core & LLM API | Setup BaseAgent and initialize live LLM calls | mvp | `AGENT-01`, `TOOL-01` | Live API hello-world returns response |
 | 5 | Workforce Query Agent & Tools Integration | Build WorkforceQueryAgent utilizing local data tools | mvp | `AGENT-02`, `TOOL-05` | Agent queries employee and allocation datasets |
@@ -16,7 +16,7 @@ This roadmap breaks down the development of the AI Workforce Intelligence Agent 
 | 8 | Recommendation Agent | Build RecommendationAgent for business guidance | mvp | `AGENT-05` | Agent outputs strategic advice reports |
 | 9 | Manager Agent & Orchestration | Build ManagerAgent orchestrating shared state context | mvp | `AGENT-04` | Orchestrator chains all specialized agents |
 | 10 | Agent Quality & Eval | Implement validation assertions and evaluation tests | mvp | `EVAL-01`, `EVAL-02` | Eval suite outputs agent scoring metrics |
-| 11 | Dashboard UI Wiring | Stream real-time logs and render reports in Streamlit | mvp | `UI-01`, `UI-02`, `UI-03`, `EVAL-03` | UI displays live thought logs and ingestion control |
+| 11 | Dashboard UI Wiring | Stream real-time logs and render reports in Streamlit | mvp | `UI-01`, `UI-02`, `UI-03`, `EVAL-03` | UI displays live execution status and ingestion control |
 | 12 | Deployment & Submission | Design cover page, deploy app, record demo, writeup | mvp | `UI-04`, `REL-01` to `REL-04` | Live link, repo public, Kaggle writeup |
 
 ---
@@ -72,12 +72,13 @@ This roadmap breaks down the development of the AI Workforce Intelligence Agent 
 
 ### Phase 5: Workforce Query Agent & Tools Integration
 
-**Goal:** Implement `WorkforceQueryAgent` and hook local search tools (`EmployeeLookupTool`, `ProjectAnalysisTool`, `WorklogReaderTool`).
+**Goal:** Implement `WorkforceQueryAgent`, hook local search tools (`EmployeeLookupTool`, `ProjectAnalysisTool`, `WorklogReaderTool`), and build the MCP Integration Layer (Filesystem, Google Drive, optional Notion).
 **Mode:** mvp
 **Success Criteria:**
 
 1. `WorkforceQueryAgent` successfully queries employee profile records and workload tables.
 2. Agent executes and formats structured query metadata for down-stream analysis.
+3. Build MCP Integration Layer supporting Filesystem (local data files), Google Drive, or Notion integrations.
 
 **UI Hint:** No
 
@@ -142,7 +143,7 @@ This roadmap breaks down the development of the AI Workforce Intelligence Agent 
 **Mode:** mvp
 **Success Criteria:**
 
-1. Streamlit dashboard shows dynamic logs sidebar with live execution step messages.
+1. Streamlit dashboard shows dynamic logs sidebar with live execution status and tool activity details.
 2. Control tab triggers live cleaning, validation, and multi-agent runs.
 
 **UI Hint:** Yes
