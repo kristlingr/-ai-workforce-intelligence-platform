@@ -9,7 +9,7 @@ This roadmap breaks down the development of the AI Workforce Intelligence Agent 
 | 1 | Planning & Architecture | Define requirements, codebase map, planning docs | mvp | — | Config and planning files committed |
 | 2 | Dataset Preparation | Clean, standardize, and validate CSV tables | mvp | `DATA-01` | Cleaner pipeline passes checks |
 | 3 | Core Data Tools | Build Employee Lookup and Project Analysis tools | mvp | `TOOL-02`, `TOOL-03` | Tools return valid dataset queries |
-| 4 | Agent Core & LLM API | Setup BaseAgent and initialize live LLM calls | mvp | `AGENT-01`, `TOOL-01`, `LOG-01`, `PROMPT-01` | Live API hello-world returns response |
+| 4 | Agent Core & LLM API | Setup BaseAgent and initialize live LLM calls | mvp | `AGENT-01`, `TOOL-01`, `PROMPT-01` | Live API hello-world returns response |
 | 5 | Workforce Query Agent & Tools Integration | Build WorkforceQueryAgent utilizing local data tools | mvp | `AGENT-02`, `TOOL-05` | Agent queries employee and allocation datasets |
 | 6 | Utilization & Productivity Agent | Build UtilizationAgent to analyze employee workloads | mvp | `AGENT-03` | Agent generates workload and performance metrics |
 | 7 | Forecast Agent | Build ForecastAgent predicting capacity constraints | mvp | `TOOL-04` | Agent forecasts monthly staffing benches/gaps |

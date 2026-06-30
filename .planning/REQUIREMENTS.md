@@ -13,16 +13,15 @@
 - [ ] **TOOL-03**: Implement `ProjectAnalysisTool` to analyze project workload, staffing distribution, utilization, resource allocation, and overall project health.
 - [ ] **TOOL-04**: Implement `ForecastTool` utilizing pandas to forecast workforce capacity, utilization trends, staffing demand, and future resource shortages.
 
-### 3. MCP Integration Layer (MCP)
-- [ ] **TOOL-05**: Build an MCP Integration Layer supporting Filesystem, Google Drive, and optional Notion connectors to securely access workforce datasets and project documentation.
-
-### 4. Multi-Agent System Core (AGENT)
+### 3. Multi-Agent System Core (AGENT)
 - [ ] **AGENT-01**: Implement `BaseAgent` abstract class interface and standardized step logging.
 - [ ] **AGENT-02**: Implement `WorkforceQueryAgent` to retrieve, filter, validate, and prepare workforce data using shared tools and MCP integrations.
 - [ ] **AGENT-03**: Implement `UtilizationAgent` to analyze employee workload, productivity, and utilization, and ForecastAgent to predict workforce capacity, staffing demand, and future resource shortages.
 - [ ] **AGENT-04**: Implement `ManagerAgent` orchestrating execution flow and coordinating agent-to-agent session memory.
 - [ ] **AGENT-05**: Implement `RecommendationAgent` generating workforce optimization recommendations including staffing, workload balancing, hiring priorities, training opportunities, and resource allocation.
-- [ ] **LOG-01**: Implement centralized structured logging for all agents, tools, and MCP interactions.
+
+### 4. External Data Integration (MCP)
+- [ ] **TOOL-05**: Build an MCP Integration Layer supporting Filesystem, Google Drive, and optional Notion connectors to securely access workforce datasets and project documentation.
 
 ### 5. Prompt Management (PROMPT)
 - [ ] **PROMPT-01**: Design reusable system prompts for each AI agent, stored separately from application logic to support maintainable prompt engineering and context management.
@@ -70,7 +69,6 @@
 | AGENT-03       | Phase 6      | Pending | TBD |
 | AGENT-04       | Phase 9      | Pending | TBD |
 | AGENT-05       | Phase 8      | Pending | TBD |
-| LOG-01         | Phase 4      | Complete / Verified | Central logs/ output validation |
 | PROMPT-01      | Phase 4      | Complete / Verified | system_prompts.yaml validation |
 | EVAL-01        | Phase 10     | Pending | TBD |
 | EVAL-02        | Phase 10     | Pending | TBD |
