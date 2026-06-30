@@ -14,6 +14,7 @@ from .worklog_reader import (
 )
 from .employee_lookup import EmployeeLookupTool
 from .project_analysis import ProjectAnalysisTool
+from .mcp_integration import McpIntegrationTool
 
 __all__ = [
     "BaseTool",
@@ -26,4 +27,5 @@ __all__ = [
     "load_project_allocations",
     "EmployeeLookupTool",
     "ProjectAnalysisTool",
+    "McpIntegrationTool",
 ]
