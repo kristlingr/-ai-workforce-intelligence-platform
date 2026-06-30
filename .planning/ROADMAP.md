@@ -24,103 +24,139 @@ This roadmap breaks down the development of the AI Workforce Intelligence Agent 
 ## Phase Details
 
 ### Phase 1: Planning & Architecture
+
 **Goal:** Define requirements, design multi-agent layouts, map the codebase.
 **Mode:** mvp
 **Success Criteria:**
+
 1. Codebase map documents created in `.planning/codebase/`.
 2. `PROJECT.md` and `config.json` finalized.
 3. `REQUIREMENTS.md` created with REQ-IDs.
+
 **UI Hint:** No
 
 ### Phase 2: Dataset Preparation
+
 **Goal:** Run generation, cleaning, and structural validation of five CSV tables.
 **Mode:** mvp
 **Success Criteria:**
+
 1. Clean datasets created in `datasets/clean/`.
 2. Validator structural checks pass.
 3. Business rules validator runs and outputs reports.
+
 **UI Hint:** No
 
 ### Phase 3: Core Data Tools
+
 **Goal:** Implement `EmployeeLookupTool` and `ProjectAnalysisTool`.
 **Mode:** mvp
 **Success Criteria:**
+
 1. `EmployeeLookupTool` searches local datasets and returns structured profiles.
 2. `ProjectAnalysisTool` queries project allocations and summaries.
 3. Unit tests check tools output.
+
 **UI Hint:** No
 
 ### Phase 4: Agent Core & LLM API
+
 **Goal:** Define agent base abstractions and execute live LLM API queries.
 **Mode:** mvp
 **Success Criteria:**
+
 1. `BaseAgent` class defines common run and log lifecycles.
 2. Google Gemini API model is configured and successfully queried.
+
 **UI Hint:** No
 
 ### Phase 5: Research Agent & Web Search
+
 **Goal:** Implement `ResearchAgent` and hook active queries in `WebSearchTool`.
 **Mode:** mvp
 **Success Criteria:**
+
 1. Web search tool returns live snippets and web sources.
 2. Research agent compiles and filters search findings.
+
 **UI Hint:** No
 
 ### Phase 6: Analyst Agent & Reports
+
 **Goal:** Build `AnalystAgent` and structure reporting templates.
 **Mode:** mvp
 **Success Criteria:**
+
 1. Analyst agent ingests context findings.
 2. Analyst synthesizes data into a professional markdown report.
+
 **UI Hint:** No
 
 ### Phase 7: Agent Orchestrator & Memory
+
 **Goal:** Build custom pipeline orchestrator and state context dictionary memory.
 **Mode:** mvp
 **Success Criteria:**
+
 1. Orchestrator executes Research -> Analyst chain.
 2. Shared context dict is successfully passed and updated.
+
 **UI Hint:** No
 
 ### Phase 8: Forecasting Tool
+
 **Goal:** Build `ForecastTool` to predict capacity gaps.
 **Mode:** mvp
 **Success Criteria:**
+
 1. Tool calculates future capacity gaps and benched employees.
 2. Forecast findings are fed to the Analyst agent context.
+
 **UI Hint:** Yes
 
 ### Phase 9: Agent Quality & Eval
+
 **Goal:** Implement validation assertions and build the evaluation test suite.
 **Mode:** mvp
 **Success Criteria:**
+
 1. Regex/assertion checks verify LLM markdown headings and format tags.
 2. Evaluation script runs and outputs metric scores.
+
 **UI Hint:** No
 
 ### Phase 10: E2E Test & Control Tab
+
 **Goal:** Write unit/integration tests and build a dashboard pipeline manager panel.
 **Mode:** mvp
 **Success Criteria:**
+
 1. Coverage of core modules is verified.
 2. Streamlit UI has a tab to trigger data generation/cleaning/validation.
+
 **UI Hint:** Yes
 
 ### Phase 11: Dashboard UI Wiring
+
 **Goal:** Connect orchestrator to Streamlit, streaming thought logs and rendering outputs.
 **Mode:** mvp
 **Success Criteria:**
+
 1. Dashboard logs box streams step execution details dynamically.
 2. Reports and citation links render correctly.
+
 **UI Hint:** Yes
 
 ### Phase 12: Deployment & Submission
+
 **Goal:** Design cover page, deploy application, record demo video, write Kaggle writeup.
 **Mode:** mvp
 **Success Criteria:**
+
 1. Streamlit app deployed to Streamlit Community Cloud.
 2. Public GitHub repo initialized with code, README, and cover page layout.
 3. Demo video and Kaggle writeup submitted.
+
 **UI Hint:** Yes
 
 ---
