@@ -1,6 +1,6 @@
 ---
 status: complete
-phase: 08-recommendation-agent
+phase: 08-forecast-recommendation-agents
 started: 2026-07-01T01:49:00Z
 updated: 2026-07-01T01:52:00Z
 ---

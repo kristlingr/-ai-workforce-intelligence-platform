@@ -1,5 +1,5 @@
 ---
-phase: 08-recommendation-agent
+phase: 08-forecast-recommendation-agents
 verified: 2026-07-01T01:52:00Z
 status: passed
 score: 2/2 must-haves verified
