@@ -63,12 +63,12 @@
 | TOOL-02        | Phase 3      | Complete / Verified | 7 Unit Tests Passed |
 | TOOL-03        | Phase 3      | Complete / Verified | 7 Unit Tests Passed |
 | TOOL-04        | Phase 7      | Pending | TBD |
-| TOOL-05        | Phase 5      | Pending | TBD |
 | AGENT-01       | Phase 4      | Complete / Verified | 3 Unit Tests Passed |
 | AGENT-02       | Phase 5      | Pending | TBD |
 | AGENT-03       | Phase 6      | Pending | TBD |
 | AGENT-04       | Phase 9      | Pending | TBD |
 | AGENT-05       | Phase 8      | Pending | TBD |
+| TOOL-05        | Phase 5      | Pending | TBD |
 | PROMPT-01      | Phase 4      | Complete / Verified | system_prompts.yaml validation |
 | EVAL-01        | Phase 10     | Pending | TBD |
 | EVAL-02        | Phase 10     | Pending | TBD |
