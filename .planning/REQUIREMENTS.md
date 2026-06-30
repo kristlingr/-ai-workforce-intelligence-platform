@@ -2,16 +2,30 @@
 
 **Analysis Date:** 2026-06-30
 
+## Project Progress
+
+| Category | Complete | Total |
+|----------|---------:|------:|
+| Data | 1 | 1 |
+| Tools | 4 | 5 |
+| Agents | 2 | 5 |
+| Prompts | 1 | 1 |
+| Evaluation | 0 | 3 |
+| UI | 0 | 4 |
+| Release | 0 | 4 |
+
+This section is informational only and should not affect traceability.
+
 ## v1 Requirements (Capstone Scope)
 
 ### 1. Ingestion & Validation Pipeline (DATA)
 - [ ] **DATA-01**: Implement a reusable data pipeline supporting dataset generation, automated data cleaning, schema validation, data dictionary generation, logical business validation, automated validation reports, and clean dataset export.
 
 ### 2. Core Data Tools (TOOL)
-- [ ] **TOOL-01**: Integrate live Google Gemini (primary) and OpenAI (fallback) LLM API connections.
+- [ ] **TOOL-01**: Integrate configurable Google Gemini (primary) and OpenAI (fallback) providers through a shared LLM abstraction layer.
 - [ ] **TOOL-02**: Implement `EmployeeLookupTool` to search and retrieve employee profiles from local datasets.
 - [ ] **TOOL-03**: Implement `ProjectAnalysisTool` to analyze project workload, staffing distribution, utilization, resource allocation, and overall project health.
-- [ ] **TOOL-04**: Implement `ForecastTool` utilizing pandas to forecast workforce capacity, utilization trends, staffing demand, and future resource shortages.
+- [ ] **TOOL-04**: Implement ForecastTool using a modular forecasting design (initial implementation with pandas) to forecast workforce capacity, utilization trends, staffing demand, and future resource shortages.
 
 ### 3. Multi-Agent System Core (AGENT)
 - [ ] **AGENT-01**: Implement `BaseAgent` abstract class interface and standardized step logging.
@@ -25,7 +39,7 @@
 - [ ] **TOOL-05**: Build an MCP Integration Layer supporting Filesystem, Google Drive, and optional Notion connectors to securely access workforce datasets and project documentation.
 
 ### 5. Prompt Management (PROMPT)
-- [ ] **PROMPT-01**: Design reusable system prompts for each AI agent, stored separately from application logic to support maintainable prompt engineering and context management.
+- [ ] **PROMPT-01**: Design reusable YAML-based system prompts for each AI agent, validated during application startup and stored separately from application logic to support maintainable prompt engineering and context management.
 
 ### 6. Agent Quality & Evaluation (EVAL)
 - [ ] **EVAL-01**: Implement format verification assertions to grade LLM response structures.
@@ -34,7 +48,7 @@
 
 ### 7. Streamlit UI Dashboard (UI)
 - [ ] **UI-01**: Stream live agent execution status and tool activity details directly to the Streamlit UI logs box.
-- [ ] **UI-02**: Render workforce KPIs, AI-generated reports, recommendations, and supporting citations dynamically inside interactive dashboard cards.
+- [ ] **UI-02**: Render workforce KPIs, utilization charts, AI-generated reports, recommendations, and supporting citations dynamically inside interactive dashboard cards.
 - [ ] **UI-03**: Add a dashboard utility control panel to trigger the data generation/cleaning/validation pipeline and display reports.
 - [ ] **UI-04**: Incorporate a professional system architecture diagram and report cover page assets.
 
