@@ -10,13 +10,13 @@ This roadmap breaks down the development of the AI Workforce Intelligence Agent 
 | 2 | Dataset Preparation | Clean, standardize, and validate CSV tables | mvp | — | Cleaner pipeline passes checks |
 | 3 | Core Data Tools | Build Employee Lookup and Project Analysis tools | mvp | `TOOL-02`, `TOOL-03` | Tools return valid dataset queries |
 | 4 | Agent Core & LLM API | Setup BaseAgent and initialize live LLM calls | mvp | `AGENT-01`, `TOOL-01` | Live API hello-world returns response |
-| 5 | Research Agent & Web Search | Build ResearchAgent with live DuckDuckGo/Tavily search | mvp | `AGENT-02`, `TOOL-05` | Researcher returns verified citations |
-| 6 | Analyst Agent & Reports | Build AnalystAgent with report templates | mvp | `AGENT-03` | Analyst writes formatted MD report |
-| 7 | Agent Orchestrator & Memory | Build orchestrator and pass session state dict | mvp | `AGENT-04`, `AGENT-05` | Orchestrator chains agents sequentially |
-| 8 | Forecasting Tool | Build ForecastTool to predict capacity limits | mvp | `TOOL-04` | Tool predicts overages and benches |
-| 9 | Agent Quality & Eval | Implement validation assertions and evaluation tests | mvp | `EVAL-01`, `EVAL-02` | Eval suite outputs performance metrics |
-| 10 | E2E Test & Control Tab | Setup test coverage and data control tab in Streamlit | mvp | `EVAL-03`, `UI-03` | Ingestion runnable from dashboard |
-| 11 | Dashboard UI Wiring | Stream real-time logs and render reports in Streamlit | mvp | `UI-01`, `UI-02` | UI displays live steps and sources |
+| 5 | Workforce Query Agent & Tools Integration | Build WorkforceQueryAgent utilizing local data tools | mvp | `AGENT-02`, `TOOL-05` | Agent queries employee and allocation datasets |
+| 6 | Utilization & Productivity Agent | Build UtilizationAgent to analyze employee workloads | mvp | `AGENT-03` | Agent generates workload and performance metrics |
+| 7 | Forecast Agent | Build ForecastAgent predicting capacity constraints | mvp | `TOOL-04` | Agent forecasts monthly staffing benches/gaps |
+| 8 | Recommendation Agent | Build RecommendationAgent for business guidance | mvp | `AGENT-05` | Agent outputs strategic advice reports |
+| 9 | Manager Agent & Orchestration | Build ManagerAgent orchestrating shared state context | mvp | `AGENT-04` | Orchestrator chains all specialized agents |
+| 10 | Agent Quality & Eval | Implement validation assertions and evaluation tests | mvp | `EVAL-01`, `EVAL-02` | Eval suite outputs agent scoring metrics |
+| 11 | Dashboard UI Wiring | Stream real-time logs and render reports in Streamlit | mvp | `UI-01`, `UI-02`, `UI-03`, `EVAL-03` | UI displays live thought logs and ingestion control |
 | 12 | Deployment & Submission | Design cover page, deploy app, record demo, writeup | mvp | `UI-04`, `REL-01` to `REL-04` | Live link, repo public, Kaggle writeup |
 
 ---
@@ -70,92 +70,91 @@ This roadmap breaks down the development of the AI Workforce Intelligence Agent 
 
 **UI Hint:** No
 
-### Phase 5: Research Agent & Web Search
+### Phase 5: Workforce Query Agent & Tools Integration
 
-**Goal:** Implement `ResearchAgent` and hook active queries in `WebSearchTool`.
+**Goal:** Implement `WorkforceQueryAgent` and hook local search tools (`EmployeeLookupTool`, `ProjectAnalysisTool`, `WorklogReaderTool`).
 **Mode:** mvp
 **Success Criteria:**
 
-1. Web search tool returns live snippets and web sources.
-2. Research agent compiles and filters search findings.
+1. `WorkforceQueryAgent` successfully queries employee profile records and workload tables.
+2. Agent executes and formats structured query metadata for down-stream analysis.
 
 **UI Hint:** No
 
-### Phase 6: Analyst Agent & Reports
+### Phase 6: Utilization & Productivity Agent
 
-**Goal:** Build `AnalystAgent` and structure reporting templates.
+**Goal:** Build `UtilizationAgent` analyzing employee workload and task allocations.
 **Mode:** mvp
 **Success Criteria:**
 
-1. Analyst agent ingests context findings.
-2. Analyst synthesizes data into a professional markdown report.
+1. Agent identifies overloaded employees (FTE > 1.0) and under-utilized resources.
+2. Agent formats workload distribution stats as table parameters.
 
 **UI Hint:** No
 
-### Phase 7: Agent Orchestrator & Memory
+### Phase 7: Forecast Agent
 
-**Goal:** Build custom pipeline orchestrator and state context dictionary memory.
+**Goal:** Build `ForecastAgent` predicting capacity limits and upcoming staffing requirements.
 **Mode:** mvp
 **Success Criteria:**
 
-1. Orchestrator executes Research -> Analyst chain.
-2. Shared context dict is successfully passed and updated.
-
-**UI Hint:** No
-
-### Phase 8: Forecasting Tool
-
-**Goal:** Build `ForecastTool` to predict capacity gaps.
-**Mode:** mvp
-**Success Criteria:**
-
-1. Tool calculates future capacity gaps and benched employees.
-2. Forecast findings are fed to the Analyst agent context.
+1. Agent estimates future monthly capacity limits per department.
+2. Agent identifies expected resource bench dates and capacity deficits.
 
 **UI Hint:** Yes
 
-### Phase 9: Agent Quality & Eval
+### Phase 8: Recommendation Agent
 
-**Goal:** Implement validation assertions and build the evaluation test suite.
+**Goal:** Build `RecommendationAgent` generating strategic advisory insights.
 **Mode:** mvp
 **Success Criteria:**
 
-1. Regex/assertion checks verify LLM markdown headings and format tags.
-2. Evaluation script runs and outputs metric scores.
+1. Agent compiles utilization and forecast gaps.
+2. Agent outputs actionable staffing, training, or hiring recommendations.
 
 **UI Hint:** No
 
-### Phase 10: E2E Test & Control Tab
+### Phase 9: Manager Agent & Orchestration
 
-**Goal:** Write unit/integration tests and build a dashboard pipeline manager panel.
+**Goal:** Build `ManagerAgent` to orchestrate pipeline state and coordinate sequential agent queries.
 **Mode:** mvp
 **Success Criteria:**
 
-1. Coverage of core modules is verified.
-2. Streamlit UI has a tab to trigger data generation/cleaning/validation.
+1. Orchestrator executes Query -> Utilization -> Forecast -> Recommendation pipeline.
+2. Central state dictionary is passed and updated across agent hops.
 
 **UI Hint:** Yes
+
+### Phase 10: Agent Quality & Eval
+
+**Goal:** Implement automated verification assertions and LLM output evaluation tests.
+**Mode:** mvp
+**Success Criteria:**
+
+1. Verification scripts check structure (JSON validation/heading formatting).
+2. Evaluation suite runs and outputs compliance scores.
+
+**UI Hint:** No
 
 ### Phase 11: Dashboard UI Wiring
 
-**Goal:** Connect orchestrator to Streamlit, streaming thought logs and rendering outputs.
+**Goal:** Wire orchestrator and pipeline controls into Streamlit dashboard.
 **Mode:** mvp
 **Success Criteria:**
 
-1. Dashboard logs box streams step execution details dynamically.
-2. Reports and citation links render correctly.
+1. Streamlit dashboard shows dynamic logs sidebar with live execution step messages.
+2. Control tab triggers live cleaning, validation, and multi-agent runs.
 
 **UI Hint:** Yes
 
 ### Phase 12: Deployment & Submission
 
-**Goal:** Design cover page, deploy application, record demo video, write Kaggle writeup.
+**Goal:** Design cover page, deploy app, record demo video, write Kaggle writeup.
 **Mode:** mvp
 **Success Criteria:**
 
-1. Streamlit app deployed to Streamlit Community Cloud.
-2. Public GitHub repo initialized with code, README, and cover page layout.
-3. Demo video and Kaggle writeup submitted.
+1. Public deployment on Streamlit Community Cloud.
+2. Cover page, public GitHub link, demo video, and Kaggle writeup submitted.
 
 **UI Hint:** Yes
 

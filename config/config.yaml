@@ -1,0 +1,50 @@
+# System Configuration for AI Workforce Intelligence Agent
+
+system:
+  name: "AI Workforce Intelligence Agent"
+  env: "development"
+  log_level: "INFO"
+
+models:
+  primary:
+    provider: "google"
+    name: "gemini-1.5-pro"
+    temperature: 0.2
+    max_tokens: 4096
+  secondary:
+    provider: "google"
+    name: "gemini-1.5-flash"
+    temperature: 0.5
+    max_tokens: 2048
+
+agents:
+  manager_agent:
+    name: "ManagerAgent"
+    role: "Orchestrate specialized agents and manage shared state context"
+    model: "gemini-1.5-pro"
+    max_iterations: 3
+  query_agent:
+    name: "WorkforceQueryAgent"
+    role: "Retrieve, filter, and validate employee, log, and allocation data from internal tools"
+    model: "gemini-1.5-flash"
+    max_iterations: 5
+  utilization_agent:
+    name: "UtilizationAgent"
+    role: "Analyze workforce workload, logged hours, and over/under utilization states"
+    model: "gemini-1.5-pro"
+    max_iterations: 3
+  forecast_agent:
+    name: "ForecastAgent"
+    role: "Predict monthly workforce capacity limits, benches, and staffing gaps"
+    model: "gemini-1.5-flash"
+    max_iterations: 3
+  recommendation_agent:
+    name: "RecommendationAgent"
+    role: "Synthesize workforce metrics and forecast gaps into actionable strategic recommendations"
+    model: "gemini-1.5-pro"
+    max_iterations: 3
+
+tools:
+  web_search:
+    max_results: 5
+    timeout: 10

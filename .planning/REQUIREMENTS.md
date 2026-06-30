@@ -6,10 +6,10 @@
 
 ### 1. Multi-Agent System Core (AGENT)
 - [ ] **AGENT-01**: Implement `BaseAgent` abstract class interface and standardized step logging.
-- [ ] **AGENT-02**: Implement `ResearchAgent` capable of processing search queries and summarizing web content.
-- [ ] **AGENT-03**: Implement `AnalystAgent` with templates to synthesize search data and internal stats into structured markdown reports.
-- [ ] **AGENT-04**: Build custom Python orchestrator class to sequence execution flow between `ResearchAgent` and `AnalystAgent`.
-- [ ] **AGENT-05**: Implement shared session context dict memory to pass state dynamically across agent runs.
+- [ ] **AGENT-02**: Implement `WorkforceQueryAgent` to retrieve, filter, and validate data using internal tools.
+- [ ] **AGENT-03**: Implement `UtilizationAgent` analyzing workloads and `ForecastAgent` predicting capacity shortages.
+- [ ] **AGENT-04**: Implement `ManagerAgent` orchestrating execution flow and coordinating agent-to-agent session memory.
+- [ ] **AGENT-05**: Implement `RecommendationAgent` generating strategic staffing, training, and hiring business recommendations.
 
 ### 2. MCP / Tool Integration (TOOL)
 - [ ] **TOOL-01**: Integrate live Google Gemini (primary) and OpenAI (fallback) LLM API connections.
