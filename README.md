@@ -13,21 +13,23 @@ graph TD
     User([User / Operator]) -->|Interacts with| UI[Streamlit Dashboard UI]
     
     subgraph System Core
-        UI <-->|Triggers Tasks & Displays logs| Orchestrator[Manager Agent / Orchestrator]
+        UI <-->|Triggers Tasks & Displays logs| Orchestrator[Manager Agent]
         Settings[Settings Loader] -.->|Configures| Orchestrator
         Config[config.yaml] --> Settings
         Env[.env] --> Settings
     end
 
-    subgraph Prompt & System Stores
-        Prompts[prompts/system_prompts.yaml] -.->|Provides prompts for| Orchestrator
-    end
-
-    subgraph Multi-Agent Workforce
-        Orchestrator <-->|Coordinates| WorkforceQueryAgent[Workforce Query Agent]
-        Orchestrator <-->|Coordinates| UtilizationAgent[Utilization Agent]
-        Orchestrator <-->|Coordinates| ForecastAgent[Forecast Agent]
-        Orchestrator <-->|Coordinates| RecommendationAgent[Recommendation Agent]
+    subgraph Multi-Agent Workforce Flow
+        Orchestrator -->|Invokes| WorkforceQueryAgent[Workforce Query Agent]
+        Orchestrator -->|Invokes| UtilizationAgent[Utilization Agent]
+        Orchestrator -->|Invokes| ForecastAgent[Forecast Agent]
+        
+        WorkforceQueryAgent -->|Feeds Data| RecommendationTool[Recommendation Tool]
+        UtilizationAgent -->|Feeds Data| RecommendationTool
+        ForecastAgent -->|Feeds Data| RecommendationTool
+        
+        RecommendationTool -->|Deterministic Recommendations| RecommendationAgent[Recommendation Agent]
+        RecommendationAgent -->|AI Executive Recommendations| UI
     end
 
     subgraph Shared Toolset
@@ -36,6 +38,7 @@ graph TD
         BaseTool --> McpIntegrationTool[MCP Integration Tool]
         BaseTool --> WorklogReaderTool[Worklog Reader Tool]
         BaseTool --> ForecastTool[Forecast Tool]
+        BaseTool --> RecommendationTool
         
         WorkforceQueryAgent -->|Uses| EmployeeLookupTool
         WorkforceQueryAgent -->|Uses| ProjectAnalysisTool
@@ -54,7 +57,7 @@ graph TD
     
     class UI,Orchestrator,Settings,Config,Env core;
     class WorkforceQueryAgent,UtilizationAgent,ForecastAgent,RecommendationAgent agent;
-    class BaseTool,EmployeeLookupTool,ProjectAnalysisTool,McpIntegrationTool,WorklogReaderTool,ForecastTool tool;
+    class BaseTool,EmployeeLookupTool,ProjectAnalysisTool,McpIntegrationTool,WorklogReaderTool,ForecastTool,RecommendationTool tool;
 ```
 
 ---
