@@ -1,0 +1,11 @@
+{
+    "status": "PASS",
+    "warnings": [
+        "No employee name column found in the employees dataset (expected 'name' or 'employee_name')",
+        "No manager or manager_id column found in the employees dataset"
+    ],
+    "errors": [],
+    "business_insights": [
+        "13 employee(s) are overloaded (>90%)"
+    ]
+}

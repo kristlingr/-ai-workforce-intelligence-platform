@@ -1,0 +1,499 @@
+worklog_id,employee_id,date,project_id,hours_logged,task_category,description
+WL00001,EMP001,2026-05-27,PRJ004,6.2,Development,Writing unit tests and bug fixes
+WL00002,EMP001,2026-05-27,PRJ005,2.3,Research,Evaluating frontend state management libraries
+WL00003,EMP002,2026-05-27,PRJ004,4.5,Development,Integrating databases with Redis caching
+WL00004,EMP002,2026-05-27,PRJ002,3.1,Development,Optimizing Docker container builds
+WL00005,EMP003,2026-05-27,PRJ002,6.5,Development,Implementing OAuth2 authorization endpoints
+WL00006,EMP003,2026-05-27,PRJ005,2.4,Research,Benchmarking LLM model inference speeds
+WL00007,EMP004,2026-05-27,PRJ004,6.5,Meetings,Monthly company sync
+WL00008,EMP004,2026-05-27,PRJ_INTERNAL,1.0,Admin,Timesheet submission and email cleanup
+WL00009,EMP005,2026-05-27,PRJ005,6.3,Development,Refactoring API response serialization
+WL00010,EMP005,2026-05-27,PRJ003,2.9,Development,Refactoring API response serialization
+WL00011,EMP006,2026-05-27,PRJ002,3.7,Meetings,Daily team standup and sprint alignment
+WL00012,EMP006,2026-05-27,PRJ004,3.8,Meetings,Monthly company sync
+WL00013,EMP007,2026-05-27,PRJ002,6.0,Research,Researching Vector DB options for RAG pipeline
+WL00014,EMP007,2026-05-27,PRJ_INTERNAL,1.6,Design,Creating high-fidelity mobile app mockups
+WL00015,EMP008,2026-05-27,PRJ003,5.0,Admin,Timesheet submission and email cleanup
+WL00016,EMP008,2026-05-27,PRJ_INTERNAL,2.8,Admin,Documenting team onboarding guidelines
+WL00017,EMP011,2026-05-27,PRJ002,5.5,Research,Benchmarking LLM model inference speeds
+WL00018,EMP011,2026-05-27,PRJ_INTERNAL,2.6,Design,Reviewing accessibility contrast and typography
+WL00019,EMP012,2026-05-27,PRJ005,5.9,Development,Refactoring API response serialization
+WL00020,EMP012,2026-05-27,PRJ004,2.3,Development,Writing unit tests and bug fixes
+WL00021,EMP013,2026-05-27,PRJ002,3.6,Meetings,Monthly company sync
+WL00022,EMP013,2026-05-27,PRJ004,4.0,Meetings,Sprint planning and story pointing
+WL00023,EMP001,2026-05-28,PRJ004,5.2,Support,Writing developer integration guide
+WL00024,EMP001,2026-05-28,PRJ005,2.6,Development,Integrating databases with Redis caching
+WL00025,EMP002,2026-05-28,PRJ004,5.4,Development,Integrating databases with Redis caching
+WL00026,EMP002,2026-05-28,PRJ002,3.4,Development,Debugging SQL slow queries
+WL00027,EMP003,2026-05-28,PRJ002,4.6,Meetings,Daily team standup and sprint alignment
+WL00028,EMP003,2026-05-28,PRJ005,3.0,Development,Refactoring API response serialization
+WL00029,EMP004,2026-05-28,PRJ004,5.8,Support,Investigating production server outage logs
+WL00030,EMP004,2026-05-28,PRJ_INTERNAL,2.3,Support,Investigating production server outage logs
+WL00031,EMP005,2026-05-28,PRJ005,6.3,Research,Evaluating frontend state management libraries
+WL00032,EMP005,2026-05-28,PRJ003,3.1,Development,Integrating databases with Redis caching
+WL00033,EMP006,2026-05-28,PRJ002,3.7,Admin,System configuration updates
+WL00034,EMP006,2026-05-28,PRJ004,4.6,Admin,Documenting team onboarding guidelines
+WL00035,EMP007,2026-05-28,PRJ002,6.2,Meetings,Sprint planning and story pointing
+WL00036,EMP007,2026-05-28,PRJ_INTERNAL,2.4,Design,Iterating on Figma design system components
+WL00037,EMP009,2026-05-28,PRJ004,6.1,Support,Writing developer integration guide
+WL00038,EMP009,2026-05-28,PRJ_INTERNAL,2.0,Support,Resolving customer escalated ticket on login issue
+WL00039,EMP010,2026-05-28,PRJ002,4.9,Design,Iterating on Figma design system components
+WL00040,EMP010,2026-05-28,PRJ_INTERNAL,3.0,Design,Reviewing accessibility contrast and typography
+WL00041,EMP011,2026-05-28,PRJ002,6.0,Design,Reviewing accessibility contrast and typography
+WL00042,EMP011,2026-05-28,PRJ_INTERNAL,1.7,Design,Conducting user research interviews
+WL00043,EMP012,2026-05-28,PRJ005,5.5,Development,Debugging SQL slow queries
+WL00044,EMP012,2026-05-28,PRJ004,2.5,Development,Implementing OAuth2 authorization endpoints
+WL00045,EMP002,2026-05-29,PRJ004,4.6,Development,Implementing OAuth2 authorization endpoints
+WL00046,EMP002,2026-05-29,PRJ002,3.0,Development,Implementing OAuth2 authorization endpoints
+WL00047,EMP003,2026-05-29,PRJ002,5.1,Development,Optimizing Docker container builds
+WL00048,EMP003,2026-05-29,PRJ005,3.0,Meetings,1-on-1 career development meeting
+WL00049,EMP005,2026-05-29,PRJ005,6.2,Development,Debugging SQL slow queries
+WL00050,EMP005,2026-05-29,PRJ003,2.9,Development,Refactoring API response serialization
+WL00051,EMP006,2026-05-29,PRJ002,4.3,Meetings,1-on-1 career development meeting
+WL00052,EMP006,2026-05-29,PRJ004,4.3,Meetings,Monthly company sync
+WL00053,EMP007,2026-05-29,PRJ002,5.5,Research,Researching Vector DB options for RAG pipeline
+WL00054,EMP007,2026-05-29,PRJ_INTERNAL,3.0,Design,Creating high-fidelity mobile app mockups
+WL00055,EMP008,2026-05-29,PRJ003,5.6,Meetings,Monthly company sync
+WL00056,EMP008,2026-05-29,PRJ_INTERNAL,3.4,Admin,Documenting team onboarding guidelines
+WL00057,EMP009,2026-05-29,PRJ004,5.9,Admin,Timesheet submission and email cleanup
+WL00058,EMP009,2026-05-29,PRJ_INTERNAL,1.8,Support,Helping team member with database migrations
+WL00059,EMP010,2026-05-29,PRJ002,5.2,Design,Designing user profile wireframes
+WL00060,EMP010,2026-05-29,PRJ_INTERNAL,2.4,Research,Evaluating frontend state management libraries
+WL00061,EMP011,2026-05-29,PRJ002,6.1,Research,Reviewing security compliance specifications
+WL00062,EMP011,2026-05-29,PRJ_INTERNAL,3.0,Research,Evaluating frontend state management libraries
+WL00063,EMP013,2026-05-29,PRJ002,4.7,Meetings,Sprint planning and story pointing
+WL00064,EMP013,2026-05-29,PRJ004,3.2,Research,Benchmarking LLM model inference speeds
+WL00065,EMP001,2026-06-01,PRJ004,6.3,Development,Refactoring API response serialization
+WL00066,EMP001,2026-06-01,PRJ005,2.7,Research,Researching Vector DB options for RAG pipeline
+WL00067,EMP002,2026-06-01,PRJ004,4.3,Support,Helping team member with database migrations
+WL00068,EMP002,2026-06-01,PRJ002,3.6,Development,Refactoring API response serialization
+WL00069,EMP003,2026-06-01,PRJ002,6.0,Research,Benchmarking LLM model inference speeds
+WL00070,EMP003,2026-06-01,PRJ005,2.2,Development,Optimizing Docker container builds
+WL00071,EMP004,2026-06-01,PRJ004,5.6,Admin,System configuration updates
+WL00072,EMP004,2026-06-01,PRJ_INTERNAL,2.0,Support,Helping team member with database migrations
+WL00073,EMP005,2026-06-01,PRJ005,6.4,Development,Optimizing Docker container builds
+WL00074,EMP005,2026-06-01,PRJ003,2.6,Support,Investigating production server outage logs
+WL00075,EMP006,2026-06-01,PRJ002,3.0,Meetings,1-on-1 career development meeting
+WL00076,EMP006,2026-06-01,PRJ004,4.6,Admin,Timesheet submission and email cleanup
+WL00077,EMP007,2026-06-01,PRJ002,5.2,Design,Designing user profile wireframes
+WL00078,EMP007,2026-06-01,PRJ_INTERNAL,3.0,Meetings,Monthly company sync
+WL00079,EMP008,2026-06-01,PRJ003,5.1,Admin,Timesheet submission and email cleanup
+WL00080,EMP008,2026-06-01,PRJ_INTERNAL,3.2,Admin,Documenting team onboarding guidelines
+WL00081,EMP009,2026-06-01,PRJ004,7.2,Support,Investigating production server outage logs
+WL00082,EMP009,2026-06-01,PRJ_INTERNAL,1.4,Support,Resolving customer escalated ticket on login issue
+WL00083,EMP010,2026-06-01,PRJ002,6.0,Design,Iterating on Figma design system components
+WL00084,EMP010,2026-06-01,PRJ_INTERNAL,2.4,Design,Iterating on Figma design system components
+WL00085,EMP011,2026-06-01,PRJ002,6.1,Design,Iterating on Figma design system components
+WL00086,EMP011,2026-06-01,PRJ_INTERNAL,2.6,Design,Iterating on Figma design system components
+WL00087,EMP012,2026-06-01,PRJ005,5.5,Development,Writing unit tests and bug fixes
+WL00088,EMP012,2026-06-01,PRJ004,2.5,Development,Debugging SQL slow queries
+WL00089,EMP013,2026-06-01,PRJ002,3.6,Meetings,Daily team standup and sprint alignment
+WL00090,EMP013,2026-06-01,PRJ004,4.7,Admin,Reviewing compliance documents
+WL00091,EMP001,2026-06-02,PRJ004,6.3,Development,Writing unit tests and bug fixes
+WL00092,EMP001,2026-06-02,PRJ005,3.1,Development,Writing unit tests and bug fixes
+WL00093,EMP002,2026-06-02,PRJ004,5.0,Development,Implementing OAuth2 authorization endpoints
+WL00094,EMP002,2026-06-02,PRJ002,3.6,Support,Writing developer integration guide
+WL00095,EMP003,2026-06-02,PRJ002,6.8,Development,Refactoring API response serialization
+WL00096,EMP003,2026-06-02,PRJ005,2.4,Meetings,Client demo and feedback session
+WL00097,EMP004,2026-06-02,PRJ004,7.2,Meetings,1-on-1 career development meeting
+WL00098,EMP004,2026-06-02,PRJ_INTERNAL,1.6,Support,Resolving customer escalated ticket on login issue
+WL00099,EMP005,2026-06-02,PRJ005,4.9,Development,Optimizing Docker container builds
+WL00100,EMP005,2026-06-02,PRJ003,3.1,Development,Refactoring API response serialization
+WL00101,EMP006,2026-06-02,PRJ002,4.1,Meetings,Monthly company sync
+WL00102,EMP006,2026-06-02,PRJ004,3.8,Research,Reviewing security compliance specifications
+WL00103,EMP007,2026-06-02,PRJ002,6.4,Design,Designing user profile wireframes
+WL00104,EMP007,2026-06-02,PRJ_INTERNAL,2.9,Research,Reviewing security compliance specifications
+WL00105,EMP008,2026-06-02,PRJ003,4.7,Support,Writing developer integration guide
+WL00106,EMP008,2026-06-02,PRJ_INTERNAL,3.6,Admin,Timesheet submission and email cleanup
+WL00107,EMP009,2026-06-02,PRJ004,6.3,Support,Writing developer integration guide
+WL00108,EMP009,2026-06-02,PRJ_INTERNAL,1.3,Meetings,Client demo and feedback session
+WL00109,EMP012,2026-06-02,PRJ005,6.5,Development,Debugging SQL slow queries
+WL00110,EMP012,2026-06-02,PRJ004,2.1,Development,Integrating databases with Redis caching
+WL00111,EMP013,2026-06-02,PRJ002,4.3,Meetings,Client demo and feedback session
+WL00112,EMP013,2026-06-02,PRJ004,3.6,Meetings,Client demo and feedback session
+WL00113,EMP001,2026-06-03,PRJ004,6.0,Development,Implementing OAuth2 authorization endpoints
+WL00114,EMP001,2026-06-03,PRJ005,3.0,Development,Writing unit tests and bug fixes
+WL00115,EMP002,2026-06-03,PRJ004,4.4,Development,Writing unit tests and bug fixes
+WL00116,EMP002,2026-06-03,PRJ002,3.2,Meetings,Sprint planning and story pointing
+WL00117,EMP003,2026-06-03,PRJ002,6.7,Development,Implementing OAuth2 authorization endpoints
+WL00118,EMP003,2026-06-03,PRJ005,2.7,Research,Evaluating frontend state management libraries
+WL00119,EMP004,2026-06-03,PRJ004,7.7,Admin,Reviewing compliance documents
+WL00120,EMP004,2026-06-03,PRJ_INTERNAL,1.4,Support,Helping team member with database migrations
+WL00121,EMP005,2026-06-03,PRJ005,6.4,Development,Optimizing Docker container builds
+WL00122,EMP005,2026-06-03,PRJ003,3.0,Meetings,Sprint planning and story pointing
+WL00123,EMP006,2026-06-03,PRJ002,4.4,Admin,Reviewing compliance documents
+WL00124,EMP006,2026-06-03,PRJ004,4.5,Meetings,Client demo and feedback session
+WL00125,EMP007,2026-06-03,PRJ002,4.8,Design,Creating high-fidelity mobile app mockups
+WL00126,EMP007,2026-06-03,PRJ_INTERNAL,2.7,Design,Conducting user research interviews
+WL00127,EMP008,2026-06-03,PRJ003,4.2,Admin,System configuration updates
+WL00128,EMP008,2026-06-03,PRJ_INTERNAL,3.6,Meetings,1-on-1 career development meeting
+WL00129,EMP009,2026-06-03,PRJ004,7.5,Support,Resolving customer escalated ticket on login issue
+WL00130,EMP009,2026-06-03,PRJ_INTERNAL,1.5,Admin,Reviewing compliance documents
+WL00131,EMP010,2026-06-03,PRJ002,6.4,Design,Creating high-fidelity mobile app mockups
+WL00132,EMP010,2026-06-03,PRJ_INTERNAL,2.0,Design,Creating high-fidelity mobile app mockups
+WL00133,EMP011,2026-06-03,PRJ002,5.7,Design,Conducting user research interviews
+WL00134,EMP011,2026-06-03,PRJ_INTERNAL,2.5,Research,Benchmarking LLM model inference speeds
+WL00135,EMP012,2026-06-03,PRJ005,6.0,Development,Optimizing Docker container builds
+WL00136,EMP012,2026-06-03,PRJ004,2.0,Research,Reviewing security compliance specifications
+WL00137,EMP013,2026-06-03,PRJ002,3.9,Meetings,Client demo and feedback session
+WL00138,EMP013,2026-06-03,PRJ004,3.6,Research,Benchmarking LLM model inference speeds
+WL00139,EMP001,2026-06-04,PRJ004,5.7,Development,Debugging SQL slow queries
+WL00140,EMP001,2026-06-04,PRJ005,2.9,Development,Implementing OAuth2 authorization endpoints
+WL00141,EMP002,2026-06-04,PRJ004,4.9,Meetings,Monthly company sync
+WL00142,EMP002,2026-06-04,PRJ002,3.1,Development,Optimizing Docker container builds
+WL00143,EMP004,2026-06-04,PRJ004,7.4,Meetings,1-on-1 career development meeting
+WL00144,EMP004,2026-06-04,PRJ_INTERNAL,1.1,Support,Investigating production server outage logs
+WL00145,EMP005,2026-06-04,PRJ005,5.5,Development,Optimizing Docker container builds
+WL00146,EMP005,2026-06-04,PRJ003,2.4,Development,Writing unit tests and bug fixes
+WL00147,EMP007,2026-06-04,PRJ002,7.1,Design,Designing user profile wireframes
+WL00148,EMP007,2026-06-04,PRJ_INTERNAL,2.1,Design,Creating high-fidelity mobile app mockups
+WL00149,EMP008,2026-06-04,PRJ003,3.5,Support,Writing developer integration guide
+WL00150,EMP008,2026-06-04,PRJ_INTERNAL,4.1,Admin,Reviewing compliance documents
+WL00151,EMP009,2026-06-04,PRJ004,6.4,Support,Helping team member with database migrations
+WL00152,EMP009,2026-06-04,PRJ_INTERNAL,1.2,Support,Resolving customer escalated ticket on login issue
+WL00153,EMP010,2026-06-04,PRJ002,6.1,Design,Reviewing accessibility contrast and typography
+WL00154,EMP010,2026-06-04,PRJ_INTERNAL,2.6,Design,Creating high-fidelity mobile app mockups
+WL00155,EMP011,2026-06-04,PRJ002,5.9,Design,Designing user profile wireframes
+WL00156,EMP011,2026-06-04,PRJ_INTERNAL,2.7,Research,Evaluating frontend state management libraries
+WL00157,EMP012,2026-06-04,PRJ005,5.6,Development,Refactoring API response serialization
+WL00158,EMP012,2026-06-04,PRJ004,2.4,Development,Integrating databases with Redis caching
+WL00159,EMP013,2026-06-04,PRJ002,3.2,Research,Reviewing security compliance specifications
+WL00160,EMP013,2026-06-04,PRJ004,4.8,Meetings,Sprint planning and story pointing
+WL00161,EMP002,2026-06-05,PRJ004,5.5,Development,Optimizing Docker container builds
+WL00162,EMP002,2026-06-05,PRJ002,3.9,Development,Refactoring API response serialization
+WL00163,EMP004,2026-06-05,PRJ004,7.4,Support,Helping team member with database migrations
+WL00164,EMP004,2026-06-05,PRJ_INTERNAL,1.7,Support,Writing developer integration guide
+WL00165,EMP005,2026-06-05,PRJ005,6.2,Development,Integrating databases with Redis caching
+WL00166,EMP005,2026-06-05,PRJ003,1.8,Development,Writing unit tests and bug fixes
+WL00167,EMP006,2026-06-05,PRJ002,3.8,Meetings,1-on-1 career development meeting
+WL00168,EMP006,2026-06-05,PRJ004,4.2,Research,Researching Vector DB options for RAG pipeline
+WL00169,EMP008,2026-06-05,PRJ003,5.1,Admin,Documenting team onboarding guidelines
+WL00170,EMP008,2026-06-05,PRJ_INTERNAL,3.9,Support,Resolving customer escalated ticket on login issue
+WL00171,EMP010,2026-06-05,PRJ002,5.2,Design,Conducting user research interviews
+WL00172,EMP010,2026-06-05,PRJ_INTERNAL,2.5,Design,Designing user profile wireframes
+WL00173,EMP011,2026-06-05,PRJ002,6.3,Design,Creating high-fidelity mobile app mockups
+WL00174,EMP011,2026-06-05,PRJ_INTERNAL,2.2,Meetings,1-on-1 career development meeting
+WL00175,EMP012,2026-06-05,PRJ005,5.8,Support,Writing developer integration guide
+WL00176,EMP012,2026-06-05,PRJ004,2.3,Research,Researching Vector DB options for RAG pipeline
+WL00177,EMP013,2026-06-05,PRJ002,3.6,Research,Reviewing security compliance specifications
+WL00178,EMP013,2026-06-05,PRJ004,4.0,Research,Researching Vector DB options for RAG pipeline
+WL00179,EMP001,2026-06-08,PRJ004,5.9,Research,Reviewing security compliance specifications
+WL00180,EMP001,2026-06-08,PRJ005,2.2,Development,Debugging SQL slow queries
+WL00181,EMP002,2026-06-08,PRJ004,5.2,Development,Writing unit tests and bug fixes
+WL00182,EMP002,2026-06-08,PRJ002,3.4,Development,Writing unit tests and bug fixes
+WL00183,EMP003,2026-06-08,PRJ002,6.3,Meetings,1-on-1 career development meeting
+WL00184,EMP003,2026-06-08,PRJ005,2.2,Meetings,Client demo and feedback session
+WL00185,EMP004,2026-06-08,PRJ004,6.6,Support,Resolving customer escalated ticket on login issue
+WL00186,EMP004,2026-06-08,PRJ_INTERNAL,2.0,Admin,System configuration updates
+WL00187,EMP005,2026-06-08,PRJ005,6.4,Development,Writing unit tests and bug fixes
+WL00188,EMP005,2026-06-08,PRJ003,3.0,Development,Implementing OAuth2 authorization endpoints
+WL00189,EMP006,2026-06-08,PRJ002,4.5,Meetings,Client demo and feedback session
+WL00190,EMP006,2026-06-08,PRJ004,4.7,Meetings,1-on-1 career development meeting
+WL00191,EMP007,2026-06-08,PRJ002,5.1,Design,Iterating on Figma design system components
+WL00192,EMP007,2026-06-08,PRJ_INTERNAL,3.0,Design,Iterating on Figma design system components
+WL00193,EMP008,2026-06-08,PRJ003,5.5,Meetings,Client demo and feedback session
+WL00194,EMP008,2026-06-08,PRJ_INTERNAL,3.5,Admin,Timesheet submission and email cleanup
+WL00195,EMP009,2026-06-08,PRJ004,7.6,Support,Investigating production server outage logs
+WL00196,EMP009,2026-06-08,PRJ_INTERNAL,1.8,Admin,Documenting team onboarding guidelines
+WL00197,EMP010,2026-06-08,PRJ002,6.3,Design,Iterating on Figma design system components
+WL00198,EMP010,2026-06-08,PRJ_INTERNAL,2.6,Design,Conducting user research interviews
+WL00199,EMP011,2026-06-08,PRJ002,5.3,Design,Reviewing accessibility contrast and typography
+WL00200,EMP011,2026-06-08,PRJ_INTERNAL,2.4,Design,Conducting user research interviews
+WL00201,EMP012,2026-06-08,PRJ005,5.4,Meetings,Sprint planning and story pointing
+WL00202,EMP012,2026-06-08,PRJ004,3.2,Meetings,Monthly company sync
+WL00203,EMP001,2026-06-09,PRJ004,6.0,Research,Reviewing security compliance specifications
+WL00204,EMP001,2026-06-09,PRJ005,2.8,Development,Implementing OAuth2 authorization endpoints
+WL00205,EMP003,2026-06-09,PRJ002,5.6,Development,Refactoring API response serialization
+WL00206,EMP003,2026-06-09,PRJ005,2.6,Development,Optimizing Docker container builds
+WL00207,EMP004,2026-06-09,PRJ004,5.8,Admin,Timesheet submission and email cleanup
+WL00208,EMP004,2026-06-09,PRJ_INTERNAL,1.9,Support,Resolving customer escalated ticket on login issue
+WL00209,EMP005,2026-06-09,PRJ005,5.5,Development,Integrating databases with Redis caching
+WL00210,EMP005,2026-06-09,PRJ003,2.5,Support,Resolving customer escalated ticket on login issue
+WL00211,EMP006,2026-06-09,PRJ002,4.6,Meetings,Monthly company sync
+WL00212,EMP006,2026-06-09,PRJ004,4.2,Meetings,Monthly company sync
+WL00213,EMP007,2026-06-09,PRJ002,6.3,Design,Reviewing accessibility contrast and typography
+WL00214,EMP007,2026-06-09,PRJ_INTERNAL,1.7,Design,Conducting user research interviews
+WL00215,EMP008,2026-06-09,PRJ003,4.6,Support,Investigating production server outage logs
+WL00216,EMP008,2026-06-09,PRJ_INTERNAL,2.9,Support,Writing developer integration guide
+WL00217,EMP009,2026-06-09,PRJ004,7.4,Meetings,Monthly company sync
+WL00218,EMP009,2026-06-09,PRJ_INTERNAL,1.7,Support,Resolving customer escalated ticket on login issue
+WL00219,EMP010,2026-06-09,PRJ002,6.1,Meetings,Daily team standup and sprint alignment
+WL00220,EMP010,2026-06-09,PRJ_INTERNAL,2.7,Research,Researching Vector DB options for RAG pipeline
+WL00221,EMP011,2026-06-09,PRJ002,5.0,Design,Conducting user research interviews
+WL00222,EMP011,2026-06-09,PRJ_INTERNAL,3.2,Design,Creating high-fidelity mobile app mockups
+WL00223,EMP012,2026-06-09,PRJ005,6.6,Development,Implementing OAuth2 authorization endpoints
+WL00224,EMP012,2026-06-09,PRJ004,2.8,Research,Benchmarking LLM model inference speeds
+WL00225,EMP003,2026-06-10,PRJ002,5.4,Support,Resolving customer escalated ticket on login issue
+WL00226,EMP003,2026-06-10,PRJ005,2.3,Research,Evaluating frontend state management libraries
+WL00227,EMP004,2026-06-10,PRJ004,8.4,Admin,System configuration updates
+WL00228,EMP004,2026-06-10,PRJ_INTERNAL,1.0,Support,Writing developer integration guide
+WL00229,EMP005,2026-06-10,PRJ005,5.7,Meetings,Monthly company sync
+WL00230,EMP005,2026-06-10,PRJ003,2.5,Development,Debugging SQL slow queries
+WL00231,EMP007,2026-06-10,PRJ002,6.2,Research,Benchmarking LLM model inference speeds
+WL00232,EMP007,2026-06-10,PRJ_INTERNAL,2.5,Research,Evaluating frontend state management libraries
+WL00233,EMP008,2026-06-10,PRJ003,5.3,Meetings,Daily team standup and sprint alignment
+WL00234,EMP008,2026-06-10,PRJ_INTERNAL,3.6,Admin,Reviewing compliance documents
+WL00235,EMP009,2026-06-10,PRJ004,5.9,Support,Writing developer integration guide
+WL00236,EMP009,2026-06-10,PRJ_INTERNAL,2.1,Support,Writing developer integration guide
+WL00237,EMP010,2026-06-10,PRJ002,6.3,Design,Creating high-fidelity mobile app mockups
+WL00238,EMP010,2026-06-10,PRJ_INTERNAL,2.0,Design,Conducting user research interviews
+WL00239,EMP011,2026-06-10,PRJ002,6.2,Design,Conducting user research interviews
+WL00240,EMP011,2026-06-10,PRJ_INTERNAL,2.2,Design,Conducting user research interviews
+WL00241,EMP012,2026-06-10,PRJ005,6.1,Development,Writing unit tests and bug fixes
+WL00242,EMP012,2026-06-10,PRJ004,2.2,Support,Writing developer integration guide
+WL00243,EMP013,2026-06-10,PRJ002,4.4,Meetings,Monthly company sync
+WL00244,EMP013,2026-06-10,PRJ004,5.0,Meetings,Sprint planning and story pointing
+WL00245,EMP001,2026-06-11,PRJ004,6.9,Development,Refactoring API response serialization
+WL00246,EMP001,2026-06-11,PRJ005,2.1,Research,Evaluating frontend state management libraries
+WL00247,EMP002,2026-06-11,PRJ004,3.9,Research,Evaluating frontend state management libraries
+WL00248,EMP002,2026-06-11,PRJ002,3.6,Support,Helping team member with database migrations
+WL00249,EMP003,2026-06-11,PRJ002,5.7,Development,Refactoring API response serialization
+WL00250,EMP003,2026-06-11,PRJ005,2.1,Development,Writing unit tests and bug fixes
+WL00251,EMP004,2026-06-11,PRJ004,7.300000000000001,Support,Investigating production server outage logs
+WL00252,EMP004,2026-06-11,PRJ_INTERNAL,1.0,Support,Helping team member with database migrations
+WL00253,EMP005,2026-06-11,PRJ005,5.2,Meetings,1-on-1 career development meeting
+WL00254,EMP005,2026-06-11,PRJ003,2.7,Development,Debugging SQL slow queries
+WL00255,EMP007,2026-06-11,PRJ002,6.0,Design,Creating high-fidelity mobile app mockups
+WL00256,EMP007,2026-06-11,PRJ_INTERNAL,2.9,Design,Designing user profile wireframes
+WL00257,EMP008,2026-06-11,PRJ003,4.9,Meetings,1-on-1 career development meeting
+WL00258,EMP008,2026-06-11,PRJ_INTERNAL,3.2,Meetings,Client demo and feedback session
+WL00259,EMP010,2026-06-11,PRJ002,5.2,Meetings,1-on-1 career development meeting
+WL00260,EMP010,2026-06-11,PRJ_INTERNAL,2.5,Meetings,Sprint planning and story pointing
+WL00261,EMP011,2026-06-11,PRJ002,5.1,Design,Creating high-fidelity mobile app mockups
+WL00262,EMP011,2026-06-11,PRJ_INTERNAL,3.1,Meetings,Monthly company sync
+WL00263,EMP012,2026-06-11,PRJ005,6.6,Meetings,Client demo and feedback session
+WL00264,EMP012,2026-06-11,PRJ004,2.8,Development,Writing unit tests and bug fixes
+WL00265,EMP013,2026-06-11,PRJ002,4.1,Research,Benchmarking LLM model inference speeds
+WL00266,EMP013,2026-06-11,PRJ004,5.0,Research,Reviewing security compliance specifications
+WL00267,EMP001,2026-06-12,PRJ004,6.7,Meetings,Monthly company sync
+WL00268,EMP001,2026-06-12,PRJ005,2.5,Meetings,Monthly company sync
+WL00269,EMP002,2026-06-12,PRJ004,4.9,Development,Writing unit tests and bug fixes
+WL00270,EMP002,2026-06-12,PRJ002,3.9,Development,Optimizing Docker container builds
+WL00271,EMP003,2026-06-12,PRJ002,6.2,Development,Optimizing Docker container builds
+WL00272,EMP003,2026-06-12,PRJ005,1.8,Support,Investigating production server outage logs
+WL00273,EMP004,2026-06-12,PRJ004,5.7,Support,Helping team member with database migrations
+WL00274,EMP004,2026-06-12,PRJ_INTERNAL,1.9,Admin,System configuration updates
+WL00275,EMP005,2026-06-12,PRJ005,6.0,Development,Debugging SQL slow queries
+WL00276,EMP005,2026-06-12,PRJ003,2.8,Meetings,Daily team standup and sprint alignment
+WL00277,EMP006,2026-06-12,PRJ002,4.5,Meetings,Monthly company sync
+WL00278,EMP006,2026-06-12,PRJ004,3.8,Meetings,Monthly company sync
+WL00279,EMP007,2026-06-12,PRJ002,4.8,Design,Reviewing accessibility contrast and typography
+WL00280,EMP007,2026-06-12,PRJ_INTERNAL,2.8,Design,Designing user profile wireframes
+WL00281,EMP008,2026-06-12,PRJ003,5.3,Admin,Timesheet submission and email cleanup
+WL00282,EMP008,2026-06-12,PRJ_INTERNAL,3.4,Meetings,Daily team standup and sprint alignment
+WL00283,EMP009,2026-06-12,PRJ004,7.6,Support,Helping team member with database migrations
+WL00284,EMP009,2026-06-12,PRJ_INTERNAL,1.3,Support,Writing developer integration guide
+WL00285,EMP011,2026-06-12,PRJ002,4.9,Design,Conducting user research interviews
+WL00286,EMP011,2026-06-12,PRJ_INTERNAL,3.0,Design,Designing user profile wireframes
+WL00287,EMP012,2026-06-12,PRJ005,5.5,Development,Refactoring API response serialization
+WL00288,EMP012,2026-06-12,PRJ004,2.3,Development,Debugging SQL slow queries
+WL00289,EMP013,2026-06-12,PRJ002,4.6,Meetings,Client demo and feedback session
+WL00290,EMP013,2026-06-12,PRJ004,4.4,Admin,System configuration updates
+WL00291,EMP001,2026-06-15,PRJ004,6.5,Development,Integrating databases with Redis caching
+WL00292,EMP001,2026-06-15,PRJ005,2.3,Development,Implementing OAuth2 authorization endpoints
+WL00293,EMP002,2026-06-15,PRJ004,4.8,Development,Integrating databases with Redis caching
+WL00294,EMP002,2026-06-15,PRJ002,4.1,Research,Evaluating frontend state management libraries
+WL00295,EMP003,2026-06-15,PRJ002,5.9,Meetings,Sprint planning and story pointing
+WL00296,EMP003,2026-06-15,PRJ005,3.3,Development,Refactoring API response serialization
+WL00297,EMP004,2026-06-15,PRJ004,7.0,Admin,System configuration updates
+WL00298,EMP004,2026-06-15,PRJ_INTERNAL,1.5,Support,Resolving customer escalated ticket on login issue
+WL00299,EMP005,2026-06-15,PRJ005,5.6,Development,Debugging SQL slow queries
+WL00300,EMP005,2026-06-15,PRJ003,2.2,Development,Debugging SQL slow queries
+WL00301,EMP006,2026-06-15,PRJ002,4.3,Admin,System configuration updates
+WL00302,EMP006,2026-06-15,PRJ004,4.1,Admin,System configuration updates
+WL00303,EMP007,2026-06-15,PRJ002,6.3,Meetings,1-on-1 career development meeting
+WL00304,EMP007,2026-06-15,PRJ_INTERNAL,2.5,Design,Reviewing accessibility contrast and typography
+WL00305,EMP008,2026-06-15,PRJ003,4.3,Support,Investigating production server outage logs
+WL00306,EMP008,2026-06-15,PRJ_INTERNAL,3.3,Meetings,Daily team standup and sprint alignment
+WL00307,EMP009,2026-06-15,PRJ004,7.0,Admin,Reviewing compliance documents
+WL00308,EMP009,2026-06-15,PRJ_INTERNAL,1.7,Support,Resolving customer escalated ticket on login issue
+WL00309,EMP010,2026-06-15,PRJ002,5.5,Design,Conducting user research interviews
+WL00310,EMP010,2026-06-15,PRJ_INTERNAL,2.1,Research,Researching Vector DB options for RAG pipeline
+WL00311,EMP011,2026-06-15,PRJ002,6.0,Research,Evaluating frontend state management libraries
+WL00312,EMP011,2026-06-15,PRJ_INTERNAL,2.9,Design,Conducting user research interviews
+WL00313,EMP012,2026-06-15,PRJ005,6.8,Research,Benchmarking LLM model inference speeds
+WL00314,EMP012,2026-06-15,PRJ004,1.9,Development,Writing unit tests and bug fixes
+WL00315,EMP013,2026-06-15,PRJ002,4.7,Research,Evaluating frontend state management libraries
+WL00316,EMP013,2026-06-15,PRJ004,4.2,Meetings,1-on-1 career development meeting
+WL00317,EMP001,2026-06-16,PRJ004,6.1,Meetings,Client demo and feedback session
+WL00318,EMP001,2026-06-16,PRJ005,3.3,Development,Debugging SQL slow queries
+WL00319,EMP003,2026-06-16,PRJ002,6.7,Meetings,1-on-1 career development meeting
+WL00320,EMP003,2026-06-16,PRJ005,2.4,Development,Debugging SQL slow queries
+WL00321,EMP004,2026-06-16,PRJ004,6.1,Admin,System configuration updates
+WL00322,EMP004,2026-06-16,PRJ_INTERNAL,2.0,Admin,Documenting team onboarding guidelines
+WL00323,EMP005,2026-06-16,PRJ005,6.0,Research,Researching Vector DB options for RAG pipeline
+WL00324,EMP005,2026-06-16,PRJ003,2.1,Meetings,1-on-1 career development meeting
+WL00325,EMP006,2026-06-16,PRJ002,4.4,Research,Evaluating frontend state management libraries
+WL00326,EMP006,2026-06-16,PRJ004,3.5,Research,Researching Vector DB options for RAG pipeline
+WL00327,EMP007,2026-06-16,PRJ002,5.8,Meetings,Client demo and feedback session
+WL00328,EMP007,2026-06-16,PRJ_INTERNAL,2.9,Design,Iterating on Figma design system components
+WL00329,EMP008,2026-06-16,PRJ003,5.9,Admin,Documenting team onboarding guidelines
+WL00330,EMP008,2026-06-16,PRJ_INTERNAL,3.3,Admin,System configuration updates
+WL00331,EMP009,2026-06-16,PRJ004,6.4,Support,Resolving customer escalated ticket on login issue
+WL00332,EMP009,2026-06-16,PRJ_INTERNAL,1.4,Admin,Reviewing compliance documents
+WL00333,EMP010,2026-06-16,PRJ002,6.9,Meetings,1-on-1 career development meeting
+WL00334,EMP010,2026-06-16,PRJ_INTERNAL,2.5,Research,Benchmarking LLM model inference speeds
+WL00335,EMP011,2026-06-16,PRJ002,7.3,Design,Creating high-fidelity mobile app mockups
+WL00336,EMP011,2026-06-16,PRJ_INTERNAL,2.0,Design,Iterating on Figma design system components
+WL00337,EMP012,2026-06-16,PRJ005,5.2,Development,Optimizing Docker container builds
+WL00338,EMP012,2026-06-16,PRJ004,2.4,Development,Integrating databases with Redis caching
+WL00339,EMP001,2026-06-17,PRJ004,5.1,Meetings,Monthly company sync
+WL00340,EMP001,2026-06-17,PRJ005,2.6,Research,Evaluating frontend state management libraries
+WL00341,EMP002,2026-06-17,PRJ004,5.1,Research,Reviewing security compliance specifications
+WL00342,EMP002,2026-06-17,PRJ002,4.1,Development,Writing unit tests and bug fixes
+WL00343,EMP004,2026-06-17,PRJ004,7.2,Meetings,Client demo and feedback session
+WL00344,EMP004,2026-06-17,PRJ_INTERNAL,2.2,Support,Helping team member with database migrations
+WL00345,EMP005,2026-06-17,PRJ005,5.8,Research,Reviewing security compliance specifications
+WL00346,EMP005,2026-06-17,PRJ003,2.5,Development,Integrating databases with Redis caching
+WL00347,EMP006,2026-06-17,PRJ002,4.1,Meetings,Client demo and feedback session
+WL00348,EMP006,2026-06-17,PRJ004,3.9,Meetings,Monthly company sync
+WL00349,EMP007,2026-06-17,PRJ002,6.3,Design,Conducting user research interviews
+WL00350,EMP007,2026-06-17,PRJ_INTERNAL,2.5,Design,Reviewing accessibility contrast and typography
+WL00351,EMP008,2026-06-17,PRJ003,4.9,Support,Investigating production server outage logs
+WL00352,EMP008,2026-06-17,PRJ_INTERNAL,2.6,Meetings,Monthly company sync
+WL00353,EMP009,2026-06-17,PRJ004,6.1,Support,Investigating production server outage logs
+WL00354,EMP009,2026-06-17,PRJ_INTERNAL,1.5,Meetings,Monthly company sync
+WL00355,EMP010,2026-06-17,PRJ002,6.7,Meetings,Client demo and feedback session
+WL00356,EMP010,2026-06-17,PRJ_INTERNAL,2.1,Research,Reviewing security compliance specifications
+WL00357,EMP011,2026-06-17,PRJ002,6.1,Research,Researching Vector DB options for RAG pipeline
+WL00358,EMP011,2026-06-17,PRJ_INTERNAL,2.8,Design,Designing user profile wireframes
+WL00359,EMP012,2026-06-17,PRJ005,7.6,Development,Optimizing Docker container builds
+WL00360,EMP012,2026-06-17,PRJ004,1.8,Development,Writing unit tests and bug fixes
+WL00361,EMP013,2026-06-17,PRJ002,4.9,Meetings,Monthly company sync
+WL00362,EMP013,2026-06-17,PRJ004,4.3,Meetings,Monthly company sync
+WL00363,EMP001,2026-06-18,PRJ004,6.2,Development,Refactoring API response serialization
+WL00364,EMP001,2026-06-18,PRJ005,3.2,Development,Integrating databases with Redis caching
+WL00365,EMP002,2026-06-18,PRJ004,4.2,Development,Integrating databases with Redis caching
+WL00366,EMP002,2026-06-18,PRJ002,3.5,Meetings,Sprint planning and story pointing
+WL00367,EMP003,2026-06-18,PRJ002,5.9,Development,Integrating databases with Redis caching
+WL00368,EMP003,2026-06-18,PRJ005,2.3,Meetings,Client demo and feedback session
+WL00369,EMP004,2026-06-18,PRJ004,6.0,Admin,System configuration updates
+WL00370,EMP004,2026-06-18,PRJ_INTERNAL,1.6,Meetings,Client demo and feedback session
+WL00371,EMP005,2026-06-18,PRJ005,6.5,Development,Optimizing Docker container builds
+WL00372,EMP005,2026-06-18,PRJ003,2.3,Research,Evaluating frontend state management libraries
+WL00373,EMP007,2026-06-18,PRJ002,5.5,Design,Conducting user research interviews
+WL00374,EMP007,2026-06-18,PRJ_INTERNAL,2.1,Design,Reviewing accessibility contrast and typography
+WL00375,EMP008,2026-06-18,PRJ003,4.9,Admin,Reviewing compliance documents
+WL00376,EMP008,2026-06-18,PRJ_INTERNAL,3.3,Admin,System configuration updates
+WL00377,EMP009,2026-06-18,PRJ004,7.2,Support,Resolving customer escalated ticket on login issue
+WL00378,EMP009,2026-06-18,PRJ_INTERNAL,2.2,Support,Writing developer integration guide
+WL00379,EMP011,2026-06-18,PRJ002,5.3,Research,Benchmarking LLM model inference speeds
+WL00380,EMP011,2026-06-18,PRJ_INTERNAL,3.1,Design,Creating high-fidelity mobile app mockups
+WL00381,EMP012,2026-06-18,PRJ005,5.3,Meetings,Daily team standup and sprint alignment
+WL00382,EMP012,2026-06-18,PRJ004,2.5,Research,Benchmarking LLM model inference speeds
+WL00383,EMP013,2026-06-18,PRJ002,4.6,Admin,Timesheet submission and email cleanup
+WL00384,EMP013,2026-06-18,PRJ004,4.0,Research,Evaluating frontend state management libraries
+WL00385,EMP001,2026-06-19,PRJ004,6.7,Research,Evaluating frontend state management libraries
+WL00386,EMP001,2026-06-19,PRJ005,2.8,Research,Researching Vector DB options for RAG pipeline
+WL00387,EMP002,2026-06-19,PRJ004,5.0,Development,Optimizing Docker container builds
+WL00388,EMP002,2026-06-19,PRJ002,4.1,Research,Researching Vector DB options for RAG pipeline
+WL00389,EMP003,2026-06-19,PRJ002,5.9,Development,Optimizing Docker container builds
+WL00390,EMP003,2026-06-19,PRJ005,2.4,Development,Implementing OAuth2 authorization endpoints
+WL00391,EMP004,2026-06-19,PRJ004,7.0,Support,Resolving customer escalated ticket on login issue
+WL00392,EMP004,2026-06-19,PRJ_INTERNAL,1.5,Meetings,Sprint planning and story pointing
+WL00393,EMP005,2026-06-19,PRJ005,5.1,Development,Refactoring API response serialization
+WL00394,EMP005,2026-06-19,PRJ003,2.6,Development,Debugging SQL slow queries
+WL00395,EMP006,2026-06-19,PRJ002,3.9,Meetings,1-on-1 career development meeting
+WL00396,EMP006,2026-06-19,PRJ004,3.8,Meetings,Monthly company sync
+WL00397,EMP007,2026-06-19,PRJ002,6.1,Design,Iterating on Figma design system components
+WL00398,EMP007,2026-06-19,PRJ_INTERNAL,2.6,Design,Reviewing accessibility contrast and typography
+WL00399,EMP008,2026-06-19,PRJ003,5.1,Admin,System configuration updates
+WL00400,EMP008,2026-06-19,PRJ_INTERNAL,4.1,Meetings,1-on-1 career development meeting
+WL00401,EMP009,2026-06-19,PRJ004,7.6,Support,Helping team member with database migrations
+WL00402,EMP009,2026-06-19,PRJ_INTERNAL,1.7,Support,Writing developer integration guide
+WL00403,EMP010,2026-06-19,PRJ002,6.1,Design,Iterating on Figma design system components
+WL00404,EMP010,2026-06-19,PRJ_INTERNAL,2.3,Design,Iterating on Figma design system components
+WL00405,EMP011,2026-06-19,PRJ002,7.1,Design,Creating high-fidelity mobile app mockups
+WL00406,EMP011,2026-06-19,PRJ_INTERNAL,2.4,Design,Conducting user research interviews
+WL00407,EMP012,2026-06-19,PRJ005,6.3,Development,Refactoring API response serialization
+WL00408,EMP012,2026-06-19,PRJ004,2.1,Development,Writing unit tests and bug fixes
+WL00409,EMP013,2026-06-19,PRJ002,3.4,Admin,Timesheet submission and email cleanup
+WL00410,EMP013,2026-06-19,PRJ004,4.6,Admin,System configuration updates
+WL00411,EMP001,2026-06-22,PRJ004,5.6,Development,Implementing OAuth2 authorization endpoints
+WL00412,EMP001,2026-06-22,PRJ005,2.9,Development,Writing unit tests and bug fixes
+WL00413,EMP003,2026-06-22,PRJ002,6.0,Development,Integrating databases with Redis caching
+WL00414,EMP003,2026-06-22,PRJ005,2.2,Development,Debugging SQL slow queries
+WL00415,EMP004,2026-06-22,PRJ004,6.4,Support,Helping team member with database migrations
+WL00416,EMP004,2026-06-22,PRJ_INTERNAL,1.3,Meetings,Client demo and feedback session
+WL00417,EMP005,2026-06-22,PRJ005,6.2,Development,Implementing OAuth2 authorization endpoints
+WL00418,EMP005,2026-06-22,PRJ003,2.4,Development,Optimizing Docker container builds
+WL00419,EMP006,2026-06-22,PRJ002,6.3,Research,Researching Vector DB options for RAG pipeline
+WL00420,EMP006,2026-06-22,PRJ004,3.2,Meetings,Daily team standup and sprint alignment
+WL00421,EMP007,2026-06-22,PRJ002,6.8,Meetings,Sprint planning and story pointing
+WL00422,EMP007,2026-06-22,PRJ_INTERNAL,2.6,Design,Creating high-fidelity mobile app mockups
+WL00423,EMP008,2026-06-22,PRJ003,5.8,Support,Writing developer integration guide
+WL00424,EMP008,2026-06-22,PRJ_INTERNAL,3.1,Admin,Timesheet submission and email cleanup
+WL00425,EMP009,2026-06-22,PRJ004,7.0,Meetings,Monthly company sync
+WL00426,EMP009,2026-06-22,PRJ_INTERNAL,1.3,Support,Writing developer integration guide
+WL00427,EMP010,2026-06-22,PRJ002,5.5,Design,Designing user profile wireframes
+WL00428,EMP010,2026-06-22,PRJ_INTERNAL,2.0,Research,Benchmarking LLM model inference speeds
+WL00429,EMP011,2026-06-22,PRJ002,5.2,Design,Reviewing accessibility contrast and typography
+WL00430,EMP011,2026-06-22,PRJ_INTERNAL,2.4,Design,Designing user profile wireframes
+WL00431,EMP012,2026-06-22,PRJ005,6.4,Research,Evaluating frontend state management libraries
+WL00432,EMP012,2026-06-22,PRJ004,2.3,Research,Evaluating frontend state management libraries
+WL00433,EMP013,2026-06-22,PRJ002,3.5,Meetings,Sprint planning and story pointing
+WL00434,EMP013,2026-06-22,PRJ004,4.0,Meetings,Sprint planning and story pointing
+WL00435,EMP001,2026-06-23,PRJ004,6.4,Meetings,Daily team standup and sprint alignment
+WL00436,EMP001,2026-06-23,PRJ005,2.8,Meetings,1-on-1 career development meeting
+WL00437,EMP002,2026-06-23,PRJ004,4.9,Development,Refactoring API response serialization
+WL00438,EMP002,2026-06-23,PRJ002,3.7,Development,Optimizing Docker container builds
+WL00439,EMP003,2026-06-23,PRJ002,6.3,Meetings,Monthly company sync
+WL00440,EMP003,2026-06-23,PRJ005,2.6,Meetings,Sprint planning and story pointing
+WL00441,EMP005,2026-06-23,PRJ005,7.5,Development,Implementing OAuth2 authorization endpoints
+WL00442,EMP005,2026-06-23,PRJ003,1.9,Meetings,Client demo and feedback session
+WL00443,EMP006,2026-06-23,PRJ002,3.8,Meetings,Daily team standup and sprint alignment
+WL00444,EMP006,2026-06-23,PRJ004,5.3,Research,Reviewing security compliance specifications
+WL00445,EMP007,2026-06-23,PRJ002,6.6,Design,Designing user profile wireframes
+WL00446,EMP007,2026-06-23,PRJ_INTERNAL,2.4,Design,Designing user profile wireframes
+WL00447,EMP008,2026-06-23,PRJ003,4.4,Admin,System configuration updates
+WL00448,EMP008,2026-06-23,PRJ_INTERNAL,4.1,Support,Helping team member with database migrations
+WL00449,EMP009,2026-06-23,PRJ004,6.2,Meetings,1-on-1 career development meeting
+WL00450,EMP009,2026-06-23,PRJ_INTERNAL,1.8,Support,Resolving customer escalated ticket on login issue
+WL00451,EMP010,2026-06-23,PRJ002,6.3,Design,Iterating on Figma design system components
+WL00452,EMP010,2026-06-23,PRJ_INTERNAL,2.1,Design,Reviewing accessibility contrast and typography
+WL00453,EMP012,2026-06-23,PRJ005,5.9,Meetings,Monthly company sync
+WL00454,EMP012,2026-06-23,PRJ004,2.6,Development,Debugging SQL slow queries
+WL00455,EMP013,2026-06-23,PRJ002,3.9,Research,Researching Vector DB options for RAG pipeline
+WL00456,EMP013,2026-06-23,PRJ004,4.7,Admin,Timesheet submission and email cleanup
+WL00457,EMP001,2026-06-24,PRJ004,6.3,Support,Writing developer integration guide
+WL00458,EMP001,2026-06-24,PRJ005,3.0,Research,Evaluating frontend state management libraries
+WL00459,EMP005,2026-06-24,PRJ005,6.4,Support,Helping team member with database migrations
+WL00460,EMP005,2026-06-24,PRJ003,2.3,Development,Debugging SQL slow queries
+WL00461,EMP006,2026-06-24,PRJ002,4.3,Meetings,Sprint planning and story pointing
+WL00462,EMP006,2026-06-24,PRJ004,4.9,Admin,System configuration updates
+WL00463,EMP007,2026-06-24,PRJ002,5.6,Meetings,Monthly company sync
+WL00464,EMP007,2026-06-24,PRJ_INTERNAL,2.3,Design,Iterating on Figma design system components
+WL00465,EMP008,2026-06-24,PRJ003,5.5,Admin,Reviewing compliance documents
+WL00466,EMP008,2026-06-24,PRJ_INTERNAL,3.7,Admin,Reviewing compliance documents
+WL00467,EMP009,2026-06-24,PRJ004,7.2,Support,Writing developer integration guide
+WL00468,EMP009,2026-06-24,PRJ_INTERNAL,2.2,Support,Helping team member with database migrations
+WL00469,EMP011,2026-06-24,PRJ002,7.0,Design,Designing user profile wireframes
+WL00470,EMP011,2026-06-24,PRJ_INTERNAL,1.8,Design,Creating high-fidelity mobile app mockups
+WL00471,EMP012,2026-06-24,PRJ005,6.8,Meetings,Monthly company sync
+WL00472,EMP012,2026-06-24,PRJ004,2.5,Meetings,Monthly company sync
+WL00473,EMP013,2026-06-24,PRJ002,3.1,Meetings,1-on-1 career development meeting
+WL00474,EMP013,2026-06-24,PRJ004,4.7,Meetings,1-on-1 career development meeting
+WL00475,EMP002,2026-06-25,PRJ004,5.5,Meetings,1-on-1 career development meeting
+WL00476,EMP002,2026-06-25,PRJ002,3.5,Research,Researching Vector DB options for RAG pipeline
+WL00477,EMP003,2026-06-25,PRJ002,6.3,Development,Optimizing Docker container builds
+WL00478,EMP003,2026-06-25,PRJ005,3.0,Support,Resolving customer escalated ticket on login issue
+WL00479,EMP004,2026-06-25,PRJ004,7.7,Support,Resolving customer escalated ticket on login issue
+WL00480,EMP004,2026-06-25,PRJ_INTERNAL,1.5,Meetings,Client demo and feedback session
+WL00481,EMP005,2026-06-25,PRJ005,5.0,Development,Integrating databases with Redis caching
+WL00482,EMP005,2026-06-25,PRJ003,2.6,Development,Writing unit tests and bug fixes
+WL00483,EMP006,2026-06-25,PRJ002,3.7,Meetings,Daily team standup and sprint alignment
+WL00484,EMP006,2026-06-25,PRJ004,3.8,Research,Researching Vector DB options for RAG pipeline
+WL00485,EMP007,2026-06-25,PRJ002,6.8,Research,Researching Vector DB options for RAG pipeline
+WL00486,EMP007,2026-06-25,PRJ_INTERNAL,2.7,Research,Reviewing security compliance specifications
+WL00487,EMP008,2026-06-25,PRJ003,5.0,Meetings,Client demo and feedback session
+WL00488,EMP008,2026-06-25,PRJ_INTERNAL,2.8,Admin,Documenting team onboarding guidelines
+WL00489,EMP009,2026-06-25,PRJ004,5.6,Admin,Timesheet submission and email cleanup
+WL00490,EMP009,2026-06-25,PRJ_INTERNAL,2.1,Meetings,Monthly company sync
+WL00491,EMP010,2026-06-25,PRJ002,5.3,Research,Researching Vector DB options for RAG pipeline
+WL00492,EMP010,2026-06-25,PRJ_INTERNAL,2.5,Meetings,Monthly company sync
+WL00493,EMP011,2026-06-25,PRJ002,5.6,Design,Creating high-fidelity mobile app mockups
+WL00494,EMP011,2026-06-25,PRJ_INTERNAL,2.7,Design,Conducting user research interviews
+WL00495,EMP012,2026-06-25,PRJ005,5.0,Meetings,1-on-1 career development meeting
+WL00496,EMP012,2026-06-25,PRJ004,2.6,Research,Researching Vector DB options for RAG pipeline
+WL00497,EMP013,2026-06-25,PRJ002,4.5,Research,Researching Vector DB options for RAG pipeline
+WL00498,EMP013,2026-06-25,PRJ004,3.1,Meetings,Daily team standup and sprint alignment

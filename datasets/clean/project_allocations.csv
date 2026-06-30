@@ -1,0 +1,28 @@
+allocation_id,project_id,project_name,employee_id,allocation_percentage,start_date,end_date,role_on_project,project_category
+AL001,PRJ004,Sales Pipeline Automation,EMP001,0.7,2026-01-01,2026-12-31,Contributor,Development
+AL002,PRJ005,Security Audit,EMP001,0.3,2026-01-01,2026-12-31,Contributor,Infrastructure
+AL003,PRJ004,Sales Pipeline Automation,EMP002,0.6,2026-01-01,2026-12-31,Lead,Development
+AL004,PRJ002,Mobile App V2,EMP002,0.4,2026-01-01,2026-12-31,Contributor,Analytics
+AL005,PRJ002,Mobile App V2,EMP003,0.7,2026-01-01,2026-12-31,Contributor,Analytics
+AL006,PRJ005,Security Audit,EMP003,0.3,2026-01-01,2026-12-31,Contributor,Infrastructure
+AL007,PRJ004,Sales Pipeline Automation,EMP004,0.8,2026-01-01,2026-12-31,Contributor,Development
+AL008,PRJ_INTERNAL,Internal Operations,EMP004,0.2,2026-01-01,2026-12-31,Contributor,Operations
+AL009,PRJ005,Security Audit,EMP005,0.7,2026-01-01,2026-12-31,Contributor,Infrastructure
+AL010,PRJ003,HR Portal Integration,EMP005,0.3,2026-01-01,2026-12-31,Contributor,Development
+AL011,PRJ002,Mobile App V2,EMP006,0.5,2026-01-01,2026-12-31,Lead,Analytics
+AL012,PRJ004,Sales Pipeline Automation,EMP006,0.5,2026-01-01,2026-12-31,Lead,Development
+AL013,PRJ002,Mobile App V2,EMP007,0.7,2026-01-01,2026-12-31,Contributor,Analytics
+AL014,PRJ_INTERNAL,Internal Operations,EMP007,0.3,2026-01-01,2026-12-31,Contributor,Operations
+AL015,PRJ003,HR Portal Integration,EMP008,0.6,2026-01-01,2026-12-31,Contributor,Development
+AL016,PRJ_INTERNAL,Internal Operations,EMP008,0.4,2026-01-01,2026-12-31,Contributor,Operations
+AL017,PRJ004,Sales Pipeline Automation,EMP009,0.8,2026-01-01,2026-12-31,Contributor,Development
+AL018,PRJ_INTERNAL,Internal Operations,EMP009,0.2,2026-01-01,2026-12-31,Contributor,Operations
+AL019,PRJ002,Mobile App V2,EMP010,0.7,2026-01-01,2026-12-31,Contributor,Analytics
+AL020,PRJ_INTERNAL,Internal Operations,EMP010,0.3,2026-01-01,2026-12-31,Contributor,Operations
+AL021,PRJ002,Mobile App V2,EMP011,0.7,2026-01-01,2026-12-31,Contributor,Analytics
+AL022,PRJ_INTERNAL,Internal Operations,EMP011,0.3,2026-01-01,2026-12-31,Contributor,Operations
+AL023,PRJ005,Security Audit,EMP012,0.7,2026-01-01,2026-12-31,Lead,Infrastructure
+AL024,PRJ004,Sales Pipeline Automation,EMP012,0.3,2026-01-01,2026-12-31,Contributor,Development
+AL025,PRJ002,Mobile App V2,EMP013,0.5,2026-01-01,2026-12-31,Lead,Analytics
+AL026,PRJ004,Sales Pipeline Automation,EMP013,0.5,2026-01-01,2026-12-31,Lead,Development
+AL027,PRJ_INTERNAL,Internal Operations,EMP014,1.0,2026-01-01,2026-12-31,Contributor,Operations
