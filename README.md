@@ -12,9 +12,13 @@
 
 **A multi-agent AI system that analyzes workforce data, detects utilization risks, forecasts capacity, and generates strategic recommendations — all through an interactive Streamlit dashboard.**
 
+[![Live App](https://img.shields.io/badge/Live_App-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit)](https://kristlingr--ai-workforce-intelligence-platform-app-zzr6ww.streamlit.app/) •
+[![GitHub](https://img.shields.io/badge/GitHub-Repo-181717?style=for-the-badge&logo=github)](https://github.com/kristlingr/-ai-workforce-intelligence-platform)
+
 [Jump to Business Impact](#business-impact) •
 [Jump to Why Agentic AI?](#why-agentic-ai) •
 [Jump to Architecture](#system-architecture) •
+[Jump to Demo](#demo) •
 [Jump to Quick Start](#quick-start) •
 [Jump to Judge Q&A](JUDGE-QA.md)
 
@@ -195,6 +199,8 @@ streamlit run app.py
 ---
 
 ## Demo
+
+**Live app:** [https://kristlingr--ai-workforce-intelligence-platform-app-zzr6ww.streamlit.app/](https://kristlingr--ai-workforce-intelligence-platform-app-zzr6ww.streamlit.app/)
 
 [Video demo](https://youtu.be/YOUR_VIDEO_ID) showing:
 
