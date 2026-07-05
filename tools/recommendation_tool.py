@@ -4,6 +4,7 @@ RecommendationTool module for generating deterministic workforce optimization re
 
 import logging
 from typing import Dict, Any, List, Optional
+from config.settings import settings
 from tools.base_tool import BaseTool
 
 logger = logging.getLogger("tools.recommendation_tool")
@@ -76,7 +77,7 @@ class RecommendationTool(BaseTool):
                 status = item.get("status", "")
 
                 # Rule: High Utilization (Overloaded)
-                if util_pct > 100.0 or status.lower() == "overloaded":
+                if util_pct > settings.overloaded_threshold or status.lower() == "overloaded":
                     recommendations.append({
                         "category": "Redistribution",
                         "priority": "High",
@@ -86,7 +87,7 @@ class RecommendationTool(BaseTool):
                     high_risk_triggers += 1
                 
                 # Rule: Low Utilization (Underutilized) / Skill Gap / Training
-                elif util_pct < 40.0 or status.lower() == "underutilized":
+                elif util_pct < settings.underutilized_threshold or status.lower() == "underutilized":
                     recommendations.append({
                         "category": "Bench Allocation",
                         "priority": "Medium",

@@ -11,6 +11,7 @@ from typing import Dict, Any, List
 
 from .base_agent import BaseAgent
 from .llm_client import LLMClient
+from config.settings import settings
 from tools.employee_lookup import EmployeeLookupTool
 from tools.project_analysis import ProjectAnalysisTool
 
@@ -75,10 +76,9 @@ class UtilizationAgent(BaseAgent):
             emp_id = context.get("entities", {}).get("employee_id")
 
         if not emp_id:
-            # Fallback to general lookup or error
             return {
                 "status": "error",
-                "message": "No valid employee_id found in target or context.",
+                "message": "No specific employee identified. Please provide an employee ID (e.g., EMP001) for utilization analysis.",
                 "analysis": {}
             }
 
@@ -117,9 +117,9 @@ class UtilizationAgent(BaseAgent):
         utilization_percentage = round(total_fte * 100, 1)
 
         # Classify status deterministically
-        if utilization_percentage > 100.0:
+        if utilization_percentage > settings.overloaded_threshold:
             status = "Overloaded"
-        elif utilization_percentage < 40.0:
+        elif utilization_percentage < settings.underutilized_threshold:
             status = "Underutilized"
         else:
             status = "Optimal"

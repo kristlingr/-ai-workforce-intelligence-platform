@@ -1,0 +1,16 @@
+employee_id,department,role,hire_date,status,work_type,location,salary_band
+EMP001,Engineering,Software Engineer,2023-04-08,Active,Remote,Remote,Band 2
+EMP002,Engineering,Engineering Manager,2021-10-14,Active,Remote,Remote,Band 4
+EMP003,Engineering,Software Engineer,2022-04-17,Active,On-site,New York,Band 2
+EMP004,Sales,Sales Representative,2025-07-08,Active,Hybrid,London,Band 1
+EMP005,Engineering,Senior Software Engineer,2024-06-09,Active,Remote,Remote,Band 3
+EMP006,Product,Senior Product Manager,2021-02-13,Active,Remote,Remote,Band 4
+EMP007,Design,Visual Designer,2025-05-26,Active,Remote,Remote,Band 1
+EMP008,HR,HR Specialist,2024-02-18,Active,Hybrid,London,Band 1
+EMP009,Sales,Sales Representative,2021-01-22,Active,Remote,Remote,Band 1
+EMP010,Design,UX Designer,2022-02-13,Active,Hybrid,Berlin,Band 2
+EMP011,Design,UX Designer,2023-06-07,Active,On-site,London,Band 2
+EMP012,Engineering,Engineering Manager,2022-09-24,Active,Remote,Remote,Band 4
+EMP013,Product,Senior Product Manager,2024-05-21,Active,On-site,San Francisco,Band 4
+EMP014,Design,UX Designer,2022-01-26,On Leave,Hybrid,Berlin,Band 2
+EMP015,Design,UX Designer,2022-10-23,Terminated,Hybrid,San Francisco,Band 2

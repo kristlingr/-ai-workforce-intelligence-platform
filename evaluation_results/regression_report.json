@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "regressions_detected": [],
+  "metrics_diff": {
+    "intent_accuracy": 0.0,
+    "routing_accuracy": 0.03,
+    "validation_pass_rate": 0.1,
+    "average_latency_ms": -35.3
+  },
+  "timestamp": "2026-07-04T21:12:10.979896Z"
+}

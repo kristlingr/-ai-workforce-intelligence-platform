@@ -34,13 +34,14 @@ class ForecastTool(BaseTool):
             config=config,
         )
 
-    def run(self, department: Optional[str] = None, months: Optional[List[str]] = None) -> Dict[str, Any]:
+    def run(self, department: Optional[str] = None, months: Optional[List[str]] = None, filters: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
         Runs the forecast analysis tool.
 
         Args:
             department (str, optional): Department name to filter by.
             months (list of str, optional): Specific months to evaluate.
+            filters (dict, optional): Structured filters to filter dataset.
 
         Returns:
             Dict[str, Any]: Structured forecasting analysis details.
@@ -61,6 +62,14 @@ class ForecastTool(BaseTool):
                     "message": "Employees dataset is empty or could not be loaded.",
                     "forecast": {}
                 }
+
+            # Apply filters if provided (Requirement 1)
+            if filters:
+                from tools.employee_lookup import apply_filters_to_df
+                df_emp = apply_filters_to_df(df_emp, df_alloc, filters)
+                matched_ids = df_emp["employee_id"].tolist()
+                df_alloc = df_alloc[df_alloc["employee_id"].isin(matched_ids)]
+                df_cap = df_cap[df_cap["employee_id"].isin(matched_ids)]
 
             # 2. Filter employees by department if specified
             if department:

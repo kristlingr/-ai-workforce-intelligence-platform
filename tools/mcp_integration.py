@@ -15,8 +15,15 @@ logger = logging.getLogger("mcp_integration")
 
 class McpIntegrationTool(BaseTool):
     """
-    Tool to access external data sources via MCP-like connector definitions.
-    Supports Filesystem, Google Drive, and Notion stubs.
+    MCP Server connector for external data sources.
+    
+    Implements three connectors:
+      - filesystem: reads local files with path traversal protection
+      - google_drive: mock connector (switches to live API when GOOGLE_DRIVE_TOKEN is set)
+      - notion: mock connector (switches to live API when NOTION_API_KEY is set)
+    
+    The filesystem connector enforces workspace-boundary security: it resolves
+    paths relative to the project root and rejects any path that resolves outside it.
     """
 
     def __init__(self, config: Dict[str, Any] = None):
@@ -28,6 +35,7 @@ class McpIntegrationTool(BaseTool):
             ),
             config=config,
         )
+        # All file reads are restricted to this directory tree
         self.workspace_root = pathlib.Path(__file__).parent.parent.resolve()
 
     def run(self, *args, **kwargs) -> Any:
@@ -69,15 +77,17 @@ class McpIntegrationTool(BaseTool):
             }
 
     def _handle_filesystem(self, resource_name: str) -> Dict[str, Any]:
-        """Reads a file securely from the local workspace filesystem."""
+        """Reads a file from the filesystem with path traversal protection."""
         try:
+            # Resolve to an absolute path, relative to workspace root
             target_path = pathlib.Path(resource_name)
             if not target_path.is_absolute():
                 target_path = (self.workspace_root / target_path).resolve()
             else:
                 target_path = target_path.resolve()
 
-            # Ensure path is inside workspace bounds
+            # Security check: reject any path that escapes the project directory
+            # This prevents path traversal attacks (e.g., "../../etc/passwd")
             if not str(target_path).startswith(str(self.workspace_root)):
                 return {
                     "connector": "filesystem",

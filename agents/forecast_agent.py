@@ -53,23 +53,27 @@ class ForecastAgent(BaseAgent):
         """Helper to extract department and months from text or context."""
         department = None
         months = None
-        if context and isinstance(context, dict):
-            department = context.get("entities", {}).get("department")
-            months = context.get("entities", {}).get("months")
-
-        # Extract department from task_description
-        if not department:
-            depts = ["Engineering", "Product", "Sales", "Support", "Operations", "HR", "Marketing"]
-            for d in depts:
-                if re.search(r"\b" + re.escape(d) + r"\b", task_description, re.IGNORECASE):
+        
+        # Extract department from task_description first
+        depts = ["Engineering", "Product", "Sales", "Support", "Operations", "HR", "Marketing"]
+        for d in depts:
+            if re.search(r"\b" + re.escape(d) + r"\b", task_description, re.IGNORECASE):
+                if d.upper() == "HR":
+                    department = "HR"
+                else:
                     department = d
-                    break
+                break
 
         # Extract months from task_description (YYYY-MM format)
-        if not months:
-            parsed_months = re.findall(r"\b\d{4}-\d{2}\b", task_description)
-            if parsed_months:
-                months = parsed_months
+        parsed_months = re.findall(r"\b\d{4}-\d{2}\b", task_description)
+        if parsed_months:
+            months = parsed_months
+
+        # Fall back to context if not found in task description
+        if not department and context and isinstance(context, dict):
+            department = context.get("entities", {}).get("department")
+        if not months and context and isinstance(context, dict):
+            months = context.get("entities", {}).get("months")
 
         return department, months
 
@@ -123,8 +127,10 @@ class ForecastAgent(BaseAgent):
                     }
 
         # 1. Execute ForecastTool
-        self.log_step(f"Invoking ForecastTool (dept='{department or 'All'}', months={months})...")
-        tool_res = self.forecast_tool.run(department=department, months=months)
+        from agents.workforce_query_agent import extract_filters_from_query
+        filters = extract_filters_from_query(task_description)
+        self.log_step(f"Invoking ForecastTool (dept='{department or 'All'}', months={months}) with filters={filters}...")
+        tool_res = self.forecast_tool.run(department=department, months=months, filters=filters)
 
         if tool_res.get("status") != "success":
             self.log_step("ForecastTool execution failed or returned error.")
@@ -230,5 +236,7 @@ class ForecastAgent(BaseAgent):
                 "status": "success"
             }
 
+        # Ensure raw monthly metrics are attached for downstream recommendation engines
+        analysis["monthly_metrics"] = monthly_metrics
         self.log_step("Workforce forecasting completed successfully.")
         return analysis

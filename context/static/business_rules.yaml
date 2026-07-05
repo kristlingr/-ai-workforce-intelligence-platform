@@ -1,0 +1,4 @@
+business_rules:
+  - "Utilizations over 100% represent staffing bottleneck risks."
+  - "Utilizations under 70% represent resource under-utilization risks."
+  - "Benchmark releases indicate future available capacity."

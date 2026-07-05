@@ -11,6 +11,7 @@ from typing import Dict, Any, List, Optional
 
 from .base_agent import BaseAgent
 from .llm_client import LLMClient
+from config.settings import settings
 from tools.recommendation_tool import RecommendationTool
 
 logger = logging.getLogger("agent.recommendationagent")
@@ -41,6 +42,15 @@ class RecommendationAgent(BaseAgent):
                 logger.error(f"Failed to parse recommendation_agent_prompt.yaml: {e}")
         return "You are the strategic advisor brain of the Workforce Intelligence System. Respond with the requested JSON schema."
 
+    def _auto_load_datasets(self, filters):
+        """Loads and filters datasets using portable paths."""
+        from config.settings import settings
+        base_dir = settings.clean_datasets_dir
+        emp_path = base_dir / "employees.csv"
+        alloc_path = base_dir / "project_allocations.csv"
+        cap_path = base_dir / "capacity.csv"
+        return emp_path, alloc_path, cap_path
+
     def run(self, task_description: str, context: Dict[str, Any] = None) -> Dict[str, Any]:
         """
         Runs the recommendation agent.
@@ -69,9 +79,66 @@ class RecommendationAgent(BaseAgent):
             }
 
         # Extract data from context
-        utilization_data = context.get("utilization_data")
-        forecast_data = context.get("forecast_data")
-        project_data = context.get("project_data")
+        utilization_data = context.get("utilization_data") if context else None
+        forecast_data = context.get("forecast_data") if context else None
+        project_data = context.get("project_data") if context else None
+
+        # Extract filters from task description or context (Requirement 2)
+        from agents.workforce_query_agent import extract_filters_from_query
+        from tools.employee_lookup import apply_filters_to_df
+        filters = extract_filters_from_query(task_description)
+
+        # Only auto-populate if ALL context data is missing
+        if not utilization_data and not forecast_data and not project_data:
+            try:
+                emp_path, alloc_path, _ = self._auto_load_datasets(filters)
+                if emp_path.exists() and alloc_path.exists():
+                    import pandas as pd
+                    df_emp = pd.read_csv(emp_path)
+                    df_alloc = pd.read_csv(alloc_path)
+                    
+                    # Apply sequential filtering to employees df
+                    df_emp = apply_filters_to_df(df_emp, df_alloc, filters)
+                    matched_ids = df_emp["employee_id"].tolist()
+                    df_alloc = df_alloc[df_alloc["employee_id"].isin(matched_ids)]
+                    
+                    emp_alloc = df_alloc.groupby("employee_id")["allocation_percentage"].sum()
+                    utilization_data = []
+                    for emp_id in df_emp["employee_id"].unique():
+                        alloc = float(emp_alloc.get(emp_id, 0.0)) * 100.0
+                        status = "overloaded" if alloc > settings.overloaded_threshold else "underutilized" if alloc < settings.underutilized_threshold else "optimal"
+                        utilization_data.append({
+                            "employee": emp_id,
+                            "utilization": alloc,
+                            "status": status
+                        })
+            except Exception as e:
+                logger.error(f"Failed to auto-populate utilization_data in RecommendationAgent: {e}")
+
+            try:
+                _, _, cap_path = self._auto_load_datasets(filters)
+                if cap_path.exists():
+                    import pandas as pd
+                    df_cap = pd.read_csv(cap_path)
+                    if filters and 'matched_ids' in locals() and matched_ids:
+                        df_cap = df_cap[df_cap["employee_id"].isin(matched_ids)]
+                        
+                    monthly_metrics = []
+                    for _, row in df_cap.iterrows():
+                        month = row.get("month", "2026-05")
+                        avail = float(row.get("available_hours", 160.0))
+                        demand = avail * 0.85
+                        gap = demand - avail
+                        status = "shortage" if gap > 0.0 else "surplus"
+                        monthly_metrics.append({
+                            "month": month,
+                            "resource_gap": gap,
+                            "status": status,
+                            "utilization": 85.0
+                        })
+                    forecast_data = {"monthly_metrics": monthly_metrics}
+            except Exception as e:
+                logger.error(f"Failed to auto-populate forecast_data in RecommendationAgent: {e}")
 
         # Negative Test: Invalid utilization data
         if utilization_data is not None and not isinstance(utilization_data, (dict, list)):

@@ -1,0 +1,102 @@
+[
+  {
+    "id": "Q01",
+    "query": "Find details for employee EMP001",
+    "expected_intent": "employee_lookup"
+  },
+  {
+    "id": "Q02",
+    "query": "Show profile workload allocation for EMP003",
+    "expected_intent": "employee_lookup"
+  },
+  {
+    "id": "Q03",
+    "query": "Retrieve employee records for department Engineering",
+    "expected_intent": "employee_lookup"
+  },
+  {
+    "id": "Q04",
+    "query": "Find project assignment details for EMP005",
+    "expected_intent": "employee_lookup"
+  },
+  {
+    "id": "Q05",
+    "query": "Analyze workload utilization for department Engineering",
+    "expected_intent": "utilization_analysis"
+  },
+  {
+    "id": "Q06",
+    "query": "Show workload utilization metrics for department Sales",
+    "expected_intent": "utilization_analysis"
+  },
+  {
+    "id": "Q07",
+    "query": "Find utilization rates for HR department employees",
+    "expected_intent": "utilization_analysis"
+  },
+  {
+    "id": "Q08",
+    "query": "Department utilization review for Marketing team",
+    "expected_intent": "utilization_analysis"
+  },
+  {
+    "id": "Q09",
+    "query": "Forecast Engineering capacity for 2026-05",
+    "expected_intent": "forecast_analysis"
+  },
+  {
+    "id": "Q10",
+    "query": "Analyze capacity gap projections for Sales for 2026-06",
+    "expected_intent": "forecast_analysis"
+  },
+  {
+    "id": "Q11",
+    "query": "Forecast upcoming staffing capacity for Engineering",
+    "expected_intent": "forecast_analysis"
+  },
+  {
+    "id": "Q12",
+    "query": "Review capacity forecasts for HR department",
+    "expected_intent": "forecast_analysis"
+  },
+  {
+    "id": "Q13",
+    "query": "What are the optimization recommendations for Engineering?",
+    "expected_intent": "recommendation_request"
+  },
+  {
+    "id": "Q14",
+    "query": "Generate strategic balancing options for Sales team workload",
+    "expected_intent": "recommendation_request"
+  },
+  {
+    "id": "Q15",
+    "query": "Strategic optimization ideas for HR resources",
+    "expected_intent": "recommendation_request"
+  },
+  {
+    "id": "Q16",
+    "query": "Resource balancing recommendations for Marketing",
+    "expected_intent": "recommendation_request"
+  },
+  {
+    "id": "Q17",
+    "query": "Show active project health roster and allocations",
+    "expected_intent": "project_lookup"
+  },
+  {
+    "id": "Q18",
+    "query": "Retrieve complete workforce intelligence summary briefing",
+    "expected_intent": "executive_briefing"
+  },
+  {
+    "id": "Q19",
+    "query": "Executive summary for the Engineering workload",
+    "expected_intent": "executive_briefing"
+  },
+  {
+    "id": "Q20",
+    "query": "Complete workforce summary and priorities",
+    "expected_intent": "executive_briefing"
+  }
+]

@@ -54,12 +54,9 @@ class ResearchAgent(BaseAgent):
             if url not in citations:
                 citations.append(url)
 
-        # Fallback default links if no markdown links were generated
+        # Note: when no URL citations are found, omit rather than fabricate
         if not citations:
-            citations = [
-                "https://www.bls.gov/news.release/pdf/empsit.pdf",
-                "https://www.linkedin.com/economic-graph"
-            ]
+            citations = ["(simulated — no external sources queried)"]
 
         self.log_step(f"Research completed successfully. Found {len(citations)} source citations.")
         return {

@@ -2,9 +2,12 @@
 Analyst Agent implementation for synthesizing workforce research.
 """
 
+import logging
 from typing import Dict, Any
 from .base_agent import BaseAgent
 from .llm_client import LLMClient
+
+logger = logging.getLogger("agent.analystagent")
 
 
 class AnalystAgent(BaseAgent):
@@ -39,8 +42,12 @@ class AnalystAgent(BaseAgent):
             citations = context.get("citations", [])
             self.log_step("Retrieved research data from pipeline context.")
         else:
-            raw_data_input = f"Fallback placeholder data for query: '{task_description}'"
-            self.log_step("No context data found. Using fallback placeholder.")
+            logger.warning(f"No context data available for analyst agent. Query: '{task_description}'")
+            return {
+                "status": "error",
+                "message": "Cannot generate report: no research data available.",
+                "report": ""
+            }
 
         # Prepare execution prompt
         prompt = (

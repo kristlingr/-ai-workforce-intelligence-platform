@@ -1,0 +1,9 @@
+report_structure:
+  sections:
+    - "Executive Summary"
+    - "Workforce Overview"
+    - "Utilization Analysis"
+    - "Forecast Insights"
+    - "Recommendations"
+    - "Action Plan"
+    - "Executive Conclusion"
