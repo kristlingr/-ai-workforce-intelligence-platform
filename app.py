@@ -296,7 +296,7 @@ SCENARIOS = {
 
 # --- INITIALIZE SESSION STATE ---
 if "current_scenario" not in st.session_state:
-    st.session_state.current_scenario = "Forecast Engineering Hiring"
+    st.session_state.current_scenario = "Show Engineering Employees"
 if "custom_query" not in st.session_state:
     st.session_state.custom_query = ""
 if "running_execution" not in st.session_state:
