@@ -1,5 +1,6 @@
 import json
 import re
+import html
 import logging
 from typing import Dict, Any, Optional
 from agents.llm_client import LLMClient
@@ -129,7 +130,9 @@ class NarrativeGenerator:
     def _clean_leakage(self, text: str) -> str:
         """
         Cleans leaked prompt instructions, system headers, and formatting artifacts.
+        Also escapes HTML entities so raw tags don't appear in reports.
         """
+        text = html.escape(text)
         leakage_patterns = [
             r"^You are a professional.*",
             r"^You are a senior.*",
