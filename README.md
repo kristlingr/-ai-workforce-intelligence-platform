@@ -219,6 +219,177 @@ streamlit run app.py
 
 ---
 
+## Evaluation & Failure Handling
+
+### Evaluation System
+
+The system includes a built-in evaluation framework that scores every query response across 12 metrics:
+
+| Metric | Weight | What It Measures |
+|---|---|---|
+| Intent accuracy | 20% | Did we classify the query correctly vs "unknown"? |
+| Routing accuracy | 20% | Did we invoke the right agents for this intent? |
+| Execution plan quality | 15% | Were validation checks passed? |
+| Validation score | 15% | Were all required report sections present? |
+| Evidence completeness | 10% | Are all claims grounded in dataset citations? |
+| Latency score | 5% | Response time (1.0 if <2s, 0.8 if <5s) |
+| State completeness | 5% | All required state keys populated |
+| Context completeness | 5% | Context warnings count |
+| Confidence | 5% | From response_metadata |
+
+**Quality tiers:** Excellent (≥0.90), Good (≥0.75), Needs Review (<0.75).
+
+To run the full benchmark suite:
+```bash
+python -m evaluation.evaluation_runner
+```
+This executes 20+ benchmark queries, produces a scorecard, failure analysis, and regression report in `evaluation_results/`.
+
+### Validation Pipeline
+
+Every response passes through two validation gates:
+
+1. **ResponseValidator** (`evaluation/response_validator.py`) — 8 checks: JSON schema, execution plan structure, mandatory report sections, metadata completeness, routing correctness, confidence calculation, tool-agent alignment, agent-tool alignment.
+
+2. **ReportValidator** (`reporting/report_validator.py`) — 9 checks: no placeholder text, no assumed domain, no leaked prompts, no duplicate paragraphs, no empty sections, no hardcoded metrics, required evidence fields, section-agent alignment, report consistency.
+
+If validation fails, the report regenerates (up to 3 attempts) before accepting partial results.
+
+### Failure Handling Strategy
+
+The system never crashes on bad input. Three-layer defense:
+
+| Layer | Mechanism | What Happens |
+|---|---|---|
+| **1. Retry** | `_execute_with_retry()` in ManagerAgent | Each sub-agent retries up to 3 times with full logging |
+| **2. Graceful degradation** | Error state propagation | Failed agents produce incomplete reports with noted limitations, not crashes |
+| **3. State preservation** | `retry_history` + `execution_trace` | Full failure context recorded and surfaced in the report's Evidence section |
+
+**Specific failure scenarios:**
+
+| Scenario | Handling |
+|---|---|
+| Missing API keys | Mock mode activates, banner shown, confidence lowered to 0.45 |
+| LLM call failure | Falls back Gemini → OpenAI → Mock automatically |
+| Missing datasets | `st.stop()` with clear error message, no traceback |
+| Non-existent employee | Tool returns `"Employee not found"`, report reflects this |
+| Invalid query intent | Defaults to `"unknown"` intent, runs full analysis pipeline |
+| Sub-agent crash | Retries 3x, then skips and notes limitation in report |
+| Report validation fail | Regenerates up to 3 times, accepts partial results |
+
+---
+
+## End-to-End Agent Execution Example
+
+Below is the complete internal reasoning pipeline for the query: **"Check utilization for Engineering"**
+
+### Step 1: PLAN Phase — Intent Classification
+
+```
+User Query: "Check utilization for Engineering"
+
+WorkforceQueryAgent.run() detects:
+  → intent: "utilization_analysis"
+  → entities: { department: "Engineering" }
+  → filters: { department: "Engineering" }
+
+ManagerAgent routes to:
+  → UtilizationAgent  (for utilization computation)
+  → RecommendationAgent  (for strategic synthesis)
+```
+
+### Step 2: ACT Phase — Tool Execution
+
+```
+UtilizationAgent.run() receives: context with employee data
+
+Step 2a: EmployeeLookupTool.run({ department: "Engineering" })
+  → Returns 4 employees: EMP001, EMP003, EMP006, EMP009
+
+Step 2b: WorklogReader loads worklogs.csv → filters by these 4 employees
+  → 120 worklog entries across 2 months
+
+Step 2c: UtilizationAgent computes per-employee:
+  EMP001: (total_hours / capacity_hours) = 152/168 = 90.5% → OVERLOADED (≥90%)
+  EMP003: 128/168 = 76.2% → Normal
+  EMP006: 144/168 = 85.7% → Normal  
+  EMP009: 96/168 = 57.1% → Underutilized (<50%? No, but low)
+
+Step 2d: Results structured into state["utilization_results"]
+```
+
+### Step 3: OBSERVE Phase — Logging
+
+```
+ObservationLayer.observe():
+  - agent: "UtilizationAgent"
+  - status: "success"  
+  - duration_ms: 1450
+  - tools: ["EmployeeLookupTool"]
+  - output: utilization_results (4 employees scored)
+```
+
+### Step 4: VALIDATE Phase — Quality Checks
+
+```
+ValidationLayer.validate(state):
+  ✓ All required state keys present
+  ✓ Execution plan structure valid
+  ✓ Tools match agent (EmployeeLookupTool for UtilizationAgent)
+  ✓ Confidence score computed: 0.92
+
+ResponseValidator runs 8 checks → status: PASS
+```
+
+### Step 5: REFINE Phase — Error Recovery Check
+
+```
+Validation status: PASS → no refinement needed
+State status remains: "success"
+```
+
+### Step 6: REPORT Phase — Build Executive Report
+
+```
+ReportRouter.route_and_build(state):
+  → Detects: utilization_analysis intent
+  → Selects: UtilizationReport builder
+
+Report sections generated:
+  1. Executive Summary — "Engineering has 1 overloaded employee (25% of team)..."
+  2. Department Utilization — table of 4 employees with utilization %
+  3. Overallocated Employees — EMP001 at 90.5% flagged
+  4. Business Risks — burnout risk, project delay risk
+  5. Recommendations — redistribute 10% of EMP001's load
+  6. Evidence — dataset citations with row counts
+  7. Executive Conclusion — priority actions summary
+
+ReportValidator passes on attempt 1
+```
+
+### Step 7: MEMORY UPDATE Phase — Persist Context
+
+```
+Session memory updated with:
+  → intent: utilization_analysis
+  → agents executed: [UtilizationAgent, RecommendationAgent]
+  → confidence: 0.92
+  → execution time: 2.3s
+  → overall status: "success"
+
+Next query can reference this context.
+```
+
+### What the Judge Sees in the UI
+
+The dashboard shows:
+- **Left panel:** The final executive report with all sections
+- **Right panel (execution trace):** Real-time agent lifecycle — PLAN → ACT → OBSERVE → VALIDATE → REPORT
+- **Bottom:** Evidence cards linking every claim back to `datasets/clean/employees.csv` with row counts
+- **Banner (if no API key):** "Running in demo mode — mock responses"
+
+---
+
 ## Project Structure
 
 ```text

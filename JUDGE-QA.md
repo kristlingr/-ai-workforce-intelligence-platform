@@ -162,6 +162,35 @@ An executive briefing scores ~0.92+ on the quality scale (Excellent threshold: �
 
 ---
 
+## Deterministic Mode
+
+### Q: What exactly happens in deterministic/mock mode?
+
+**A:** When no API keys are detected, the entire system runs without any LLM calls. Here's what changes vs what stays the same:
+
+**Same (deterministic):**
+- All tool calls (data queries, filtering, computation) use the same code path
+- The report engine still generates structured reports with all sections
+- Evidence cards still link to source datasets
+- The execution trace still shows the full agent lifecycle
+- Error handling, retry logic, and validation all function
+
+**Different (mock LLM):**
+- Intent classification returns rule-based results instead of LLM-parsed
+- Narrative generation uses templated prose instead of LLM-generated
+- Confidence scores are lowered to 0.45 (vs 0.95 with real LLM)
+- A banner at the top clearly states: "Running in demo mode — no API keys detected"
+
+### Q: Can a judge verify the system works with a real LLM?
+
+**A:** Yes. Add a `GEMINI_API_KEY` or `OPENAI_API_KEY` to `.env`, restart the app, and the banner disappears. The same queries produce richer narrative text with the same underlying data. The switch is transparent — agents, tools, and reports all use the same code path regardless of LLM availability.
+
+### Q: Is mock mode considered a feature or a limitation?
+
+**A:** It's a deliberate feature. The system was designed from the start to be **deployable without API keys** so that judges can evaluate the architecture, agent lifecycle, tool layer, error handling, and reporting without needing cloud credentials. The mock mode is transparently labeled and produces deterministic outputs — every judge sees identical results.
+
+---
+
 ## Edge Cases
 
 ### Q: What happens with empty search results?
