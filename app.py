@@ -4,11 +4,20 @@ import pandas as pd
 
 st.set_page_config(
     page_title="Workforce Intelligence Platform | Enterprise AI",
-    page_icon="🛡️",
+    page_icon="\U0001f6e1\ufe0f",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
+if "page" not in st.session_state:
+    st.session_state.page = "cover"
+
+if st.session_state.page == "dashboard":
+    from dashboard_page import render as render_dashboard
+    render_dashboard()
+    st.stop()
+
+# --- COVER PAGE ---
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -55,9 +64,14 @@ st.markdown("""
     }
     .arch-label { font-size: 0.75rem; color: #94A3B8; margin-top: 0.3rem; }
     .arch-arrow { text-align: center; color: #475569; font-size: 1.2rem; padding: 0.3rem 0; }
-    div[data-testid="stPageLink-NavLink"] > p {
-        font-size: 1rem !important; font-weight: 600 !important;
+    .launch-btn {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+        color: white !important; font-weight: 600; font-size: 1rem;
+        padding: 0.75rem 2rem; border-radius: 8px; transition: opacity 0.2s, transform 0.2s;
+        border: none; cursor: pointer;
     }
+    .launch-btn:hover { opacity: 0.9; transform: translateY(-1px); }
 </style>
 """, unsafe_allow_html=True)
 
@@ -73,23 +87,20 @@ try:
 except Exception:
     pass
 
-st.markdown("<div class='hero-icon'>🛡️</div>", unsafe_allow_html=True)
-st.markdown(
-    "<div class='hero-title'>AI Workforce Intelligence<br>Platform</div>",
-    unsafe_allow_html=True
-)
+st.markdown("<div class='hero-icon'>\U0001f6e1\ufe0f</div>", unsafe_allow_html=True)
+st.markdown("<div class='hero-title'>AI Workforce Intelligence<br>Platform</div>", unsafe_allow_html=True)
 st.markdown(
     "<div class='hero-subtitle'>"
     "An autonomous multi-agent system that analyzes workforce data, forecasts capacity gaps, "
-    "and delivers executive-ready strategic recommendations — powered by a cascading agent "
+    "and delivers executive-ready strategic recommendations \u2014 powered by a cascading agent "
     "orchestration framework with deterministic fallback."
     "</div>",
     unsafe_allow_html=True
 )
 
-col1, col2, col3 = st.columns([1, 2, 1])
-with col2:
-    st.page_link("pages/dashboard.py", label="🚀 Launch Intelligence Dashboard", use_container_width=True)
+if st.button("🚀 Launch AI Workforce Intelligence", use_container_width=True, type="primary"):
+    st.session_state.page = "dashboard"
+    st.rerun()
 
 st.markdown('<div class="stat-grid">', unsafe_allow_html=True)
 cols = st.columns(4)
@@ -114,7 +125,7 @@ st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
 st.markdown('<div class="section-title">🏗️ Architecture Overview</div>', unsafe_allow_html=True)
 st.markdown(
-    '<div class="section-sub">A cascading multi-agent pipeline — each agent delegates to specialized sub-agents, '
+    '<div class="section-sub">A cascading multi-agent pipeline \u2014 each agent delegates to specialized sub-agents, '
     'producing a routed report tailored to the user query.</div>',
     unsafe_allow_html=True
 )
@@ -151,13 +162,13 @@ features = [
     ("🧠", "Multi-Agent Orchestration",
      "Manager Agent delegates queries to specialized sub-agents (Workforce, Utilization, Forecast, Recommendation) based on detected intent."),
     ("📊", "Executive Reporting Engine",
-     "Intelligent Report Engine produces routed reports — Employee Lookup, Utilization, Forecast, Executive Briefing, and Strategic Recommendations."),
+     "Intelligent Report Engine produces routed reports \u2014 Employee Lookup, Utilization, Forecast, Executive Briefing, and Strategic Recommendations."),
     ("🔮", "Capacity Forecasting",
      "Analyzes historical capacity data against projected demand to identify FTE gaps, hiring needs, and workload imbalances."),
     ("⚖️", "Utilization Analysis",
      "Evaluates department and individual allocation rates, flags overallocation (>90%) and underutilization (<70%) risks."),
     ("🛡️", "Deterministic Fallback",
-     "Full mock-response mode without API keys — all agent orchestration, routing, and reporting remain fully operational for demos."),
+     "Full mock-response mode without API keys \u2014 all agent orchestration, routing, and reporting remain fully operational for demos."),
     ("📋", "Evidence & Traceability",
      "Every report includes an evidence card showing primary/supporting agents, datasets used, rows processed, validation status, and confidence score."),
 ]
@@ -207,7 +218,6 @@ for i, (icon, name, desc) in enumerate(report_types):
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
 st.markdown('<div class="section-title">🛠️ Tech Stack</div>', unsafe_allow_html=True)
-
 techs = [
     ("🐍", "Python 3.11+", "Core language"),
     ("⚡", "Streamlit", "UI framework"),
@@ -215,7 +225,6 @@ techs = [
     ("📊", "Pandas / Plotly", "Data analysis & visualization"),
     ("🧪", "Pytest", "Testing framework"),
 ]
-
 cols = st.columns(len(techs))
 for i, (icon, name, desc) in enumerate(techs):
     with cols[i]:
@@ -230,14 +239,15 @@ for i, (icon, name, desc) in enumerate(techs):
 
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
-col1, col2, col3 = st.columns([1, 2, 1])
-with col2:
-    st.page_link("pages/dashboard.py", label="🚀 Launch Intelligence Dashboard", use_container_width=True)
-    st.caption("No API keys required — runs in Enterprise Demo Environment mode")
+if st.button("🚀 Launch AI Workforce Intelligence", use_container_width=True, type="primary"):
+    st.session_state.page = "dashboard"
+    st.rerun()
+
+st.caption("No API keys required \u2014 runs in Enterprise Demo Environment mode")
 
 st.markdown(
     '<div class="footer">'
-    'AI Workforce Intelligence Platform • Built with Streamlit • '
+    'AI Workforce Intelligence Platform \u2022 Built with Streamlit \u2022 '
     '<a href="https://github.com/kristlingr/ai-workforce-intelligence-platform" '
     'style="color:#60A5FA;">GitHub</a>'
     '</div>',
