@@ -12,11 +12,11 @@
 
 **A multi-agent AI system that analyzes workforce data, detects utilization risks, forecasts capacity, and generates strategic recommendations — all through an interactive Streamlit dashboard.**
 
-[Quick Start](#quick-start) •
-[Architecture](#architecture) •
-[Why Agentic AI?](#why-agentic-ai) •
-[Demo](#demo) •
-[Judge Q&A](JUDGE-QA.md)
+[Jump to Business Impact](#business-impact) •
+[Jump to Why Agentic AI?](#why-agentic-ai) •
+[Jump to Architecture](#system-architecture) •
+[Jump to Quick Start](#quick-start) •
+[Jump to Judge Q&A](JUDGE-QA.md)
 
 </div>
 
@@ -59,46 +59,74 @@ This system implements the full Google Agentic Engineering pattern — not as a 
 
 ---
 
-## Architecture
+## System Architecture
+
+The following diagram illustrates the relationship between the user interface, the system configuration, the agent orchestrator, and the specialized agents and tools.
+
+```mermaid
+graph TD
+    User([User / Operator]) -->|Interacts with| UI[Streamlit Dashboard UI]
+    
+    subgraph System Core
+        UI <-->|Triggers Tasks & Displays logs| Orchestrator[Manager Agent]
+        Settings[Settings Loader] -.->|Configures| Orchestrator
+        Config[config.yaml] --> Settings
+        Env[.env] --> Settings
+    end
+
+    subgraph Multi-Agent Workforce Flow
+        Orchestrator -->|Invokes| WorkforceQueryAgent[Workforce Query Agent]
+        Orchestrator -->|Invokes| UtilizationAgent[Utilization Agent]
+        Orchestrator -->|Invokes| ForecastAgent[Forecast Agent]
+        
+        WorkforceQueryAgent -->|Feeds Data| RecommendationTool[Recommendation Tool]
+        UtilizationAgent -->|Feeds Data| RecommendationTool
+        ForecastAgent -->|Feeds Data| RecommendationTool
+        
+        RecommendationTool -->|Deterministic Recommendations| RecommendationAgent[Recommendation Agent]
+        RecommendationAgent -->|AI Executive Recommendations| UI
+    end
+
+    subgraph Shared Toolset
+        BaseTool[base_tool.py] --> EmployeeLookupTool[Employee Lookup Tool]
+        BaseTool --> ProjectAnalysisTool[Project Analysis Tool]
+        BaseTool --> McpIntegrationTool[MCP Integration Tool]
+        BaseTool --> WorklogReaderTool[Worklog Reader Tool]
+        BaseTool --> ForecastTool[Forecast Tool]
+        BaseTool --> RecommendationTool
+        
+        WorkforceQueryAgent -->|Uses| EmployeeLookupTool
+        WorkforceQueryAgent -->|Uses| ProjectAnalysisTool
+        WorkforceQueryAgent -->|Uses| McpIntegrationTool
+        WorkforceQueryAgent -->|Uses| WorklogReaderTool
+        
+        UtilizationAgent -->|Uses| EmployeeLookupTool
+        UtilizationAgent -->|Uses| ProjectAnalysisTool
+        
+        ForecastAgent -->|Uses| ForecastTool
+    end
+
+    classDef core fill:#4f46e5,stroke:#4338ca,stroke-width:2px,color:#fff;
+    classDef agent fill:#0d9488,stroke:#0f766e,stroke-width:2px,color:#fff;
+    classDef tool fill:#ea580c,stroke:#c2410c,stroke-width:2px,color:#fff;
+    
+    class UI,Orchestrator,Settings,Config,Env core;
+    class WorkforceQueryAgent,UtilizationAgent,ForecastAgent,RecommendationAgent agent;
+    class BaseTool,EmployeeLookupTool,ProjectAnalysisTool,McpIntegrationTool,WorklogReaderTool,ForecastTool,RecommendationTool tool;
+```
 
 ### Multi-Agent Orchestration
 
-The system is built around a **Manager Agent** that implements the complete AI lifecycle. Unlike single-LLM apps that route prompts to one model:
+The system is built around a **Manager Agent** that implements the complete AI lifecycle. Unlike single-LLM apps that route prompts to one model, this system uses 4 specialized sub-agents orchestrated through a shared state:
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                     MANAGER AGENT (Orchestrator)                 │
-│  PLAN ──► ACT ──► OBSERVE ──► VALIDATE ──► REFINE ──► REPORT    │
-│                       ┌───► MEMORY UPDATE ◄───┐                  │
-└─────────────────────────────────────────────────────────────────┘
-         │                      ▲                        ▲
-         │ delegates to         │ returns results        │ calls
-         ▼                      │                        │
-┌──────────────────┐  ┌──────────────────┐  ┌──────────────────────┐
-│ Workforce Query   │  │ Utilization      │  │ Forecast Agent       │
-│ Agent             │  │ Agent            │  │                      │
-│ • Intent classif. │  │ • Compute util%  │  │ • Capacity analysis  │
-│ • Entity extract. │  │ • Thresholds     │  │ • Trend projection  │
-│ • Tool routing   │  │ • Risk detection │  │ • Hiring forecasts  │
-└────────┬─────────┘  └────────┬─────────┘  └──────────┬───────────┘
-         │                     │                        │
-         ▼                     ▼                        ▼
-┌──────────────────────────────────────────────────────────────────┐
-│                         TOOL LAYER                                │
-│  EmployeeLookup  │  ForecastTool  │  MCP Integration  │  ...     │
-│  (CSV queries)   │  (projections) │  (FS/Drive/Notion)│          │
-└──────────────────────────────────────────────────────────────────┘
-         │                     │                        │
-         └─────────────────────┼────────────────────────┘
-                               ▼
-┌──────────────────────────────────────────────────────────────────┐
-│                  RECOMMENDATION AGENT                              │
-│  • Synthesizes all agent outputs into actionable recommendations   │
-│  • Priority-ranked actions with business impact assessment         │
-└──────────────────────────────────────────────────────────────────┘
-```
+| Agent | Responsibility | Tools Used | Triggered By |
+|---|---|---|---|
+| **WorkforceQueryAgent** | Intent classification, entity extraction, tool routing | EmployeeLookup, ProjectAnalysis, MCP, WorklogReader | Every query (PLAN phase) |
+| **UtilizationAgent** | Compute utilization %, detect overloaded/underutilized, identify risks | EmployeeLookup, ProjectAnalysis | `utilization_analysis` intent |
+| **ForecastAgent** | Capacity trend analysis, hiring forecasts, gap detection | ForecastTool | `forecast_analysis` intent |
+| **RecommendationAgent** | Synthesize all outputs into prioritized actions | RecommendationTool | After data-gathering agents |
 
-**What makes this different from a single-LLM app:**
+### What Makes This Different From a Single LLM App
 
 | Aspect | Single LLM App | This Agentic System |
 |---|---|---|
@@ -116,7 +144,7 @@ The system is built around a **Manager Agent** that implements the complete AI l
 2. **Shared state** — all agents read/write a single `state` dict. No inter-agent message passing, no deadlocks.
 3. **Retry with backoff** — each sub-agent gets 3 attempts before graceful degradation.
 4. **Mock mode** — zero API keys required. Deterministic mock responses let judges evaluate the full pipeline.
-5. **Unified thresholds** — `overloaded_threshold` (90%) and `underutilized_threshold` (50%) live in one place.
+5. **Unified thresholds** — `overloaded_threshold` (90%) and `underutilized_threshold` (50%) live in `config/settings.py`.
 
 ---
 
@@ -126,11 +154,11 @@ Six synthetic datasets (15 employees, 5 departments, 2 months of data):
 
 | Dataset | Rows | Key Columns |
 |---|---|---|
-| `employees.csv` | 15 | ID, department, role, salary_band, status |
-| `project_allocations.csv` | 27 | Employee-project mappings, allocation % |
-| `worklogs.csv` | 498 | Daily hours by employee, project, task |
-| `attendance.csv` | ~450 | Daily attendance, PTO, sick leave |
-| `capacity.csv` | ~30 | Monthly capacity hours per employee |
+| `employees.csv` | 15 | employee_id, department, role, salary_band, status |
+| `project_allocations.csv` | 27 | employee_id, project_id, allocation_percentage |
+| `worklogs.csv` | 498 | employee_id, date, hours_logged, task_category |
+| `attendance.csv` | ~450 | employee_id, date, status (Present/PTO/Sick/Leave) |
+| `capacity.csv` | ~30 | employee_id, month, total_capacity_hours |
 
 All data is **deterministically generated** (seed=42) for reproducibility. Judges see the same data every run.
 
@@ -152,6 +180,16 @@ This installs dependencies, generates datasets, and launches the app. The system
 copy .env.example .env
 # Edit .env: add GEMINI_API_KEY or OPENAI_API_KEY
 setup.bat
+```
+
+### Manual Setup
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python -m data_layer.run_pipeline
+streamlit run app.py
 ```
 
 ---
@@ -183,22 +221,51 @@ setup.bat
 
 ## Project Structure
 
-```
-├── app.py                     # Streamlit dashboard (UI)
-├── agents/                    # Multi-agent system
-│   ├── manager_agent.py       # Orchestrator (lifecycle loop)
+```text
+AI-Workforce-Intelligence-Agent/
+├── .env.example             # Template for environment variables
+├── README.md                # This file
+├── JUDGE-QA.md              # Prepared judge Q&A
+├── requirements.txt         # Dependencies
+├── setup.bat                # One-click setup for judges
+├── app.py                   # Streamlit dashboard (UI)
+│
+├── agents/                  # Multi-agent system
+│   ├── manager_agent.py     # Orchestrator (PLAN->ACT->OBSERVE->VALIDATE->REFINE->REPORT->MEMORY)
 │   ├── workforce_query_agent.py  # Intent + entity extraction
-│   ├── utilization_agent.py   # Workload analysis
-│   ├── forecast_agent.py      # Capacity forecasting
-│   └── recommendation_agent.py# Strategic recommendations
-├── tools/                     # Tool layer (deterministic)
-│   ├── employee_lookup.py     # CSV data access
-│   ├── forecast_tool.py       # Computation
-│   ├── mcp_integration.py     # MCP connectors
-│   └── worklog_reader.py      # Dataset reader
-├── config/                    # Settings + thresholds
-├── data_layer/                # Generation + cleaning
-├── evaluation/                # Benchmark + validation
-├── reporting/                 # Report engine
-└── setup.bat                  # One-click setup
+│   ├── utilization_agent.py # Workload and productivity analysis
+│   ├── forecast_agent.py    # Capacity forecasting
+│   └── recommendation_agent.py # Strategic recommendations
+│
+├── tools/                   # Deterministic tool layer
+│   ├── employee_lookup.py   # CSV data access and filtering
+│   ├── forecast_tool.py     # Forecast computation
+│   ├── mcp_integration.py   # MCP connectors (FS/Drive/Notion)
+│   └── worklog_reader.py    # Dataset reader
+│
+├── config/                  # Configuration
+│   ├── settings.py          # Singleton: API keys, thresholds, paths
+│   └── config.yaml          # YAML overrides
+│
+├── data_layer/              # Data pipeline
+│   ├── generator.py         # Synthetic data generation (seed=42)
+│   ├── cleaner.py           # Data cleaning + standardization
+│   ├── validator.py         # Schema + integrity validation
+│   └── run_pipeline.py      # End-to-end pipeline
+│
+├── evaluation/              # Benchmark + quality
+│   ├── evaluation_runner.py # 12-metric benchmark suite
+│   ├── quality_score.py     # Weighted quality calculation
+│   └── response_validator.py # 8-point response validation
+│
+├── reporting/               # Intelligent Report Engine
+│   ├── report_router.py     # Routes state to correct builder
+│   ├── report_builder.py    # Base builder with shared utilities
+│   ├── narrative_generator.py # LLM-powered prose generation
+│   └── report_validator.py  # 9-point report validation
+│
+├── prompts/                 # YAML prompt templates
+├── datasets/                # Generated CSVs (employees, worklogs, etc.)
+├── tests/                   # Unit tests
+└── context/                 # Context management system
 ```
