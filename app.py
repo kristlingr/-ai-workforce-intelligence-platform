@@ -276,19 +276,19 @@ if not df_cap.empty:
 
 # --- PRE-CONFIGURED SCENARIOS ---
 SCENARIOS = {
-    "Forecast Engineering Hiring": {
+    "Show Engineering Employees": {
+        "query": "List all employees in the Engineering department with their roles and utilization.",
+        "intent": "employee_lookup"
+    },
+    "Forecast hiring needs": {
         "query": "Forecast capacity and workload demands for Engineering department and recommend hiring strategies.",
         "intent": "forecast"
     },
-    "Assess Product Team Overload": {
+    "Find overloaded teams": {
         "query": "Find employees with utilization above 90% and identify workload balancing opportunities.",
         "intent": "utilization"
     },
-    "Search Employee Profile": {
-        "query": "Find allocation details and roster status for employee EMP001",
-        "intent": "employee_lookup"
-    },
-    "Generate Executive Workforce Briefing": {
+    "Generate executive report": {
         "query": "Provide a full executive summary workforce alignment report across all active departments.",
         "intent": "executive"
     }
@@ -353,7 +353,7 @@ with col_head1:
 with col_head2:
     st.write("")
     st.write("")
-    st.text_input("🔍 Quick Search Command Palette (Ctrl+K)", placeholder="e.g., /forecast-demand platform-team", label_visibility="collapsed")
+    st.text_input("🔍 Quick Search Command Palette (Ctrl+K)", placeholder="Ask a workforce question...", label_visibility="collapsed")
 
 # Determine LLM mode
 _has_gemini = bool(settings.gemini_api_key)
