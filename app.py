@@ -98,7 +98,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-if st.button("🚀 Launch AI Workforce Intelligence", use_container_width=True, type="primary"):
+if st.button("🚀 Launch AI Workforce Intelligence", use_container_width=True, type="primary", key="launch_top"):
     st.session_state.page = "dashboard"
     st.rerun()
 
@@ -239,7 +239,7 @@ for i, (icon, name, desc) in enumerate(techs):
 
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
-if st.button("🚀 Launch AI Workforce Intelligence", use_container_width=True, type="primary"):
+if st.button("🚀 Launch AI Workforce Intelligence", use_container_width=True, type="primary", key="launch_bottom"):
     st.session_state.page = "dashboard"
     st.rerun()
 
