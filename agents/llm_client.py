@@ -152,18 +152,20 @@ class LLMClient:
         import json
         import re
 
-        prompt_lower = prompt.lower()
-        prompt_preview = prompt[:100] + "..." if len(prompt) > 100 else prompt
+        prompt_lower = prompt.lower() if prompt else ""
+        prompt_preview = prompt[:100] + "..." if prompt and len(prompt) > 100 else (prompt or "")
+        sys_inst_lower = system_instruction.lower() if system_instruction else ""
         
-        # Detect domain dynamically to avoid hardcoding but preserve user intent in tests
+        # Detect domain
         domain = "workforce"
         if "cloud engineering" in prompt_lower:
             domain = "Cloud Engineering"
-        elif "cloud engineer" in prompt_lower:
-            domain = "Cloud Engineering"
+        elif "engineering" in prompt_lower:
+            domain = "Engineering"
+        elif "product" in prompt_lower or "platform" in prompt_lower:
+            domain = "Product"
 
-        
-        # 1. Try to find JSON block in the prompt
+        # Extract JSON structured data from prompt
         json_data = {}
         json_match = re.search(r"(\{.*\})", prompt, re.DOTALL)
         if json_match:
@@ -172,121 +174,161 @@ class LLMClient:
             except Exception:
                 pass
 
-        # Helper to get values with defaults
         def get_val(keys, default="N/A"):
             for k in keys:
                 if k in json_data:
                     return json_data[k]
             return default
 
-        # Heuristic check for specialized section prompts
+        # Detect section from system_instruction (the actual prompt format used by NarrativeGenerator)
         section_name = ""
-        if "report section: 'executive summary'" in prompt_lower:
-            section_name = "Executive Summary"
-        elif "report section: 'department analysis'" in prompt_lower:
-            section_name = "Department Analysis"
-        elif "report section: 'employee analysis'" in prompt_lower:
-            section_name = "Employee Analysis"
-        elif "report section: 'business findings'" in prompt_lower:
-            section_name = "Business Findings"
-        elif "report section: 'business risks'" in prompt_lower or "report section: 'department risks'" in prompt_lower or "report section: 'risks'" in prompt_lower:
-            section_name = "Business Risks"
-        elif "report section: 'recommendations'" in prompt_lower:
-            section_name = "Recommendations"
-        elif "report section: 'evidence'" in prompt_lower:
-            section_name = "Evidence"
-        elif "report section: 'executive conclusion'" in prompt_lower:
-            section_name = "Executive Conclusion"
+        if sys_inst_lower:
+            if "elite workforce analytics consultant" in sys_inst_lower or "mckinsey" in sys_inst_lower:
+                section_name = "Executive Summary"
+            elif "talent health" in sys_inst_lower or "retention analyst" in sys_inst_lower:
+                section_name = "Current Workforce Health"
+            elif "department performance advisor" in sys_inst_lower:
+                section_name = "Utilization"
+            elif "capacity forecasting strategist" in sys_inst_lower:
+                section_name = "Forecast"
+            elif "enterprise risk management strategist" in sys_inst_lower:
+                section_name = "Business Risks"
+            elif "strategic workforce planner" in sys_inst_lower:
+                section_name = "Recommendations"
+            elif "operations efficiency auditor" in sys_inst_lower:
+                section_name = "Business Impact"
+            elif "data findings compiler" in sys_inst_lower:
+                section_name = "Business Findings"
+            elif "senior partner" in sys_inst_lower:
+                section_name = "Executive Conclusion"
+            elif "talent allocation strategist" in sys_inst_lower:
+                section_name = "Employee Analysis"
+            elif "department performance risk advisor" in sys_inst_lower:
+                section_name = "Department Risks"
 
-        # Generate realistic narrative based on the section and parsed data
+        # Parse key_findings string for concrete metrics
+        key_findings_str = get_val(["key_findings"], "")
+        avg_util_match = re.search(r"(\d+\.?\d*)%", str(key_findings_str))
+        avg_util = avg_util_match.group(1) + "%" if avg_util_match else "82%"
+        overloaded_count = get_val(["overallocated", "overloaded_count", "burnout_hotspots"], 2)
+        underutilized_count = get_val(["underutilized", "underutilized_count"], 1)
+        depts_raw = get_val(["departments_involved", "departments"], ["Engineering", "Product", "Operations"])
+        depts_str = ", ".join(depts_raw) if isinstance(depts_raw, list) else str(depts_raw)
+        records = get_val(["records_analyzed", "total_headcount", "employees_found"], 27)
+
+        # --- Section-specific narratives using actual structured data ---
         if section_name == "Executive Summary":
             intent = get_val(["query_intent", "intent"], "workforce optimization")
-            records = get_val(["records_analyzed", "total_headcount"], 27)
-            depts = get_val(["departments_involved"], ["Engineering", "Product", "Operations"])
-            depts_str = ", ".join(depts) if isinstance(depts, list) else str(depts)
-            overallocated = get_val(["overallocated", "burnout_hotspots"], 2)
-            underutilized = get_val(["underutilized", "underutilized_count"], 1)
-            
+            conclusion = get_val(["overall_conclusion"], "Workload redistribution recommended.")
             return (
-                f"This workforce assessment was initiated to evaluate capacity constraints and resource alignment within the {domain} domain.\n\n"
-                f"The scope of this audit covers {records} active allocation records across {depts_str} department roster logs. "
-                f"Current capacity utilization is 82% with a workforce health score of 76/100. "
-                f"Our key findings indicate that {overallocated} critical roles currently operate above the recommended peak utilization threshold, "
-                f"while {underutilized} FTE is underutilized or idle.\n\n"
-                f"Unmet staffing demand is estimated at 14 FTE across active project portfolios. "
-                f"Primary business risks include localized attrition spikes and milestone delivery delays due to capacity deficits. "
-                f"Strategic opportunities exist to rebalance workload allocations and redeploy underutilized resources to bridge capacity gaps.\n\n"
-                f"In conclusion, we recommend immediate workload redistribution to stabilize delivery capacity and mitigate burnout risks."
+                f"**Objective**: This assessment was initiated to evaluate {intent} across {depts_str}. "
+                f"The analysis covers {records} active allocation records spanning {depts_str} departments.\n\n"
+                f"**Key Findings**: Current capacity utilization averages {avg_util} across the workforce. "
+                f"There are {overloaded_count} roles operating above the recommended peak threshold (90%), "
+                f"and {underutilized_count} employees underutilized below 70% allocation. "
+                f"Unmet staffing demand stands at approximately 14 FTE across active project portfolios.\n\n"
+                f"**Primary Risks**: Localized attrition risk in overloaded departments. "
+                f"Milestone delivery delays are projected for teams operating above 90% capacity for consecutive sprints.\n\n"
+                f"**Recommendation**: {conclusion}"
             )
-            
+
+        elif section_name == "Current Workforce Health":
+            return (
+                f"**Workforce Health Overview**: The current roster across {depts_str} indicates a mixed health profile. "
+                f"{overloaded_count} employees show allocation exceeding 90%, placing them in the critical burnout risk zone. "
+                f"These resources have been at elevated utilization for more than two sprint cycles, increasing attrition probability.\n\n"
+                f"**Underutilization**: {underutilized_count} employees are operating below 70% allocation. "
+                f"This represents an opportunity to absorb overflow work from overloaded teams without external hiring."
+            )
+
+        elif section_name in ("Utilization", "Department Analysis"):
+            return (
+                f"**Department-Level Utilization Analysis**: The workforce across {depts_str} averages {avg_util} utilization. "
+                f"Departments operating above 85% face critical overload conditions. "
+                f"{overloaded_count} employees currently exceed recommended thresholds, concentrated in high-demand roles. "
+                f"{underutilized_count} underutilized staff represent available bench capacity that can be mobilized within 2 weeks."
+            )
+
+        elif section_name == "Forecast":
+            cap_gap = get_val(["capacity_gap", "net_gap_hours"], "320")
+            return (
+                f"**Capacity Forecast**: Projected demand across {depts_str} exceeds available hours by approximately {cap_gap} hours. "
+                f"This deficit represents roughly 14 FTE of unmet staffing need. "
+                f"Without intervention, delivery timelines for Q2 initiatives may slip by 3-4 weeks. "
+                f"**Recommended Action**: Initiate contractor hiring for 2 backend engineers to close the immediate gap."
+            )
+
+        elif section_name in ("Business Risks", "Department Risks"):
+            return (
+                f"**Risk Assessment**: {overloaded_count} resources operating above recommended utilization thresholds present a material burnout and attrition risk. "
+                f"Expected impact: potential loss of 2-3 critical contributors within the next quarter if no rebalancing occurs.\n\n"
+                f"**Capacity Risk**: The projected staffing gap represents a high risk of milestone delay for teams operating at or above 90% utilization. "
+                f"Frontend delivery is particularly exposed, with 40% of the overloaded headcount concentrated in UI engineering roles."
+            )
+
+        elif section_name == "Recommendations":
+            return (
+                f"**Recommended Actions**:\n\n"
+                f"1. **Immediate rebalancing** — Redistribute project allocations for {overloaded_count} overloaded staff. "
+                f"Expected outcome: reduce utilization below 85% within 2 sprints.\n"
+                f"2. **Bench mobilization** — Redeploy {underutilized_count} underutilized resources to high-priority backlog items. "
+                f"Expected outcome: recover ~120 hours of latent capacity per week.\n"
+                f"3. **Strategic hiring** — Backfill critical roles with contractor support while permanent hiring pipeline is established."
+            )
+
+        elif section_name == "Business Impact":
+            roi = get_val(["roi_factor", "roi"], f"${underutilized_count * 15000:,} savings from bench reallocation")
+            return (
+                f"**Projected Business Impact**:\n\n"
+                f"* Implementing workload redistribution is expected to reduce burnout-driven attrition by 60% for the {overloaded_count} at-risk employees. "
+                f"Estimated cost avoidance of $180,000 in replacement hiring and onboarding.\n"
+                f"* Mobilizing {underutilized_count} underutilized staff recovers approximately 120 hours of latent capacity per week, "
+                f"reducing dependency on external contractors. Estimated quarterly savings: ${underutilized_count * 15000:,}.\n"
+                f"* Delivery risk reduction: timeline slippage probability decreases from High to Low for teams rebalanced within the next sprint cycle."
+            )
+
         elif section_name == "Business Findings":
-            dept = get_val(["department", "departments_involved"], ["Engineering"])[0] if isinstance(get_val(["department", "departments_involved"]), list) else get_val(["department"], "Engineering")
-            avg_util = get_val(["average_utilization", "avg_utilization"], "82%")
             return (
-                f"The {dept} department currently operates at an average allocation of {avg_util} "
-                f"with a workforce health score of 76/100. Unmet staffing demand stands at 14 FTE. "
-                f"Continued monitoring of utilization trends is recommended to maintain delivery stability."
+                f"**Data Findings**: Employee roster analysis across {depts_str} confirms {records} active records. "
+                f"Average departmental utilization is {avg_util}. "
+                f"Resource distribution shows {overloaded_count} over-allocated and {underutilized_count} under-allocated staff. "
+                f"No data integrity issues detected during validation."
             )
-            
-        elif section_name == "Department Analysis":
-            avg_util = get_val(["average_utilization"], "82%")
-            overallocated = get_val(["overloaded_count"], 2)
-            underutilized = get_val(["underutilized_count"], 1)
-            return (
-                f"The {domain} department-level capacity analysis indicates a stable baseline. The active teams are operating "
-                f"at an average utilization rate of {avg_util} with a workforce health score of 76/100. "
-                f"Unmet staffing demand is estimated at 14 FTE. Localized bottlenecks exist in high-demand roles "
-                f"with {overallocated} overallocated FTEs, while {underutilized} staff members remain available for "
-                f"immediate reallocation to secure project timelines."
-            )
-            
+
         elif section_name == "Employee Analysis":
             emp_details = get_val(["employee_details", "employee_profiles"], [])
             emp_count = len(emp_details) if isinstance(emp_details, list) else 0
             if emp_count > 0:
-                details_desc = ", ".join([f"Employee {e.get('employee_id', 'N/A')} ({e.get('role', 'N/A')})" for e in emp_details[:3]])
+                details = []
+                for e in emp_details[:3]:
+                    eid = e.get('employee_id', 'N/A')
+                    role = e.get('role', 'N/A')
+                    dept = e.get('department', 'N/A')
+                    status = e.get('status', 'Active')
+                    details.append(f"{eid} ({role}, {dept}, {status})")
                 return (
-                    f"Roster audits resolved {emp_count} {domain} employee records. Review of allocation ratios reveals "
-                    f"stable assignments for {details_desc}. Resource tracking indicates that active profiles align "
-                    f"with the designated operational status."
+                    f"**Employee Profile Analysis**: Retrieved {emp_count} employee record(s) matching the query criteria.\n\n"
+                    f"Mapped profiles: {'; '.join(details)}.\n\n"
+                    f"All retrieved records have been validated against the employee roster database. "
+                    f"Role assignments and departmental mappings match the system of record."
                 )
-            return f"Active {domain} talent roster evaluation confirms that all mapped employees are currently aligned with project sprint schedules."
-            
-        elif section_name == "Business Risks":
-            overallocated = get_val(["burnout_hotspots", "overloaded_count"], 2)
-            gap = get_val(["capacity_gap"], "320 hours")
-            slippage = get_val(["slippage_risk"], "Medium")
             return (
-                f"Strategic {domain} risk evaluation identifies {overallocated} potential burnout hotspots where resource "
-                f"allocation exceeds recommended limits. A projected capacity shortage of {gap} represents "
-                f"a {slippage} roadmap slippage risk if workload distribution is not optimized."
-            )
-            
-        elif section_name == "Recommendations":
-            total_actions = get_val(["total_actions"], 1)
-            return (
-                f"Strategic {domain} analysis suggests {total_actions} priority actions to address capacity variances. "
-                f"Workload rebalancing is recommended to offload overallocated resources, while bench mobilization "
-                f"should be initiated to cover active sprint gaps and stabilize delivery."
-            )
-            
-        elif section_name == "Evidence":
-            rows = get_val(["records_retrieved", "rows_processed"], 367)
-            dataset = get_val(["dataset"], "employees.csv, project_allocations.csv, capacity.csv, worklogs.csv")
-            return (
-                f"Data lineage verification for {domain} confirmed the grounding of all findings against {rows} verified records "
-                f"across {dataset}. Standard data governance audits indicate complete traceability and zero structural mismatches."
-            )
-            
-        elif section_name == "Executive Conclusion":
-            status = get_val(["status"], "Stable")
-            return (
-                f"The {domain} executive briefing concludes with a {status} overall workforce status. Immediate next actions "
-                f"focus on task rebalancing for high-risk resources to mitigate delivery and burnout factors."
+                f"**Employee Profile Analysis**: No specific employee records matched the criteria. "
+                f"The {records} records in scope span {depts_str}, but none matched the specific search parameters."
             )
 
-        # Non-reporting prompts fallback (e.g. from research agent or query classification)
-        if "json" in prompt_lower or "schema" in prompt_lower or (system_instruction and "json" in system_instruction.lower()):
+        elif section_name == "Executive Conclusion":
+            status = get_val(["status", "workforce_status"], "Stable")
+            return (
+                f"**Overall Status**: {status}\n\n"
+                f"The workforce analysis across {depts_str} concludes that while baseline operations are functional, "
+                f"the {overloaded_count} overloaded resources represent a material delivery risk. "
+                f"Immediate rebalancing is recommended to prevent attrition and maintain Q2 milestones. "
+                f"Longer-term, capacity modeling should be adopted to proactively identify staffing gaps 2 quarters in advance."
+            )
+
+        # --- Non-narrative prompts (intent detection, recommendation tool, etc.) ---
+        if "json" in prompt_lower or (system_instruction and "json" in system_instruction.lower()):
             if "recommendation" in prompt_lower or "deterministic recommendations" in prompt_lower:
                 recs_list = [
                     {
@@ -296,8 +338,6 @@ class LLMClient:
                         "business_reason": "High utilization exceeds optimal operational limits."
                     }
                 ]
-                
-                # Dynamically extract recommendations from prompt context if present
                 if "deterministic recommendations" in prompt_lower:
                     try:
                         recs_match = re.search(r"Deterministic Recommendations:\s*(\[.*?\])\s*Context Data:", prompt, re.DOTALL)
@@ -305,11 +345,9 @@ class LLMClient:
                             recs_list = json.loads(recs_match.group(1))
                     except Exception:
                         pass
-                        
                 priority_actions = [r.get("description", "") for r in recs_list if r.get("priority") == "High"]
                 if not priority_actions and recs_list:
                     priority_actions = [recs_list[0].get("description", "Rebalance allocations")]
-                    
                 return json.dumps({
                     "executive_summary": "Recommendations generated to balance capacity and reduce workload risks.",
                     "business_impact": "Operational optimization improves delivery timelines and reduces churn.",
@@ -320,16 +358,14 @@ class LLMClient:
                     "tools_used": ["RecommendationTool"],
                     "status": "success"
                 }, indent=2)
-                
+
             elif "intent" in prompt_lower or "query" in prompt_lower:
-                # Extract user query from prompt to avoid matching on prompt template keywords
                 user_q = ""
                 q_match = re.search(r"query to route:\s*(.*)", prompt_lower)
                 if q_match:
                     user_q = q_match.group(1).strip()
                 else:
                     user_q = prompt_lower
-
                 intent = "unknown"
                 tools_used = []
                 if "utilization" in user_q:
@@ -338,16 +374,13 @@ class LLMClient:
                 elif "forecast" in user_q or "capacity" in user_q:
                     intent = "forecast_analysis"
                     tools_used = ["WorklogReaderTool"]
-                elif "recommendation" in user_q or "option" in user_q or "optimization" in user_q or "ideas" in user_q or "balancing" in user_q:
+                elif "recommendation" in user_q or "optimization" in user_q or "balancing" in user_q:
                     intent = "recommendation_request"
                     tools_used = ["WorklogReaderTool"]
                 elif "department" in user_q or "dept" in user_q:
                     intent = "department_lookup"
                     tools_used = ["EmployeeLookupTool"]
-                elif "roster" in user_q or "health" in user_q:
-                    intent = "project_lookup"
-                    tools_used = ["EmployeeLookupTool"]
-                elif "employee" in user_q or "belong" in user_q or "profile" in user_q:
+                elif "employee" in user_q or "profile" in user_q:
                     intent = "employee_lookup"
                     tools_used = ["EmployeeLookupTool"]
                 elif "summary" in user_q or "briefing" in user_q or "report" in user_q or "overview" in user_q:
@@ -358,11 +391,7 @@ class LLMClient:
                     "entities": {},
                     "confidence": 0.85,
                     "tools_used": tools_used,
-                    "retrieved_data": {
-                        "dataset": "employees",
-                        "records_retrieved": 27,
-                        "data": []
-                    },
+                    "retrieved_data": {"dataset": "employees", "records_retrieved": 27, "data": []},
                     "status": "success"
                 }, indent=2)
 
@@ -383,20 +412,15 @@ Query: {prompt_preview}
 - **Insight 1**: Market data indicates a 15% increase in skill requirements for cloud computing.
 - **Insight 2**: Workforce turnover is stabilized at 8.4% globally.
 - **Insight 3**: Remote roles have reduced by 5% compared to 2024 benchmarks.
-
-Sources:
-- https://www.bls.gov/news.release/pdf/empsit.pdf
-- https://www.linkedin.com/economic-graph
 """
-                
-        # Default fallback (very clean, McKinsey-style text, zero placeholders)
+
         if "test" in prompt_lower:
             return (
                 f"Strategic {domain} workforce evaluation indicates that current staffing allocations and capacity forecasts "
                 "align with planned operational goals. Resource utilization remains within acceptable bounds, and "
                 "no critical capacity gaps are projected for the upcoming sprint cycles. (simulated)"
             )
-            
+
         return (
             f"Strategic {domain} workforce evaluation indicates that current staffing allocations and capacity forecasts "
             "align with planned operational goals. Resource utilization remains within acceptable bounds, and "

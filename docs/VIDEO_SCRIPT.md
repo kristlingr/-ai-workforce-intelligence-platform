@@ -26,18 +26,18 @@
 
 ### 0:45 – 1:15 — Multi-Agent Utilization Analysis
 
-> "Now let's see the multi-agent system in action. I'll ask: 'Check utilization for Engineering.' This triggers a full lifecycle — the Query Agent determines the intent, then the Utilization Agent computes workload percentages against a 90% overload threshold, and finally the Recommendation Agent synthesizes strategic actions."
+> "Now let's see the multi-agent system in action. I'll check utilization for a specific employee: 'Check utilization for EMP004.' This triggers a full lifecycle — the Query Agent determines the intent, then the Utilization Agent computes workload percentages against a 90% overload threshold, and finally the Recommendation Agent synthesizes strategic actions."
 
-*Type: "check utilization for Engineering"*
+*Type: "check utilization for EMP004"*
 *Point at: the PLAN->ACT->OBSERVE->VALIDATE->REPORT steps appearing in the trace*
 *Scroll down to show: the report sections (executive summary, utilization table, business risks, recommendations, evidence)*
 
-### 1:15 – 1:45 — Forecast & Strategic Output
+### 1:15 – 1:45 — Workforce Summary (Multi-Agent)
 
-> "The Forecast Agent can project capacity two months ahead. Let's ask: 'Predict workload for Engineering.' It shows who's overallocated, where capacity gaps exist, and even recommends hiring targets. All recommendations have evidence cards that trace back to the source datasets and row counts — auditability built in."
+> "Now let's trigger multiple agents with one query. I'll ask: 'Workforce summary for Engineering.' This runs the Utilization Agent, Forecast Agent, and Recommendation Agent in sequence. It shows overallocation risks, capacity gaps, hiring targets, and prioritized actions — all with evidence cards tracing back to source datasets."
 
-*Type: "predict workload for Engineering"*
-*Show: forecast table, capacity gap analysis, hiring recommendations*
+*Type: "workforce summary for Engineering"*
+*Show: combined executive summary with utilization table, forecast insights, and recommendations*
 *Click on: an evidence card to show the dataset citation*
 
 ### 1:45 – 2:15 — Error Handling

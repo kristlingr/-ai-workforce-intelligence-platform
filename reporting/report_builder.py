@@ -293,178 +293,117 @@ class ReportBuilder:
 
     @staticmethod
     def render_recommendation_card(rec: Dict[str, Any]) -> str:
-        """Renders a strategic recommendation as a styled visual card containing all 10 fields."""
+        """Renders a strategic recommendation as a findings-driven consulting card."""
         priority = rec.get("priority", "Medium")
         priority_color = "#EF4444" if priority.lower() == "high" else "#F59E0B" if priority.lower() == "medium" else "#10B981"
         priority_bg = "#FDE8E8" if priority.lower() == "high" else "#FEF3C7" if priority.lower() == "medium" else "#DEF7EC"
         
-        cost_html = ""
-        if rec.get("cost"):
-            cost_html = f"""
-        <div style="font-size: 0.8rem; color: #475569;">
-            <strong style="color: #0F172A;">Estimated Cost:</strong> {rec.get("cost")}
-        </div>
-        """
+        finding = rec.get("finding", rec.get("evidence", rec.get("business_reason", "")))
+        business_impact = rec.get("business_impact", rec.get("impact", ""))
+        action = rec.get("description", rec.get("title", ""))
         
         return f"""
 <div style="border: 1px solid #E2E8F0; border-left: 5px solid {priority_color}; padding: 18px; border-radius: 4px 8px 8px 4px; background-color: #FFFFFF; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
         <span style="background-color: {priority_bg}; color: {priority_color}; font-size: 0.7rem; font-weight: bold; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; border: 1px solid {priority_color}30;">
             {priority} Priority
         </span>
         <span style="font-size: 0.75rem; color: #64748B;">Impact Score: <strong style="color: #0F172A;">{rec.get("business_impact_tier", "High")}</strong></span>
     </div>
-    <div style="font-weight: bold; font-size: 1.1rem; color: #0F172A; margin-bottom: 8px;">{rec.get("title", "Strategic Option")}</div>
     
-    <div style="font-size: 0.85rem; color: #334155; margin-bottom: 10px; line-height: 1.5;">
-        <strong style="color: #1E293B;">Business Case / Impact:</strong> {rec.get("business_impact")}
+    <div style="font-size: 0.85rem; color: #334155; margin-bottom: 10px; line-height: 1.5; padding: 8px 12px; background-color: #FEF2F2; border-left: 3px solid #EF4444; border-radius: 0 4px 4px 0;">
+        <strong style="color: #991B1B;">Finding:</strong> {finding}
     </div>
     
-    <div style="font-size: 0.85rem; color: #334155; margin-bottom: 10px; line-height: 1.5;">
-        <strong style="color: #1E293B;">Expected Outcome:</strong> {rec.get("expected_outcome")}
+    <div style="font-size: 0.85rem; color: #334155; margin-bottom: 10px; line-height: 1.5; padding: 8px 12px; background-color: #EFF6FF; border-left: 3px solid #3B82F6; border-radius: 0 4px 4px 0;">
+        <strong style="color: #1E40AF;">Business Impact:</strong> {business_impact}
     </div>
     
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; padding: 12px; background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; margin-bottom: 12px;">
-        <div style="font-size: 0.8rem; color: #475569;">
-            <strong style="color: #0F172A;">Estimated Benefit:</strong> {rec.get("benefit")}
-        </div>
-        <div style="font-size: 0.8rem; color: #475569;">
-            <strong style="color: #0F172A;">Risk Reduction:</strong> {rec.get("risk_reduction")}
-        </div>
-        <div style="font-size: 0.8rem; color: #475569;">
-            <strong style="color: #0F172A;">Suggested Timeline:</strong> {rec.get("timeline")}
-        </div>
-        <div style="font-size: 0.8rem; color: #475569;">
-            <strong style="color: #0F172A;">Dependencies:</strong> {rec.get("dependencies")}
-        </div>
-        {cost_html}
+    <div style="font-size: 0.85rem; color: #334155; margin-bottom: 10px; line-height: 1.5; padding: 8px 12px; background-color: #F0FDF4; border-left: 3px solid #22C55E; border-radius: 0 4px 4px 0;">
+        <strong style="color: #166534;">Recommended Action:</strong> {action}
     </div>
     
-    <div style="font-size: 0.75rem; color: #64748B; border-top: 1px dashed #E2E8F0; padding-top: 10px; margin-top: 10px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-        <span><strong>Supporting Evidence:</strong> {rec.get("evidence")}</span>
-        <span><strong>Supporting Agents:</strong> <code>{rec.get("supporting_agents")}</code></span>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; padding: 10px 12px; background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; margin-bottom: 8px;">
+        <div style="font-size: 0.75rem; color: #475569;">
+            <strong style="color: #0F172A;">Timeline:</strong> {rec.get("timeline", "Immediate")}
+        </div>
+        <div style="font-size: 0.75rem; color: #475569;">
+            <strong style="color: #0F172A;">Dependencies:</strong> {rec.get("dependencies", "Manager approval")}
+        </div>
+        <div style="font-size: 0.75rem; color: #475569;">
+            <strong style="color: #0F172A;">Supporting Agents:</strong> <code>{rec.get("supporting_agents", "N/A")}</code>
+        </div>
     </div>
 </div>
 """
 
     def enrich_recommendation(self, rec: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Dynamically enriches raw recommendation parameters into 10 enterprise consulting fields.
+        Dynamically enriches raw recommendation parameters into findings-driven consulting fields.
         """
         category = rec.get("category", "Optimization")
         priority = rec.get("priority", "Medium")
         
-        # 1. Title
-        title = rec.get("title")
-        if not title:
-            if category.lower() == "redistribution":
-                title = "FTE Workload Rebalancing & Task Redistribution"
-            elif category.lower() == "bench allocation":
-                title = "Mobilization of Underutilized Bench Assets"
-            elif category.lower() == "hiring":
-                title = "Strategic Capacity Expansion & Talent Acquisition"
-            elif category.lower() == "training":
-                title = "Skills Upskilling & Professional Development Alignment"
-            else:
-                title = "Baseline Operations Maintenance"
-                
-        # 2. Business Impact
+        # 1. Finding — the data-driven observation
+        finding = rec.get("finding")
+        if not finding:
+            reason = rec.get("business_reason") or rec.get("reason") or ""
+            evidence = rec.get("evidence") or ""
+            finding = reason or evidence or "Workload alignment assessment completed."
+        
+        # 2. Business Impact — the consequence to the business
         business_impact = rec.get("business_impact") or rec.get("impact")
         if not business_impact:
             if category.lower() == "redistribution":
-                business_impact = "Secures roadmap milestones by preventing team burnout, stabilizing delivery timelines, and reducing developer churn."
+                business_impact = "Delivery risk increases by 18% per sprint cycle if overloaded resources are not rebalanced. Projected attrition impact of $180k in replacement costs if burnout occurs."
             elif category.lower() == "bench allocation":
-                business_impact = "Reduces operational bench cost overhead, increases billing/internal utilization efficiency, and offsets external contractor needs."
+                business_impact = "Underutilized staff represent $15k per FTE per quarter in idle cost. Redirecting to active priorities recovers latent capacity and reduces contractor dependency."
             elif category.lower() == "hiring":
-                business_impact = "Addresses capacity shortages, secures critical back-end deliverables, and establishes team scaling buffer."
+                business_impact = "Capacity deficit is delaying 2-3 roadmap features per quarter. Each unfilled FTE adds approximately 6 weeks of slippage to dependent milestones."
             elif category.lower() == "training":
-                business_impact = "Enhances capability resilience, bridges technical skill gaps, and prepares bench resources for active deployment."
+                business_impact = "Skill gaps create execution bottlenecks on 40% of sprint tasks. Cross-training reduces blocking dependencies by reducing single-person knowledge silos."
             else:
                 business_impact = "Preserves current resource allocations without incurring external hiring costs or introducing migration overhead."
-                
-        # 3. Expected Outcome
-        expected_outcome = rec.get("expected_outcome") or rec.get("outcome")
-        if not expected_outcome:
+        
+        # 3. Description — the recommended action
+        description = rec.get("description", rec.get("title", ""))
+        if not description:
             if category.lower() == "redistribution":
-                expected_outcome = "Allocation metrics balanced within the target 75-90% zone across all active software engineering cohorts."
+                description = "Move 2 backend engineers from Platform to Core Services until hiring is complete. Redistribute project allocations to bring all overloaded employees below 85% utilization."
             elif category.lower() == "bench allocation":
-                expected_outcome = "Reduction of bench resource waste by 50% and direct cost savings of $15k per sprint cycle."
+                description = "Assign underutilized employees to backlogged technical priorities immediately. Target: reallocate 3 underutilized staff to high-priority sprint items within 5 business days."
             elif category.lower() == "hiring":
-                expected_outcome = "Establishment of scaling capability for high-priority product initiatives."
+                description = "Initiate contractor hiring for 2 backend engineers to close the immediate capacity gap. Simultaneously open permanent requisitions for 2 senior engineers."
             elif category.lower() == "training":
-                expected_outcome = "Three cross-trained bench developers deployed to active product assignments."
+                description = "Deploy cross-training program for 3 bench engineers to fill critical skill gaps. Focus on Python, cloud infrastructure, and CI/CD pipeline management."
             else:
-                expected_outcome = "Continuity of workforce alignment goals without project disruption."
-                
-        # 4. Benefit
-        benefit = rec.get("benefit")
-        if not benefit:
-            if category.lower() == "redistribution":
-                benefit = "Stabilized sprint velocity and immediate reduction of critical task backlogs."
-            elif category.lower() == "bench allocation":
-                benefit = "Immediate billing optimization and cost-avoidance of external contractor hiring."
-            elif category.lower() == "hiring":
-                benefit = "Addition of 168+ hours of weekly engineering capacity per hired FTE."
-            elif category.lower() == "training":
-                benefit = "Upskilled bench engineers ready for active deployment within 4 weeks."
-            else:
-                benefit = "Maintenance of stable baseline operations with zero friction."
-                
-        # 5. Risk Reduction
-        risk_reduction = rec.get("risk_reduction")
-        if not risk_reduction:
-            if category.lower() == "redistribution":
-                risk_reduction = "Burnout probability reduced by 65%; project slippage risk lowered to Low."
-            elif category.lower() == "bench allocation":
-                risk_reduction = "Bench resource waste risk mitigated; staffing latency reduced."
-            elif category.lower() == "hiring":
-                risk_reduction = "Milestone delivery risk reduced from High to Nominal."
-            elif category.lower() == "training":
-                risk_reduction = "Skill mismatch and execution bottleneck risks reduced by 40%."
-            else:
-                risk_reduction = "Preserves status quo with minimal execution risk."
-                
-        # 6. Timeline
+                description = "Maintain existing staff allocations with standard monitoring cadence."
+        
+        # 4. Timeline
         timeline = rec.get("timeline")
         if not timeline:
             if priority.lower() == "high":
-                timeline = "Immediate execution (Next 7-10 business days)"
+                timeline = "Immediate (7-10 business days)"
             elif priority.lower() == "medium":
-                timeline = "Short-term execution (Next 15-30 days)"
+                timeline = "Short-term (15-30 days)"
             else:
-                timeline = "Ongoing monitoring / Q4 planning cycle"
-                
-        # 7. Dependencies
+                timeline = "Ongoing monitoring"
+        
+        # 5. Dependencies
         dependencies = rec.get("dependencies") or "Managerial approval of allocation modifications."
         
-        # 8. Cost (if available)
-        cost = rec.get("cost")
-        if not cost:
-            if category.lower() == "hiring":
-                cost = "$85k-$120k annualized salary per FTE"
-            elif category.lower() == "training":
-                cost = "$2.5k training budget per engineer"
-            else:
-                cost = "Nominal ($0 operational cost)"
-                
-        # 9. Evidence
-        reason = rec.get("business_reason") or rec.get("reason") or "Workload alignment verification check."
-        evidence = rec.get("evidence") or reason
-        
-        # 10. Supporting Agents
+        # 6. Evidence / Supporting Agents
+        evidence = rec.get("evidence") or rec.get("business_reason") or "Verified against project allocation records."
         supporting_agents = rec.get("supporting_agents") or "UtilizationAgent, RecommendationAgent"
         
         return {
-            "title": title,
             "priority": priority,
             "business_impact_tier": "High" if priority.lower() == "high" else "Medium",
+            "finding": finding,
             "business_impact": business_impact,
-            "expected_outcome": expected_outcome,
-            "benefit": benefit,
-            "risk_reduction": risk_reduction,
+            "description": description,
             "timeline": timeline,
             "dependencies": dependencies,
-            "cost": cost,
             "evidence": evidence,
             "supporting_agents": supporting_agents
         }

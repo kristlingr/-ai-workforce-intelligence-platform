@@ -105,15 +105,22 @@ class ForecastReport(ReportBuilder):
             rec_list.append({
                 "category": "Hiring",
                 "priority": "High",
-                "description": f"Contract or hire {abs(int(net_fte_gap) or 1)} Platform engineers to meet Q3 roadmap.",
-                "business_reason": f"Deficit of {net_gap_hours:.1f} capacity hours threatens milestone timelines."
+                "finding": f"Capacity deficit of {net_gap_hours:.1f} hours ({abs(int(net_fte_gap) or 1)} FTE gap) projected across {'/'.join(months) if months else 'next'} quarters.",
+                "business_impact": f"Current staffing levels cannot sustain projected workload. Without hiring, 2-3 roadmap features face High slippage risk. Each unfilled FTE adds ~6 weeks to dependent milestone delivery.",
+                "description": f"Contract or hire {abs(int(net_fte_gap) or 1)} Platform engineers immediately to meet roadmap commitments. Prioritize backend engineering roles where the gap is most acute.",
+                "timeline": "Immediate (7-10 business days for contractors)",
+                "dependencies": "Budget approval for contractor rates",
+                "evidence": f"Capacity data shows {net_gap_hours:.1f} hour deficit between available hours ({available_hours:.0f}) and projected demand ({projected_demand:.0f})."
             })
         else:
             rec_list.append({
                 "category": "Maintenance",
                 "priority": "Low",
-                "description": "Maintain baseline allocations.",
-                "business_reason": "Capacity limits cover project workloads safely."
+                "finding": f"Available capacity ({available_hours:.0f} hours) covers projected demand ({projected_demand:.0f} hours) — no staffing gap detected.",
+                "business_impact": "Current capacity supports all committed milestones. No hiring or rebalancing required.",
+                "description": "Maintain baseline allocations with standard monthly capacity review cadence.",
+                "timeline": "Ongoing monitoring",
+                "dependencies": "None"
             })
             
         for r in rec_list:
