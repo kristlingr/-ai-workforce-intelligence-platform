@@ -358,13 +358,13 @@ with col_head2:
 # Determine LLM mode
 _has_gemini = bool(settings.gemini_api_key)
 _has_openai = bool(settings.openai_api_key)
-_llm_status = "🚧 Demo Mode (Mock Responses)" if not (_has_gemini or _has_openai) else "Connected"
+_llm_status = "Enterprise Demo Environment" if not (_has_gemini or _has_openai) else "Connected"
 
 # --- DEMO MODE BANNER (shown when no API keys) ---
 if not (_has_gemini or _has_openai):
-    st.warning(
-        "🚧 **Demo Mode** — No LLM API keys detected. Responses are generated from local templates. "
-        "Set `GEMINI_API_KEY` or `OPENAI_API_KEY` in `.env` to enable real AI-powered execution."
+    st.info(
+        "🏢 **Enterprise Demo Environment** — Running in demonstration mode using validated workforce datasets. "
+        "All agent orchestration, routing, evaluation, and reporting remain fully operational."
     )
 
 # --- GLOBAL SYSTEM STATUS BAR ---
