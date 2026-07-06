@@ -220,13 +220,14 @@ class LLMClient:
         if section_name == "Executive Summary":
             intent = get_val(["query_intent", "intent"], "workforce optimization")
             conclusion = get_val(["overall_conclusion"], "Workload redistribution recommended.")
+            ftes_needed = max(overloaded_count, underutilized_count) + 1
             return (
                 f"**Objective**: This assessment was initiated to evaluate {intent} across {depts_str}. "
                 f"The analysis covers {records} active allocation records spanning {depts_str} departments.\n\n"
                 f"**Key Findings**: Current capacity utilization averages {avg_util} across the workforce. "
                 f"There are {overloaded_count} roles operating above the recommended peak threshold (90%), "
                 f"and {underutilized_count} employees underutilized below 70% allocation. "
-                f"Unmet staffing demand stands at approximately 14 FTE across active project portfolios.\n\n"
+                f"Unmet staffing demand stands at approximately {ftes_needed} FTE across active project portfolios.\n\n"
                 f"**Primary Risks**: Localized attrition risk in overloaded departments. "
                 f"Milestone delivery delays are projected for teams operating above 90% capacity for consecutive sprints.\n\n"
                 f"**Recommendation**: {conclusion}"
@@ -250,12 +251,18 @@ class LLMClient:
             )
 
         elif section_name == "Forecast":
-            cap_gap = get_val(["capacity_gap", "net_gap_hours"], "320")
+            cap_gap_raw = get_val(["capacity_gap", "net_gap_hours"], "0")
+            cap_gap_num = 0.0
+            try:
+                cap_gap_num = float(str(cap_gap_raw).replace(",", "").split()[0])
+            except ValueError:
+                cap_gap_num = 0.0
+            ftes_needed = round(cap_gap_num / 168.0, 1) if cap_gap_num > 0 else 1.0
             return (
-                f"**Capacity Forecast**: Projected demand across {depts_str} exceeds available hours by approximately {cap_gap} hours. "
-                f"This deficit represents roughly 14 FTE of unmet staffing need. "
+                f"**Capacity Forecast**: Projected demand across {depts_str} exceeds available hours by approximately {cap_gap_raw} hours. "
+                f"This deficit represents roughly {ftes_needed} FTE of unmet staffing need. "
                 f"Without intervention, delivery timelines for Q2 initiatives may slip by 3-4 weeks. "
-                f"**Recommended Action**: Initiate contractor hiring for 2 backend engineers to close the immediate gap."
+                f"**Recommended Action**: Initiate contractor hiring for {max(1, int(ftes_needed))} backend engineers to close the immediate gap."
             )
 
         elif section_name in ("Business Risks", "Department Risks"):
